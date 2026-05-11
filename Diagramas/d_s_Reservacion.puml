@@ -1,0 +1,64 @@
+@startuml
+title Diagrama de secuencia - Realizar reservación
+
+actor "Usuario Cliente" as Cliente
+
+boundary "Frontend Web" as Frontend
+control "Sistema de Reservaciones" as Sistema
+database "Base de Datos" as BD
+collections "Servicio de Correo" as Correo
+
+Cliente -> Frontend : Selecciona parque,\nfechas, personas y tipo de visita
+
+Frontend -> Sistema : Enviar datos de reservación
+
+Sistema -> Sistema : Validar fechas dentro\ndel festival
+
+alt Fechas fuera de temporada
+    Sistema --> Frontend : Error:\nFechas inválidas
+    Frontend --> Cliente : Mostrar mensaje de error
+else Fechas válidas
+
+    Sistema -> Sistema : Validar que no haya martes
+
+    alt La estancia incluye martes
+        Sistema --> Frontend : Error:\nNo se permiten martes
+        Frontend --> Cliente : Mostrar mensaje de error
+    else Sin martes
+
+        Sistema -> BD : Consultar parque y disponibilidad
+        BD --> Sistema : Datos del parque y capacidad
+
+        Sistema -> Sistema : Validar tipo de visita
+
+        alt Tipo de visita no disponible
+            Sistema --> Frontend : Error:\nTipo de visita no disponible
+            Frontend --> Cliente : Mostrar mensaje de error
+
+        else Tipo disponible
+
+            Sistema -> Sistema : Validar capacidad disponible
+
+            alt Sin disponibilidad
+                Sistema --> Frontend : Error:\nNo hay disponibilidad
+                Frontend --> Cliente : Mostrar mensaje de error
+
+            else Disponibilidad válida
+
+                Sistema -> BD : Registrar reservación
+                BD --> Sistema : Reservación registrada
+
+                Sistema -> BD : Actualizar disponibilidad
+                BD --> Sistema : Disponibilidad actualizada
+
+                Sistema -> Correo : Enviar correo de confirmación
+
+                Sistema --> Frontend : Confirmación de reservación
+                Frontend --> Cliente : Mostrar confirmación
+
+            end
+        end
+    end
+end
+
+@enduml

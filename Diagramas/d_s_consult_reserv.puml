@@ -1,0 +1,57 @@
+@startuml
+title Diagrama de secuencia - Consulta de reservaciones
+
+actor Usuario
+
+boundary "Frontend Web" as Frontend
+control "Sistema de Reservaciones" as Sistema
+database "Base de Datos" as BD
+
+Usuario -> Frontend : Solicitar consulta de reservaciones
+Frontend -> Sistema : Enviar solicitud
+
+Sistema -> Sistema : Validar sesión activa
+
+alt Sesión inválida
+    Sistema --> Frontend : Error:\nSesión no válida
+    Frontend --> Usuario : Mostrar mensaje de error
+
+else Sesión válida
+
+    Sistema -> Sistema : Identificar rol del usuario
+
+    alt Usuario Cliente
+
+        Sistema -> BD : Consultar reservaciones\ndel usuario autenticado
+        BD --> Sistema : Lista de reservaciones
+
+        Sistema -> Sistema : Filtrar reservaciones activas
+
+        alt No existen reservaciones activas
+            Sistema --> Frontend : Lista vacía
+            Frontend --> Usuario : Mostrar mensaje:\n"No tienes reservaciones activas"
+
+        else Existen reservaciones
+            Sistema --> Frontend : Datos de reservaciones
+            Frontend --> Usuario : Mostrar parque,\nfechas, personas y tipo de visita
+        end
+
+    else Usuario Administrador
+
+        Sistema -> BD : Consultar todas las reservaciones
+        BD --> Sistema : Reservaciones registradas
+
+        alt No existen reservaciones
+            Sistema --> Frontend : Lista vacía
+            Frontend --> Usuario : Mostrar mensaje:\n"No existen reservaciones"
+
+        else Existen reservaciones
+            Sistema --> Frontend : Datos globales de reservaciones
+            Frontend --> Usuario : Mostrar usuario, correo,\nparque, fechas y duración
+        end
+
+    end
+
+end
+
+@enduml

@@ -1,0 +1,37 @@
+@startuml
+title Diagrama de actividad - Control de disponibilidad
+
+start
+
+:Sistema recibe solicitud de disponibilidad;
+:Obtener parque seleccionado;
+:Obtener fechas de inicio y término;
+:Obtener número de personas;
+:Obtener tipo de visita\n(cabaña o camping);
+
+:Consultar capacidad registrada del parque;
+:Consultar reservaciones existentes\nen el rango de fechas;
+
+if (¿Tipo de visita disponible\nen el parque?) then (Sí)
+
+  :Calcular espacios ocupados;
+  :Calcular espacios disponibles;
+
+  if (¿Capacidad suficiente?) then (Sí)
+    :Reservar espacio solicitado;
+    :Actualizar disponibilidad del parque;
+    :Permitir continuar con la reservación;
+    stop
+  else (No)
+    :Bloquear reservación;
+    :Mostrar error:\n"No hay disponibilidad suficiente";
+    stop
+  endif
+
+else (No)
+  :Bloquear reservación;
+  :Mostrar error:\n"El tipo de visita no está disponible";
+  stop
+endif
+
+@enduml

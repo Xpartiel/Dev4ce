@@ -1,0 +1,73 @@
+@startuml
+title Diagrama de actividad - Gestión de parques
+
+start
+
+:Usuario administrador inicia sesión;
+:Accede al módulo de gestión de parques;
+
+:Sistema muestra catálogo de parques;
+
+if (¿Qué acción desea realizar?) then (Crear parque)
+
+  :Capturar nombre;
+  :Capturar dirección;
+  :Capturar servicios disponibles;
+  :Capturar horario;
+  :Definir disponibilidad de cabañas;
+  :Definir capacidad de camping;
+  :Validar datos del parque;
+
+  if (¿Datos válidos?) then (Sí)
+    :Registrar nuevo parque;
+    :Actualizar catálogo de parques;
+    :Mostrar confirmación;
+    stop
+  else (No)
+    :Mostrar errores de validación;
+    stop
+  endif
+
+elseif (Editar parque)
+
+  :Seleccionar parque existente;
+  :Modificar nombre, dirección,\nservicios, horario o disponibilidad;
+  :Validar datos modificados;
+
+  if (¿Datos válidos?) then (Sí)
+    :Guardar cambios del parque;
+    :Actualizar catálogo de parques;
+    :Mostrar confirmación;
+    stop
+  else (No)
+    :Mostrar errores de validación;
+    stop
+  endif
+
+else (Eliminar parque)
+
+  :Seleccionar parque existente;
+  :Sistema verifica reservaciones activas;
+
+  if (¿Tiene reservaciones activas?) then (Sí)
+    :Bloquear eliminación;
+    :Mostrar error:\n"No se puede eliminar un parque\ncon reservaciones activas";
+    stop
+  else (No)
+    :Solicitar confirmación de eliminación;
+
+    if (¿Administrador confirma?) then (Sí)
+      :Eliminar parque del sistema;
+      :Actualizar catálogo de parques;
+      :Mostrar confirmación;
+      stop
+    else (No)
+      :Cancelar operación;
+      :Regresar al catálogo de parques;
+      stop
+    endif
+  endif
+
+endif
+
+@endumlD

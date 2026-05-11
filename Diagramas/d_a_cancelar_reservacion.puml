@@ -1,0 +1,40 @@
+@startuml
+title Diagrama de actividad - Cancelar reservación
+
+start
+
+:Usuario cliente inicia sesión;
+:Consulta sus reservaciones activas;
+:Selecciona la reservación que desea cancelar;
+
+:Sistema muestra detalles de la reservación;
+
+if (¿El usuario confirma la cancelación?) then (Sí)
+
+  :Sistema valida que la reservación esté activa;
+
+  if (¿Reservación activa?) then (Sí)
+    :Cambiar estado de la reservación a "cancelada";
+    :Liberar espacio reservado;
+    :Actualizar disponibilidad del parque;
+    :Mostrar confirmación de cancelación;
+
+    if (¿Enviar correo de cancelación?) then (Sí)
+      :Enviar correo de cancelación;
+    else (No)
+    endif
+
+    stop
+
+  else (No)
+    :Mostrar error:\n"La reservación no puede cancelarse";
+    stop
+  endif
+
+else (No)
+  :Cancelar operación;
+  :Regresar a lista de reservaciones;
+  stop
+endif
+
+@endumlD

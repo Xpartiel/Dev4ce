@@ -1,0 +1,47 @@
+@startuml
+title Diagrama de secuencia - Control de disponibilidad
+
+actor "Usuario Cliente" as Cliente
+
+boundary "Frontend Web" as Frontend
+control "Sistema de Reservaciones" as Sistema
+database "Base de Datos" as BD
+
+Cliente -> Frontend : Seleccionar parque,\nfechas, personas y tipo de visita
+
+Frontend -> Sistema : Solicitar validación de disponibilidad
+
+Sistema -> BD : Consultar datos del parque
+BD --> Sistema : Capacidad y tipos disponibles
+
+Sistema -> Sistema : Validar tipo de visita
+
+alt Tipo de visita no disponible
+    Sistema --> Frontend : Error:\nTipo de visita no disponible
+    Frontend --> Cliente : Mostrar mensaje de error
+
+else Tipo disponible
+
+    Sistema -> BD : Consultar reservaciones existentes\npara el rango de fechas
+    BD --> Sistema : Reservaciones registradas
+
+    Sistema -> Sistema : Calcular espacios ocupados
+    Sistema -> Sistema : Calcular espacios disponibles
+
+    alt Capacidad insuficiente
+        Sistema --> Frontend : Error:\nNo hay disponibilidad suficiente
+        Frontend --> Cliente : Mostrar mensaje de error
+
+    else Capacidad suficiente
+
+        Sistema -> BD : Actualizar disponibilidad temporal
+        BD --> Sistema : Disponibilidad actualizada
+
+        Sistema --> Frontend : Disponibilidad confirmada
+        Frontend --> Cliente : Permitir continuar con la reservación
+
+    end
+
+end
+
+@enduml

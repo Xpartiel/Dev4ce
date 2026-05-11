@@ -1,0 +1,54 @@
+@startuml
+title Diagrama de secuencia - Inicio de sesión
+
+actor Usuario
+
+boundary "Frontend Web" as Frontend
+control "Sistema de Autenticación" as Sistema
+database "Base de Datos" as BD
+
+Usuario -> Frontend : Ingresar correo y contraseña
+Frontend -> Sistema : Enviar credenciales
+
+Sistema -> Sistema : Validar formato de datos
+
+alt Datos inválidos
+    Sistema --> Frontend : Error:\nDatos inválidos
+    Frontend --> Usuario : Mostrar mensaje de error
+
+else Datos válidos
+
+    Sistema -> BD : Buscar usuario por correo
+    BD --> Sistema : Datos del usuario
+
+    alt Usuario no existe
+        Sistema --> Frontend : Error:\nCorreo o contraseña incorrectos
+        Frontend --> Usuario : Mostrar mensaje de error
+
+    else Usuario encontrado
+
+        Sistema -> Sistema : Validar contraseña
+
+        alt Contraseña incorrecta
+            Sistema --> Frontend : Error:\nCorreo o contraseña incorrectos
+            Frontend --> Usuario : Mostrar mensaje de error
+
+        else Contraseña correcta
+
+            Sistema -> Sistema : Identificar rol del usuario
+
+            alt Rol Cliente
+                Sistema --> Frontend : Acceso autorizado (Cliente)
+                Frontend --> Usuario : Redirigir al panel de cliente
+
+            else Rol Administrador
+                Sistema --> Frontend : Acceso autorizado (Administrador)
+                Frontend --> Usuario : Redirigir al panel de administración
+
+            end
+
+        end
+    end
+end
+
+@enduml

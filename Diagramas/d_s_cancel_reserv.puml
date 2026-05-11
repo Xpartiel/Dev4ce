@@ -1,0 +1,43 @@
+@startuml
+title Diagrama de secuencia - Cancelar reservación
+
+actor "Usuario Cliente" as Cliente
+
+boundary "Frontend Web" as Frontend
+control "Sistema de Reservaciones" as Sistema
+database "Base de Datos" as BD
+collections "Servicio de Correo" as Correo
+
+Cliente -> Frontend : Solicita consultar\nreservaciones activas
+Frontend -> Sistema : Obtener reservaciones del usuario
+Sistema -> BD : Consultar reservaciones activas
+BD --> Sistema : Lista de reservaciones
+Sistema --> Frontend : Reservaciones activas
+Frontend --> Cliente : Mostrar reservaciones
+
+Cliente -> Frontend : Selecciona reservación\ny confirma cancelación
+Frontend -> Sistema : Solicitar cancelación
+
+Sistema -> BD : Consultar datos de la reservación
+BD --> Sistema : Datos de reservación
+
+Sistema -> Sistema : Validar estado de reservación
+
+alt Reservación no activa
+    Sistema --> Frontend : Error:\nLa reservación no puede cancelarse
+    Frontend --> Cliente : Mostrar mensaje de error
+else Reservación activa
+    Sistema -> BD : Cambiar estado a "cancelada"
+    BD --> Sistema : Estado actualizado
+
+    Sistema -> BD : Liberar espacio reservado\ny actualizar disponibilidad
+    BD --> Sistema : Disponibilidad actualizada
+
+    Sistema -> Correo : Enviar correo de cancelación
+    Correo --> Sistema : Confirmación de envío
+
+    Sistema --> Frontend : Cancelación confirmada
+    Frontend --> Cliente : Mostrar confirmación
+end
+
+@endumlD

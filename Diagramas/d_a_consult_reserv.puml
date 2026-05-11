@@ -1,0 +1,38 @@
+@startuml
+title Diagrama de actividad - Consulta de reservaciones
+
+start
+
+:Usuario inicia sesión;
+:Accede al módulo de reservaciones;
+
+if (¿El usuario es Cliente?) then (Sí)
+
+  :Sistema obtiene las reservaciones\ndel usuario autenticado;
+  :Sistema filtra reservaciones activas;
+  :Sistema muestra lista de reservaciones;
+
+  if (¿Existen reservaciones activas?) then (Sí)
+    :Mostrar detalles de cada reservación:\nparque, fechas, número de personas\ny tipo de visita;
+    stop
+  else (No)
+    :Mostrar mensaje:\n"No tienes reservaciones activas";
+    stop
+  endif
+
+else (Administrador)
+
+  :Sistema obtiene todas las reservaciones\ndel sistema;
+  :Sistema muestra lista global de reservaciones;
+
+  if (¿Existen reservaciones registradas?) then (Sí)
+    :Mostrar detalles:\nusuario, correo, parque,\nfecha de inicio y duración;
+    stop
+  else (No)
+    :Mostrar mensaje:\n"No existen reservaciones registradas";
+    stop
+  endif
+
+endif
+
+@enduml

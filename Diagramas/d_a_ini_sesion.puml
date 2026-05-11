@@ -1,0 +1,49 @@
+@startuml
+title Diagrama de actividad - Inicio de sesión
+
+start
+
+:Usuario ingresa a la plataforma;
+:Selecciona la opción "Iniciar sesión";
+:Ingresa correo electrónico;
+:Ingresa contraseña;
+
+:Sistema valida formato de los datos;
+
+if (¿Datos con formato válido?) then (Sí)
+
+  :Sistema busca usuario registrado;
+  
+  if (¿Usuario existe?) then (Sí)
+
+    :Sistema valida contraseña;
+
+    if (¿Contraseña correcta?) then (Sí)
+      :Sistema identifica rol del usuario;
+
+      if (¿Rol Cliente?) then (Sí)
+        :Otorgar acceso a funcionalidades de cliente;
+        :Redirigir al panel de cliente;
+        stop
+      else (Administrador)
+        :Otorgar acceso a funcionalidades de administrador;
+        :Redirigir al panel de administración;
+        stop
+      endif
+
+    else (No)
+      :Mostrar error:\n"Correo o contraseña incorrectos";
+      stop
+    endif
+
+  else (No)
+    :Mostrar error:\n"Correo o contraseña incorrectos";
+    stop
+  endif
+
+else (No)
+  :Mostrar error:\n"Datos incompletos o inválidos";
+  stop
+endif
+
+@enduml

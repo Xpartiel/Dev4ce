@@ -1,0 +1,79 @@
+@startuml
+title Diagrama de secuencia - Gestión de parques
+
+actor "Usuario Administrador" as Admin
+
+boundary "Frontend Web" as Frontend
+control "Sistema de Gestión de Parques" as Sistema
+database "Base de Datos" as BD
+
+Admin -> Frontend : Acceder a gestión de parques
+Frontend -> Sistema : Solicitar catálogo de parques
+Sistema -> BD : Consultar parques registrados
+BD --> Sistema : Lista de parques
+Sistema --> Frontend : Catálogo de parques
+Frontend --> Admin : Mostrar catálogo
+
+alt Crear parque
+
+    Admin -> Frontend : Capturar datos del nuevo parque
+    Frontend -> Sistema : Enviar datos del parque
+
+    Sistema -> Sistema : Validar datos
+
+    alt Datos inválidos
+        Sistema --> Frontend : Mostrar errores de validación
+        Frontend --> Admin : Mostrar mensaje de error
+
+    else Datos válidos
+        Sistema -> BD : Registrar nuevo parque
+        BD --> Sistema : Parque registrado
+
+        Sistema --> Frontend : Confirmación de registro
+        Frontend --> Admin : Mostrar confirmación
+    end
+
+else Editar parque
+
+    Admin -> Frontend : Seleccionar parque y modificar datos
+    Frontend -> Sistema : Enviar modificaciones
+
+    Sistema -> Sistema : Validar datos modificados
+
+    alt Datos inválidos
+        Sistema --> Frontend : Mostrar errores de validación
+        Frontend --> Admin : Mostrar mensaje de error
+
+    else Datos válidos
+        Sistema -> BD : Actualizar información del parque
+        BD --> Sistema : Parque actualizado
+
+        Sistema --> Frontend : Confirmación de actualización
+        Frontend --> Admin : Mostrar confirmación
+    end
+
+else Eliminar parque
+
+    Admin -> Frontend : Seleccionar parque a eliminar
+    Frontend -> Sistema : Solicitar eliminación
+
+    Sistema -> BD : Consultar reservaciones activas
+    BD --> Sistema : Resultado de validación
+
+    alt Existen reservaciones activas
+        Sistema --> Frontend : Error:\nNo se puede eliminar el parque
+        Frontend --> Admin : Mostrar mensaje de error
+
+    else No existen reservaciones activas
+
+        Sistema -> BD : Eliminar parque
+        BD --> Sistema : Parque eliminado
+
+        Sistema --> Frontend : Confirmación de eliminación
+        Frontend --> Admin : Mostrar confirmación
+
+    end
+
+end
+
+@enduml
