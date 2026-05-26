@@ -1,6 +1,10 @@
-"""
-RF-01 Registro · RF-02 Login · RF-03 Logout
-"""
+'''
+Registros Funcionales cubiertos por las vistas
+- 01: Registro
+- 02: Login
+- 03: Logout
+'''
+
 from django.contrib.auth import login, logout
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
@@ -16,16 +20,19 @@ from .services import ValidadorInicioSesion
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def registro(request):
-    """RF-01"""
-    ser = RegistroSerializer(data=request.data)
-    ser.is_valid(raise_exception=True)
-    data = ser.validated_data
+    '''
+    Requisito Funcional
+    - 1: Registro de Usuario
+    '''
+    serializador = RegistroSerializer(data=request.data)
+    serializador.is_valid(raise_exception=True)
+    data = serializador.validated_data
 
     persona = Persona.objects.create(
-        nombre=data["nombre"],
-        apellido_paterno=data["apellido_paterno"],
-        apellido_materno=data.get("apellido_materno", ""),
-        email=data["email"],
+        nombre = data["nombre"],
+        apellido_paterno = data["apellido_paterno"],
+        apellido_materno = data.get("apellido_materno", ""),
+        email = data["email"],
     )
     perfil = PerfilFactory.crear_cliente(persona, data["password"])
     return Response(PerfilSerializer(perfil).data, status=status.HTTP_201_CREATED)
@@ -34,16 +41,23 @@ def registro(request):
 @api_view(["POST"])
 @permission_classes([AllowAny])
 def login_view(request):
-    """RF-02 — usa el Proxy ValidadorInicioSesion."""
-    ser = LoginSerializer(data=request.data)
-    ser.is_valid(raise_exception=True)
+    '''
+    Requisito Funcional
+    - 02: Inicio de Sesion
+        Usa el Proxy ValidadorInicioSesion.
+    '''
+    
+    serializador = LoginSerializer(data=request.data)
+    serializador.is_valid(raise_exception=True)
 
     proxy  = ValidadorInicioSesion(
-        correo=ser.validated_data["email"],
-        password=ser.validated_data["password"],
+        correo=serializador.validated_data["email"],
+        password=serializador.validated_data["password"],
         ip=request.META.get("REMOTE_ADDR"),
     )
     perfil = proxy.validar()
+    
+    # 
     if perfil is None:
         # RF-02.4 — mensaje genérico
         return Response({"detail": "Credenciales inválidas."},
@@ -56,7 +70,11 @@ def login_view(request):
 @api_view(["POST"])
 @permission_classes([IsAuthenticated])
 def logout_view(request):
-    """RF-03"""
+    '''
+    Vista correspondiente al cierre de sesion
+    Requisito Funcional
+    - 03: Cierre de Sesion
+    '''
     logout(request)
     return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -64,4 +82,8 @@ def logout_view(request):
 @api_view(["GET"])
 @permission_classes([IsAuthenticated])
 def yo(request):
+    '''
+    Vista correspondiente a un usuario específico ya loggeado
+    '''
+    
     return Response(PerfilSerializer(request.user).data)
