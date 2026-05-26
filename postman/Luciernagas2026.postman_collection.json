@@ -1,0 +1,730 @@
+{
+  "info": {
+    "name": "Festival Luciernagas 2026 — API",
+    "description": "Colección de pruebas para los 12 RFs del Sistema de Reservación y Mapeo.\n\n**Variables**:\n- `base_url` — http://127.0.0.1:8000\n- `token` — se guarda automáticamente tras login\n- `parque_id`, `reserva_id` — se guardan automáticamente\n\n**Orden sugerido**: RF-01 → RF-02 → RF-10 (crear parque admin) → RF-04 → RF-06 → RF-08 → RF-09 → RF-03",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_postman_id": "luciernagas-2026"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "parque_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "reserva_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "item": [
+    {
+      "name": "1 · Autenticación",
+      "item": [
+        {
+          "name": "RF-01 · Registro de usuario",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "pm.test('Devuelve rol CLIENTE', () => {",
+                  "  const j = pm.response.json();",
+                  "  pm.expect(j.rol).to.eql('CLIENTE');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"André\",\n  \"apellido_paterno\": \"Zambrano\",\n  \"apellido_materno\": \"Jerónimo\",\n  \"email\": \"andre.test@luciernagas.mx\",\n  \"password\": \"Luciernaga2026\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/registro/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "registro",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-01.2 · Registro duplicado (debe fallar)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Rechaza correo duplicado', () => pm.expect(pm.response.code).to.be.oneOf([400, 409]));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Otro\",\n  \"apellido_paterno\": \"Usuario\",\n  \"apellido_materno\": \"\",\n  \"email\": \"andre.test@luciernagas.mx\",\n  \"password\": \"Luciernaga2026\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/registro/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "registro",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-01.3 · Contraseña débil (debe fallar)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Rechaza password débil', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Test\",\n  \"apellido_paterno\": \"Weak\",\n  \"apellido_materno\": \"\",\n  \"email\": \"weak@luciernagas.mx\",\n  \"password\": \"abc\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/registro/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "registro",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-02 · Login (guarda token)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "const cookies = pm.cookies.toObject();",
+                  "if (cookies.sessionid) pm.collectionVariables.set('token', cookies.sessionid);",
+                  "pm.test('Sesión iniciada', () => {",
+                  "  const j = pm.response.json();",
+                  "  pm.expect(j.email).to.exist;",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"andre.test@luciernagas.mx\",\n  \"password\": \"Luciernaga2026\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-02.4 · Login con credenciales malas",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 401', () => pm.response.to.have.status(401));",
+                  "pm.test('Mensaje genérico (no revela qué campo)', () => {",
+                  "  const j = pm.response.json();",
+                  "  pm.expect(j.detail.toLowerCase()).to.include('inválid');",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"andre.test@luciernagas.mx\",\n  \"password\": \"PasswordIncorrecto1\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "Yo (usuario actual)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/yo/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "yo",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-03 · Cerrar sesión",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 204', () => pm.response.to.have.status(204));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/auth/logout/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "logout",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "2 · Parques (Visualización + Admin)",
+      "item": [
+        {
+          "name": "RF-04 / RF-05 · Listar parques (público)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Es lista', () => pm.expect(pm.response.json()).to.be.an('array'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/parques/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "parques",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-10.1 · Crear parque (admin)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "if (j.id) pm.collectionVariables.set('parque_id', j.id);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nombre\": \"Parque Nacional El Faro\",\n  \"direccion\": \"Tlalpujahua, Michoacán\",\n  \"servicios\": [\n    \"estacionamiento\",\n    \"fogata\",\n    \"sanitarios\"\n  ],\n  \"horario\": \"18:00 - 23:00\",\n  \"lat\": 19.8125,\n  \"lng\": -100.1693,\n  \"capacidad_max_camping\": 50,\n  \"capacidad_max_cabania\": 10\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/parques/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "parques",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-10.2 · Editar parque",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"capacidad_max_camping\": 60\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/parques/{{parque_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "parques",
+                "{{parque_id}}",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-05 · Detalle de parque",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/parques/{{parque_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "parques",
+                "{{parque_id}}",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-10.3 · Eliminar parque",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/parques/{{parque_id}}/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "parques",
+                "{{parque_id}}",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "3 · Reservaciones",
+      "item": [
+        {
+          "name": "RF-06 · Crear reservación (válida)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 201', () => pm.response.to.have.status(201));",
+                  "const j = pm.response.json();",
+                  "if (j.id) pm.collectionVariables.set('reserva_id', j.id);",
+                  "pm.test('Estado CONFIRMADA', () => pm.expect(j.estado).to.eql('CONFIRMADA'));",
+                  "pm.test('Tiene folio UUID', () => pm.expect(j.folio).to.match(/[0-9a-f-]{36}/));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parque_id\": \"{{parque_id}}\",\n  \"fecha_inicio\": \"2026-07-10\",\n  \"fecha_fin\": \"2026-07-12\",\n  \"num_asistentes\": 4,\n  \"tipo_visita\": \"CAMPING\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-06.2 · Fuera de temporada (debe fallar)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400 — Solo jun-jul-ago', () => pm.response.to.have.status(400));",
+                  "pm.test('Mensaje menciona meses', () => {",
+                  "  pm.expect(pm.response.text().toLowerCase()).to.satisfy(s => s.includes('junio') || s.includes('agosto'));",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parque_id\": \"{{parque_id}}\",\n  \"fecha_inicio\": \"2026-05-10\",\n  \"fecha_fin\": \"2026-05-12\",\n  \"num_asistentes\": 2,\n  \"tipo_visita\": \"CAMPING\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-06.3 · Estancia incluye martes (debe fallar)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400 — Sin martes', () => pm.response.to.have.status(400));",
+                  "pm.test('Mensaje menciona martes', () => pm.expect(pm.response.text().toLowerCase()).to.include('martes'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parque_id\": \"{{parque_id}}\",\n  \"fecha_inicio\": \"2026-07-06\",\n  \"fecha_fin\": \"2026-07-08\",\n  \"num_asistentes\": 2,\n  \"tipo_visita\": \"CAMPING\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-06.4 · Cabaña en parque sin cabañas (debe fallar)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parque_id\": \"{{parque_id}}\",\n  \"fecha_inicio\": \"2026-07-10\",\n  \"fecha_fin\": \"2026-07-12\",\n  \"num_asistentes\": 2,\n  \"tipo_visita\": \"CABAÑA\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-06.5 · Exceder capacidad (debe fallar)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 400 — Sin cupo', () => pm.response.to.have.status(400));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"parque_id\": \"{{parque_id}}\",\n  \"fecha_inicio\": \"2026-07-10\",\n  \"fecha_fin\": \"2026-07-12\",\n  \"num_asistentes\": 9999,\n  \"tipo_visita\": \"CAMPING\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-08 · Mis reservaciones",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Es lista', () => pm.expect(pm.response.json()).to.be.an('array'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/mias/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                "mias",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-09 · Cancelar reservación",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Estado CANCELADA', () => pm.expect(pm.response.json().estado).to.eql('CANCELADA'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/{{reserva_id}}/cancelar/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                "{{reserva_id}}",
+                "cancelar",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "RF-11 · Vista admin de reservaciones",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/reservaciones/admin/?estado=CONFIRMADA",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "reservaciones",
+                "admin",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "estado",
+                  "value": "CONFIRMADA"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
