@@ -85,7 +85,7 @@ class Perfil(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name        = "Perfil"
+        verbose_name = "Perfil"
         verbose_name_plural = "Perfiles"
 
     def __str__(self):
@@ -100,9 +100,9 @@ class Perfil(AbstractBaseUser, PermissionsMixin):
 # ---------------------------------------------------------------
 class AuditLog(models.Model):
     correo = models.EmailField()
-    exito  = models.BooleanField()
-    ip     = models.GenericIPAddressField(null=True, blank=True)
-    fecha  = models.DateTimeField(auto_now_add=True)
+    exito = models.BooleanField()
+    ip = models.GenericIPAddressField(null=True, blank=True)
+    fecha = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         ordering = ["-fecha"]
