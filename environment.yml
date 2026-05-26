@@ -1,0 +1,12 @@
+name: luciernagas
+
+channels:
+  - defaults
+
+dependencies:
+  - python=3.12
+  - pip
+  - pip:
+      - django
+      - django-environ
+      - psycopg2-binary
