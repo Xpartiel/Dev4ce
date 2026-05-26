@@ -4,12 +4,20 @@ from .models import Persona, Perfil
 
 
 class RegistroSerializer(serializers.Serializer):
-    """RF-01.1 / RF-01.3"""
-    nombre           = serializers.CharField(max_length=80)
+    '''
+    Serializador de guardado y reconstruccion de informacion
+    REGISTRO
+    
+    Requisitos Funcionales
+    - 1.1 
+    - 1.3 
+    '''
+    
+    nombre = serializers.CharField(max_length=80)
     apellido_paterno = serializers.CharField(max_length=80)
     apellido_materno = serializers.CharField(max_length=80, allow_blank=True, required=False)
-    email            = serializers.EmailField()
-    password         = serializers.CharField(write_only=True, min_length=8)
+    email = serializers.EmailField()
+    password = serializers.CharField(write_only=True, min_length=8)
 
     def validate_email(self, value):
         if Persona.objects.filter(email__iexact=value).exists():
@@ -24,13 +32,22 @@ class RegistroSerializer(serializers.Serializer):
             )
         return value
 
-
 class LoginSerializer(serializers.Serializer):
-    email    = serializers.EmailField()
+    '''
+    Serializador para guardado y reconstruccion
+    LOGIN
+    '''
+    
+    email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
 
 class PerfilSerializer(serializers.ModelSerializer):
+    '''
+    Serializador para guardado y reconstruccion de informacion
+    PERFIL
+    '''
+    
     nombre_completo = serializers.SerializerMethodField()
 
     class Meta:
