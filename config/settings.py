@@ -1,6 +1,3 @@
-"""
-Settings — Festival Luciernagas 2026
-"""
 from pathlib import Path
 from decouple import config, Csv
 
@@ -26,6 +23,7 @@ INSTALLED_APPS = [
     "apps.usuarios",
     "apps.parques",
     "apps.reservaciones",
+    "rest_framework_gis",
 ]
 
 MIDDLEWARE = [
@@ -128,5 +126,6 @@ USE_TZ = True
 STATIC_URL = "static/"
 MEDIA_URL  = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+STATIC_ROOT = BASE_DIR / "staticfiles" 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

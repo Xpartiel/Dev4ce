@@ -1,7 +1,7 @@
 """
-Patrón State — ciclo de vida de Reservacion.
-PENDIENTE → CONFIRMADA → COMPLETADA
-          ↘ CANCELADA
+Patrón State  ciclo de vida de Reservacion.
+PENDIENTE -> CONFIRMADA --> COMPLETADA
+          -> CANCELADA
 """
 from django.utils import timezone
 from .models import Reservacion, EstadoReservacion

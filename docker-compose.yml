@@ -1,103 +1,82 @@
-# ====================================================================
-# Festival Luciérnagas 2026 — Stack de desarrollo
-# Levantar: docker compose up --build
-# ====================================================================
-
 services:
 
-  # ------------------------------------------------------------------
-  # PostgreSQL + PostGIS  (RF-04.3 GeoDjango)
-  # ------------------------------------------------------------------
+  # ═══════════════════════════════════════════════════════
+  # Servicio db
+  # ═══════════════════════════════════════════════════════
   db:
     image: postgis/postgis:16-3.4
     container_name: luciernagas_db
+    restart: unless-stopped
     environment:
-      POSTGRES_DB: ${DB_NAME:-luciernagas}
-      POSTGRES_USER: ${DB_USER:-postgres}
-      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: luciernagas
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    volumes:
-      - pg_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
-      interval: 5s
-      timeout: 5s
-      retries: 10
-    restart: unless-stopped
+    healthcheck:                                          # 👈 AGREGAR ESTO
+      test: ["CMD-SHELL", "pg_isready -U postgres"]       # 👈
+      interval: 5s                                        # 👈
+      timeout: 5s                                         # 👈
+      retries: 5                                          # 👈
 
-  # ------------------------------------------------------------------
-  # Redis  (broker de Celery — RF-07.4)
-  # ------------------------------------------------------------------
+  # ═══════════════════════════════════════════════════════
+  # Servicio redis
+  # ═══════════════════════════════════════════════════════
   redis:
     image: redis:7-alpine
     container_name: luciernagas_redis
+    restart: unless-stopped
     ports:
       - "6379:6379"
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-    restart: unless-stopped
+    healthcheck:                                          # 👈 AGREGAR ESTO
+      test: ["CMD", "redis-cli", "ping"]                  # 👈
+      interval: 5s                                        # 👈
+      timeout: 3s                                         # 👈
+      retries: 5                                          # 👈
 
-  # ------------------------------------------------------------------
-  # Web (Django + DRF)
-  # ------------------------------------------------------------------
+  # ═══════════════════════════════════════════════════════
+  # Servicio web (Django)
+  # ═══════════════════════════════════════════════════════
   web:
     build:
       context: .
-      args:
-        INSTALL_DEV: "true"
+      dockerfile: Dockerfile
     container_name: luciernagas_web
+    entrypoint: ["bash", "/app/docker/entrypoint.sh"]    # 👈 CAMBIO #1
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/app                        # hot-reload del código
-      - media_data:/app/media
+      - .:/app
     ports:
       - "8000:8000"
-    env_file: .env
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      REDIS_URL: redis://redis:6379/0
-      RUN_MIGRATIONS: "true"
-      DJANGO_SETTINGS_MODULE: config.settings
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:                                           # 👈 CAMBIAR ESTO
+      db:                                                 # 👈
+        condition: service_healthy                        # 👈
+      redis:                                              # 👈
+        condition: service_healthy                        # 👈
 
-  # ------------------------------------------------------------------
-  # Celery worker — envío de correos asíncrono (RF-07)
-  # ------------------------------------------------------------------
+  # ═══════════════════════════════════════════════════════
+  # Servicio celery
+  # ═══════════════════════════════════════════════════════
   celery:
     build:
       context: .
-      args:
-        INSTALL_DEV: "true"
+      dockerfile: Dockerfile
     container_name: luciernagas_celery
+    entrypoint: ["bash", "/app/docker/entrypoint.sh"]    # 👈 CAMBIO #1 (también aquí)
     command: celery -A config worker --loglevel=info
     volumes:
       - .:/app
-    env_file: .env
-    environment:
-      DB_HOST: db
-      DB_PORT: 5432
-      REDIS_URL: redis://redis:6379/0
-      RUN_MIGRATIONS: "false"
-      DJANGO_SETTINGS_MODULE: config.settings
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-      web:
-        condition: service_started
-    restart: unless-stopped
+    env_file:
+      - .env
+    depends_on:                                           # 👈 CAMBIAR ESTO TAMBIÉN
+      db:                                                 # 👈
+        condition: service_healthy                        # 👈
+      redis:                                              # 👈
+        condition: service_healthy                        # 👈
 
 volumes:
-  pg_data:
-  media_data:
+  postgres_data:

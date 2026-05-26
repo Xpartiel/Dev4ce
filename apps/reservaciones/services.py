@@ -1,5 +1,5 @@
 """
-ReservacionService — Facade / Service Layer.
+ReservacionService - Facade / Service Layer.
 Orquesta: validación (Strategy) + persistencia atómica + emisión de Signal (Observer).
 """
 from datetime import timedelta

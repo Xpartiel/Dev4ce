@@ -8,3 +8,4 @@ celery>=5.4
 redis>=5.0
 Pillow>=10.0
 gunicorn>=22.0
+djangorestframework-gis==1.1

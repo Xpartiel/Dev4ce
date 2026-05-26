@@ -1,5 +1,5 @@
 """
-Proxy de protección — ValidadorInicioSesion (RF-02).
+Proxy de protección - ValidadorInicioSesion (RF-02).
 Aplica rate-limit + auditoría antes de delegar en el verificador real.
 """
 from django.contrib.auth import authenticate

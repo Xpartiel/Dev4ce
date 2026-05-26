@@ -1,5 +1,5 @@
 """
-Observer — Signal de reserva creada / cancelada.
+Observer - Signal de reserva creada / cancelada.
 Encola la TareaEnvioCorreo (Celery) sin acoplar al flujo principal.
 """
 from django.dispatch import Signal, receiver
