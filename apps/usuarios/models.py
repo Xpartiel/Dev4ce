@@ -18,11 +18,11 @@ class Rol(models.TextChoices):
 # Persona — PII (LFPDPPP / RNF-02)
 # ---------------------------------------------------------------
 class Persona(models.Model):
-    nombre             = models.CharField(max_length=80)
-    apellido_paterno   = models.CharField(max_length=80)
-    apellido_materno   = models.CharField(max_length=80, blank=True)
-    email              = models.EmailField(unique=True)        # RF-01.2
-    fecha_creacion     = models.DateTimeField(auto_now_add=True)
+    nombre = models.CharField(max_length=80)
+    apellido_paterno = models.CharField(max_length=80)
+    apellido_materno = models.CharField(max_length=80, blank=True)
+    email = models.EmailField(unique=True)        # RF-01.2
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)
 
     class Meta:
