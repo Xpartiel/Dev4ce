@@ -190,3 +190,318 @@ body {
     cursor: pointer;
 
 }
+
+/* ===== HERO ===== */
+
+.hero-section {
+    position: relative;
+    min-height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 50% 20%, rgba(255, 200, 87, 0.12), transparent 15%),
+        linear-gradient(180deg, #050810 0%, #0B1426 55%, #050810 100%);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 950px;
+    text-align: center;
+    padding: 80px 24px;
+}
+
+.hero-badge {
+    display: inline-block;
+    margin-bottom: 28px;
+    padding: 8px 18px;
+    border-radius: 999px;
+    background-color: rgba(24, 41, 75, 0.8);
+    color: var(--color-gold);
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.hero-content h1 {
+    font-size: clamp(48px, 7vw, 88px);
+    line-height: 0.95;
+    letter-spacing: -3px;
+    margin-bottom: 28px;
+}
+
+.hero-content h1 span {
+    color: var(--color-gold);
+}
+
+.hero-description {
+    max-width: 680px;
+    margin: 0 auto 36px;
+    color: rgba(245, 239, 224, 0.72);
+    font-size: 20px;
+    line-height: 1.6;
+}
+
+.hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 18px;
+    margin-bottom: 52px;
+}
+
+.hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 46px;
+}
+
+.hero-stats div {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.hero-stats strong {
+    color: var(--color-gold);
+    font-size: 28px;
+}
+
+.hero-stats span {
+    color: rgba(245, 239, 224, 0.45);
+    font-size: 13px;
+}
+
+/* ===== FIREFLIES ===== */
+
+.fireflies span {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 18px var(--color-gold);
+    animation: floatFirefly 6s infinite ease-in-out;
+}
+
+.fireflies span:nth-child(1) { top: 15%; left: 12%; }
+.fireflies span:nth-child(2) { top: 28%; left: 82%; animation-delay: 1s; }
+.fireflies span:nth-child(3) { top: 62%; left: 20%; animation-delay: 2s; }
+.fireflies span:nth-child(4) { top: 72%; left: 72%; animation-delay: .5s; }
+.fireflies span:nth-child(5) { top: 35%; left: 45%; animation-delay: 1.4s; }
+.fireflies span:nth-child(6) { top: 84%; left: 55%; animation-delay: 2.2s; }
+.fireflies span:nth-child(7) { top: 18%; left: 65%; animation-delay: .8s; }
+.fireflies span:nth-child(8) { top: 48%; left: 10%; animation-delay: 1.8s; }
+.fireflies span:nth-child(9) { top: 52%; left: 90%; animation-delay: 2.8s; }
+.fireflies span:nth-child(10) { top: 12%; left: 33%; animation-delay: 3.1s; }
+
+@keyframes floatFirefly {
+    0%, 100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-18px) scale(1.5);
+        opacity: 1;
+    }
+}
+
+/* ===== SECTIONS ===== */
+
+.map-preview-section,
+.parks-section {
+    padding: 70px 64px;
+    background-color: var(--color-bg);
+}
+
+.section-label {
+    color: var(--color-gold);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 10px;
+}
+
+.map-preview-section h2,
+.parks-section h2 {
+    font-size: 30px;
+    margin-bottom: 24px;
+}
+
+/* ===== MAP PREVIEW ===== */
+
+.map-preview {
+    position: relative;
+    height: 240px;
+    border-radius: 16px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 20% 50%, rgba(123, 160, 91, 0.15), transparent 14%),
+        radial-gradient(circle at 80% 30%, rgba(24, 41, 75, 0.8), transparent 18%),
+        linear-gradient(135deg, #0B1426, #18294B);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.map-line {
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    top: 50%;
+    left: 10%;
+    background: linear-gradient(90deg, transparent, rgba(255, 200, 87, 0.5), transparent);
+    transform: rotate(-8deg);
+}
+
+.map-point {
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: var(--color-gold);
+    border-radius: 50%;
+    border: 2px solid var(--color-gold-soft);
+    box-shadow: 0 0 18px var(--color-gold);
+}
+
+.point-1 { top: 54%; left: 30%; }
+.point-2 { top: 48%; left: 36%; }
+.point-3 { top: 56%; left: 42%; }
+.point-4 { top: 51%; left: 48%; }
+.point-5 { top: 62%; left: 54%; }
+.point-6 { top: 57%; left: 60%; }
+.point-7 { top: 46%; left: 68%; }
+.point-8 { top: 55%; left: 76%; }
+
+/* ===== PARK CARDS ===== */
+
+.park-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.park-card {
+    overflow: hidden;
+    border-radius: 16px;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.park-image {
+    position: relative;
+    height: 150px;
+    overflow: hidden;
+}
+
+.park-green {
+    background: linear-gradient(160deg, #0B1426, #2D5016);
+}
+
+.park-amber {
+    background: linear-gradient(160deg, #0B1426, #4a2d05);
+}
+
+.park-blue {
+    background: linear-gradient(160deg, #0B1426, #18294B);
+}
+
+.park-status {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.available {
+    color: #9DFF6E;
+    border: 1px solid rgba(157, 255, 110, 0.4);
+}
+
+.few {
+    color: var(--color-gold);
+    border: 1px solid rgba(255, 200, 87, 0.4);
+}
+
+.sold {
+    color: #FF4D5A;
+    border: 1px solid rgba(255, 77, 90, 0.4);
+}
+
+.moon {
+    position: absolute;
+    top: 22px;
+    right: 24px;
+    width: 28px;
+    height: 28px;
+    background: var(--color-text);
+    border-radius: 50%;
+    box-shadow: 0 0 18px var(--color-gold-soft);
+}
+
+.park-info {
+    padding: 22px;
+}
+
+.park-info h3 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.park-info p {
+    color: rgba(245,239,224,0.62);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 18px;
+}
+
+.park-footer {
+    display: flex;
+    gap: 6px;
+    align-items: baseline;
+}
+
+.park-footer strong {
+    color: var(--color-text);
+    font-size: 18px;
+}
+
+.park-footer span {
+    color: rgba(245,239,224,0.45);
+    font-size: 13px;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 900px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .park-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .map-preview-section,
+    .parks-section {
+        padding: 48px 24px;
+    }
+}

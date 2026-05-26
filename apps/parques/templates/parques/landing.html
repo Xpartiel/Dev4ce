@@ -1,0 +1,147 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Festival Internacional de las Luciérnagas
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="fireflies">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <div class="hero-content">
+
+        <p class="hero-badge">
+            ● Festival · 14 Jun — 31 Ago 2026
+        </p>
+
+        <h1>
+            Reserva tu noche con <br>
+            <span>millones de luciérnagas</span>
+        </h1>
+
+        <p class="hero-description">
+            Ocho santuarios oficiales en México. Cabañas y camping
+            reservables noche por noche, del 14 de junio al 31 de agosto.
+        </p>
+
+        <div class="hero-actions">
+            <a href="/usuarios/registro/" class="btn btn-primary">
+                ⚡ Crear cuenta y reservar
+            </a>
+
+            <a href="#" class="btn btn-secondary">
+                🗺 Explorar el mapa
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <strong>8</strong>
+                <span>santuarios oficiales</span>
+            </div>
+
+            <div>
+                <strong>74</strong>
+                <span>noches del festival</span>
+            </div>
+
+            <div>
+                <strong>774</strong>
+                <span>espacios disponibles</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="map-preview-section">
+
+    <p class="section-label">// Ruta bioluminiscente</p>
+
+    <h2>Ocho santuarios, un mapa</h2>
+
+    <div class="map-preview">
+        <div class="map-line"></div>
+
+        <span class="map-point point-1"></span>
+        <span class="map-point point-2"></span>
+        <span class="map-point point-3"></span>
+        <span class="map-point point-4"></span>
+        <span class="map-point point-5"></span>
+        <span class="map-point point-6"></span>
+        <span class="map-point point-7"></span>
+        <span class="map-point point-8"></span>
+    </div>
+
+</section>
+
+<section class="parks-section">
+
+    <p class="section-label">// Parques destacados</p>
+
+    <h2>Empieza por estos tres</h2>
+
+    <div class="park-grid">
+
+        <article class="park-card">
+            <div class="park-image park-green">
+                <span class="park-status available">Disponible</span>
+                <span class="moon"></span>
+            </div>
+
+            <div class="park-info">
+                <h3>Santuario El Rosario</h3>
+                <p>Escucha de verano con 2,000 luciérnagas bajo cielos oscuros.</p>
+
+                <div class="park-footer">
+                    <strong>$950</strong>
+                    <span>noche</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="park-card">
+            <div class="park-image park-amber">
+                <span class="park-status few">Pocos lugares</span>
+                <span class="moon"></span>
+            </div>
+
+            <div class="park-info">
+                <h3>Sierra Chincua</h3>
+                <p>Hospedaje panorámico con senderos nocturnos y avistamiento.</p>
+
+                <div class="park-footer">
+                    <strong>$1180</strong>
+                    <span>noche</span>
+                </div>
+            </div>
+        </article>
+
+        <article class="park-card">
+            <div class="park-image park-blue">
+                <span class="park-status sold">Agotado</span>
+                <span class="moon"></span>
+            </div>
+
+            <div class="park-info">
+                <h3>Piedra Herrada</h3>
+                <p>Zona ideal para familias, naturaleza y recorridos guiados.</p>
+
+                <div class="park-footer">
+                    <strong>$720</strong>
+                    <span>noche</span>
+                </div>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}
