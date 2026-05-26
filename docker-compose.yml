@@ -1,0 +1,103 @@
+# ====================================================================
+# Festival Luciérnagas 2026 — Stack de desarrollo
+# Levantar: docker compose up --build
+# ====================================================================
+
+services:
+
+  # ------------------------------------------------------------------
+  # PostgreSQL + PostGIS  (RF-04.3 GeoDjango)
+  # ------------------------------------------------------------------
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: luciernagas_db
+    environment:
+      POSTGRES_DB: ${DB_NAME:-luciernagas}
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-postgres}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------
+  # Redis  (broker de Celery — RF-07.4)
+  # ------------------------------------------------------------------
+  redis:
+    image: redis:7-alpine
+    container_name: luciernagas_redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------
+  # Web (Django + DRF)
+  # ------------------------------------------------------------------
+  web:
+    build:
+      context: .
+      args:
+        INSTALL_DEV: "true"
+    container_name: luciernagas_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app                        # hot-reload del código
+      - media_data:/app/media
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      REDIS_URL: redis://redis:6379/0
+      RUN_MIGRATIONS: "true"
+      DJANGO_SETTINGS_MODULE: config.settings
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # ------------------------------------------------------------------
+  # Celery worker — envío de correos asíncrono (RF-07)
+  # ------------------------------------------------------------------
+  celery:
+    build:
+      context: .
+      args:
+        INSTALL_DEV: "true"
+    container_name: luciernagas_celery
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - .:/app
+    env_file: .env
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      REDIS_URL: redis://redis:6379/0
+      RUN_MIGRATIONS: "false"
+      DJANGO_SETTINGS_MODULE: config.settings
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      web:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  pg_data:
+  media_data:
