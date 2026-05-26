@@ -37,8 +37,9 @@ class Persona(models.Model):
 
 
 # ---------------------------------------------------------------
-# Perfil — AUTH_USER_MODEL (datos públicos + rol + auth)
-# La "Contraseña" del diagrama vive aquí en password_hash (manejado por Django).
+# Perfil
+# AUTH_USER_MODEL (datos públicos + rol + auth)
+# La "Contraseña" del diagrama vive en password_hash (manejado por Django).
 # ---------------------------------------------------------------
 class PerfilManager(BaseUserManager):
     """Manager estándar; el Factory Method vive en managers.PerfilFactory."""
@@ -68,11 +69,11 @@ class PerfilManager(BaseUserManager):
 
 
 class Perfil(AbstractBaseUser, PermissionsMixin):
-    persona       = models.OneToOneField(Persona, on_delete=models.CASCADE, related_name="perfil")
-    email         = models.EmailField(unique=True)
-    nick_name     = models.CharField(max_length=60, blank=True)
-    foto_perfil   = models.ImageField(upload_to="perfiles/", blank=True, null=True)
-    rol           = models.CharField(max_length=20, choices=Rol.choices, default=Rol.CLIENTE)
+    persona = models.OneToOneField(Persona, on_delete=models.CASCADE, related_name="perfil")
+    email = models.EmailField(unique=True)
+    nick_name = models.CharField(max_length=60, blank=True)
+    foto_perfil = models.ImageField(upload_to="perfiles/", blank=True, null=True)
+    rol = models.CharField(max_length=20, choices=Rol.choices, default=Rol.CLIENTE)
     fecha_registro = models.DateTimeField(auto_now_add=True)
 
     is_active = models.BooleanField(default=True)
