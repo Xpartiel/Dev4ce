@@ -1,0 +1,51 @@
+# ====================================================================
+# Festival Luciérnagas 2026 — Backend Django
+# Entorno Conda / Miniconda
+# ====================================================================
+# Uso:
+#   conda env create -f environment.yml
+#   conda activate luciernagas2026
+#
+# Actualizar tras cambios:
+#   conda env update -f environment.yml --prune
+#
+# Eliminar:
+#   conda env remove -n luciernagas2026
+# ====================================================================
+
+name: luciernagas2026
+
+channels:
+  - conda-forge
+  - defaults
+
+dependencies:
+  # --- Runtime base ---
+  - python=3.12
+  - pip>=24.0
+
+  # --- Librerías de sistema (mejor desde conda-forge) ---
+  - libpq>=16          # cliente PostgreSQL (requerido por psycopg)
+  - openssl
+  - ca-certificates
+
+  # --- Dependencias Python vía pip ---
+  # Se mantienen en pip para alinear versiones con requirements.txt
+  # y evitar divergencias entre el entorno conda y el Dockerfile.
+  - pip:
+      # Producción (espejo de requirements.txt)
+      - Django>=5.0,<6.0
+      - djangorestframework>=3.15
+      - django-cors-headers>=4.3
+      - psycopg[binary]>=3.1
+      - bcrypt>=4.1
+      - python-decouple>=3.8
+      - celery>=5.4
+      - redis>=5.0
+      - Pillow>=10.0
+      - gunicorn>=22.0
+
+      # Desarrollo / testing (espejo de requirements-dev.txt)
+      - pytest>=8.0
+      - pytest-django>=4.8
+      - pytest-cov>=5.0

@@ -1,0 +1,56 @@
+[
+  {
+    "model": "parques.parque",
+    "pk": 1,
+    "fields": {
+      "nombre": "Santuario de las Luciérnagas Piedra Canteada",
+      "direccion": "Nanacamilpa, Tlaxcala",
+      "servicios": [
+        "estacionamiento",
+        "sanitarios",
+        "guías",
+        "fogata"
+      ],
+      "horario": "19:30 - 23:00",
+      "coordenadas": "SRID=4326;POINT(-98.5440 19.4670)",
+      "capacidad_max_camping": 80,
+      "capacidad_max_cabania": 15,
+      "fecha_creacion": "2026-05-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "parques.parque",
+    "pk": 2,
+    "fields": {
+      "nombre": "Parque Nacional El Faro (Santa Clara del Cobre)",
+      "direccion": "Salvador Escalante, Michoacán",
+      "servicios": [
+        "estacionamiento",
+        "sanitarios",
+        "fogata"
+      ],
+      "horario": "18:00 - 22:00",
+      "coordenadas": "SRID=4326;POINT(-101.6358 19.4067)",
+      "capacidad_max_camping": 50,
+      "capacidad_max_cabania": 0,
+      "fecha_creacion": "2026-05-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "parques.parque",
+    "pk": 3,
+    "fields": {
+      "nombre": "Parque Nacional Cofre de Perote",
+      "direccion": "Perote, Veracruz",
+      "servicios": [
+        "estacionamiento",
+        "guías"
+      ],
+      "horario": "19:00 - 23:00",
+      "coordenadas": "SRID=4326;POINT(-97.1500 19.4920)",
+      "capacidad_max_camping": 60,
+      "capacidad_max_cabania": 8,
+      "fecha_creacion": "2026-05-01T00:00:00Z"
+    }
+  }
+]
