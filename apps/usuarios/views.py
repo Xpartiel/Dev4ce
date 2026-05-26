@@ -1,8 +1,8 @@
 '''
 Registros Funcionales cubiertos por las vistas
-- 01: Registro
-- 02: Login
-- 03: Logout
+- 01: Registro de usuario
+- 02: Inicio de sesion
+- 03: Cierre de sesion
 '''
 
 from django.contrib.auth import login, logout
@@ -21,22 +21,24 @@ from .services import ValidadorInicioSesion
 @permission_classes([AllowAny])
 def registro(request):
     '''
-    Requisito Funcional
+    Vista usada para registrar un nuevo usuario
+    
+    Requisito Funcional cubierto
     - 1: Registro de Usuario
     '''
     serializador = RegistroSerializer(data=request.data)
     serializador.is_valid(raise_exception=True)
     data = serializador.validated_data
 
+    # Crear la persona con los datos dados por la peticion
     persona = Persona.objects.create(
         nombre = data["nombre"],
         apellido_paterno = data["apellido_paterno"],
         apellido_materno = data.get("apellido_materno", ""),
         email = data["email"],
     )
-    perfil = PerfilFactory.crear_cliente(persona, data["password"])
-    return Response(PerfilSerializer(perfil).data, status=status.HTTP_201_CREATED)
-
+    perfil = PerfilFactory.crear_cliente( persona, data["password"] )
+    return Response( PerfilSerializer(perfil).data, status=status.HTTP_201_CREATED )
 
 @api_view(["POST"])
 @permission_classes([AllowAny])
@@ -55,15 +57,18 @@ def login_view(request):
         password=serializador.validated_data["password"],
         ip=request.META.get("REMOTE_ADDR"),
     )
+    
+    # Intentar obtener un perfil valido
     perfil = proxy.validar()
     
-    # 
+    # Si no existe...
     if perfil is None:
         # RF-02.4 — mensaje genérico
         return Response({"detail": "Credenciales inválidas."},
                         status=status.HTTP_401_UNAUTHORIZED)
 
     login(request, perfil)
+    
     return Response(PerfilSerializer(perfil).data)
 
 
