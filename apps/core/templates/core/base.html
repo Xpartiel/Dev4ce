@@ -1,0 +1,78 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            Dev4ce
+        {% endblock %}
+    </title>
+
+    <link rel="stylesheet" href="{% static 'core/css/styles.css' %}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    {% block extra_css %}
+    {% endblock %}
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar">
+
+        <!-- Logo -->
+        <div class="logo-container">
+            <a href="/" class="logo-link">
+                <span class="logo-icon">△</span>
+                <span class="logo-text">dev4ce</span>
+            </a>
+        </div>
+
+        <!-- Navegación -->
+        <nav class="nav-links">
+
+            <a href="#">Parques</a>
+            <a href="#">Mapa</a>
+            <a href="#">El Festival</a>
+
+        </nav>
+
+        <!-- Acciones -->
+        <div class="nav-actions">
+
+            <!-- Toggle modo -->
+            <button class="theme-toggle">
+                ☀
+            </button>
+
+            <a href="/usuarios/login/" class="btn btn-secondary">
+                Iniciar sesión
+            </a>
+
+            <a href="/usuarios/registro/" class="btn btn-primary">
+                Crear cuenta
+            </a>
+
+        </div>
+
+    </header>
+
+    <!-- Contenido -->
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+</body>
+</html>
