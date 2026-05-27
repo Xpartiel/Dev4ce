@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+
+{% block title %}Reservación confirmada{% endblock %}
+
+{% block content %}
+
+<section class="confirmation-section">
+
+    <div class="confirmation-card">
+
+        <div class="confirmation-icon">✓</div>
+
+        <h1>Reservación confirmada</h1>
+
+        <p>
+            Te enviamos el detalle a <strong>{{ user.email }}</strong>.
+        </p>
+
+        <div class="folio-box">
+
+            <small>Folio</small>
+            <strong>LUZ-2026-65199</strong>
+
+            <div class="confirm-grid">
+                <div>
+                    <small>Santuario</small>
+                    <strong>Santuario El Rosario</strong>
+                </div>
+
+                <div>
+                    <small>Estancia</small>
+                    <strong>2026-06-14 → 2026-06-16</strong>
+                </div>
+
+                <div>
+                    <small>Tipo</small>
+                    <strong>Cabaña</strong>
+                </div>
+
+                <div>
+                    <small>Total</small>
+                    <strong>$1,760</strong>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="confirmation-actions">
+            <a href="#" class="btn btn-secondary">Ver mis reservaciones</a>
+            <a href="{% url 'dashboard_cliente' %}" class="btn btn-primary">Ir al inicio</a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

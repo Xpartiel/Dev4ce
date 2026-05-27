@@ -6,4 +6,11 @@ urlpatterns = [
     path("dashboard/", views.dashboard_cliente, name="dashboard_cliente"),
     path("mapa/",views.mapa_cliente, name="mapa_cliente"),
     path("parques/<int:parque_id>/", views.detalle_parque, name="detalle_parque"),
+    path("reservar/<int:parque_id>/paso-1/", views.reservar_paso_1, name="reservar_paso_1"),
+    path("reservar/<int:parque_id>/paso-2/", views.reservar_paso_2, name="reservar_paso_2"),
+    path("reservar/<int:parque_id>/paso-3/", views.reservar_paso_3, name="reservar_paso_3"),
+    path("reservacion-confirmada/", views.reservacion_confirmada, name="reservacion_confirmada"),
+    path("mis-reservaciones/", views.mis_reservaciones, name="mis_reservaciones"),
+    path("mis-reservaciones/<int:reservacion_id>/", views.detalle_reservacion, name="detalle_reservacion"),
+    path("mi-perfil/", views.mi_perfil, name="mi_perfil"),
 ]

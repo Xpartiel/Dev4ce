@@ -47,7 +47,8 @@
             {% if user.is_authenticated %}
                 <a href="{% url 'dashboard_cliente' %}">Inicio</a>
                 <a href="{% url 'mapa_cliente' %}">Mapa</a>
-                <a href="#">Mis reservaciones</a>
+                <a href="{% url 'mis_reservaciones' %}">Mis reservaciones</a>
+                <a href="{% url 'mi_perfil' %}">Mi perfil</a>
             {% else %}
                 <a href="#">Parques</a>
                 <a href="#">Mapa</a>

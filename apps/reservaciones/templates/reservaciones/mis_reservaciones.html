@@ -1,0 +1,58 @@
+{% extends "core/base.html" %}
+
+{% block title %}Mis reservaciones{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+    <div class="client-container">
+
+        <p class="section-label">// Mis reservaciones</p>
+
+        <div class="client-header">
+            <div>
+                <h1>Mis reservaciones</h1>
+                <p>Consulta tus próximas visitas y el detalle de cada folio.</p>
+            </div>
+
+            <a href="{% url 'mapa_cliente' %}" class="btn btn-primary">
+                + Nueva reservación
+            </a>
+        </div>
+
+        <div class="reservation-page-list">
+
+            {% for reservacion in reservaciones %}
+
+            <a href="{% url 'detalle_reservacion' reservacion.id %}" class="reservation-page-card">
+
+                <div class="reservation-date">
+                    <small>Check-in</small>
+                    <strong>{{ reservacion.checkin|slice:"8:10" }}</strong>
+                    <span>{{ reservacion.checkin|slice:"5:7" }}</span>
+                </div>
+
+                <div class="reservation-info">
+                    <small>{{ reservacion.folio }}</small>
+                    <h3>{{ reservacion.parque }}</h3>
+                    <p>
+                        {{ reservacion.tipo }} · {{ reservacion.checkin }} → {{ reservacion.checkout }}
+                        · {{ reservacion.huespedes }} personas
+                    </p>
+                </div>
+
+                <div class="reservation-status">
+                    <span>{{ reservacion.estado }}</span>
+                    <strong>${{ reservacion.total }}</strong>
+                </div>
+
+            </a>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

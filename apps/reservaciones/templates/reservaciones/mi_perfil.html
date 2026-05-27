@@ -1,0 +1,173 @@
+{% extends "core/base.html" %}
+
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+
+    <div class="client-container profile-container">
+
+        <p class="section-label">// Mi perfil</p>
+
+        <div class="profile-header">
+
+            <div class="profile-user">
+
+                <div class="profile-avatar">
+                    {{ user.nombre_completo|slice:":1" }}
+                </div>
+
+                <div>
+
+                    <h1>{{ user.nombre_completo }}</h1>
+
+                    <p>{{ user.email }}</p>
+
+                </div>
+
+            </div>
+
+            <span class="profile-badge">
+                {% if user.tipoAdministrador %}
+                    Administrador
+                {% else %}
+                    Cliente
+                {% endif %}
+            </span>
+
+        </div>
+
+        <div class="profile-stats">
+
+            <article class="profile-stat-card">
+                <small>Reservaciones</small>
+                <strong>2</strong>
+            </article>
+
+            <article class="profile-stat-card">
+                <small>Noches reservadas</small>
+                <strong>4</strong>
+            </article>
+
+            <article class="profile-stat-card">
+                <small>Parques visitados</small>
+                <strong>3</strong>
+            </article>
+
+            <article class="profile-stat-card">
+                <small>Cuenta creada</small>
+                <strong>2026</strong>
+            </article>
+
+        </div>
+
+        <div class="profile-layout">
+
+            <div class="profile-main">
+
+                <article class="profile-card">
+
+                    <div class="profile-card-header">
+                        <h2>Información personal</h2>
+
+                        <button class="btn btn-secondary">
+                            Editar
+                        </button>
+                    </div>
+
+                    <div class="profile-grid">
+
+                        <div>
+                            <small>Nombre completo</small>
+                            <strong>{{ user.nombre_completo }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Correo electrónico</small>
+                            <strong>{{ user.email }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Usuario</small>
+                            <strong>{{ user.username }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Tipo de cuenta</small>
+                            <strong>
+                                {% if user.tipoAdministrador %}
+                                    Administrador
+                                {% else %}
+                                    Cliente
+                                {% endif %}
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </article>
+
+                <article class="profile-card">
+
+                    <h2>Preferencias de experiencia</h2>
+
+                    <div class="profile-tags">
+
+                        <span>Cabañas</span>
+                        <span>Camping</span>
+                        <span>Senderos nocturnos</span>
+                        <span>Observación de luciérnagas</span>
+                        <span>Hospedaje familiar</span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+            <aside class="profile-sidebar">
+
+                <article class="profile-card">
+
+                    <h2>Cuenta</h2>
+
+                    <div class="profile-sidebar-info">
+
+                        <div>
+                            <small>Último acceso</small>
+                            <strong>{{ user.last_login }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Estado</small>
+                            <strong>Activa</strong>
+                        </div>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="profile-actions">
+
+                        <a href="{% url 'mis_reservaciones' %}" class="btn btn-secondary">
+                            Ver reservaciones
+                        </a>
+
+                        <a href="{% url 'logout' %}" class="btn btn-danger">
+                            Cerrar sesión
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

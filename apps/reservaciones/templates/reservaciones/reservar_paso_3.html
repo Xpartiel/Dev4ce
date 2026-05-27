@@ -1,0 +1,92 @@
+{% extends "core/base.html" %}
+
+{% block title %}Reservar · Confirmación{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+    <div class="booking-container">
+
+        <a href="{% url 'reservar_paso_2' parque_id %}" class="back-link">← Volver a datos</a>
+
+        <p class="section-label">// Confirmación</p>
+        <h1>Revisa y confirma tu reservación</h1>
+
+        <div class="booking-steps">
+            <span>1 Fechas y huéspedes</span>
+            <span>2 Datos del visitante</span>
+            <span class="active">3 Confirmación</span>
+        </div>
+
+        <div class="booking-layout">
+
+            <div class="booking-card">
+
+                <h2>Detalle de la reservación</h2>
+
+                <div class="confirm-grid">
+                    <div>
+                        <small>Santuario</small>
+                        <strong>Santuario El Rosario</strong>
+                    </div>
+
+                    <div>
+                        <small>Estancia</small>
+                        <strong>14 Jun — 16 Jun</strong>
+                    </div>
+
+                    <div>
+                        <small>Hospedaje</small>
+                        <strong>Cabaña</strong>
+                    </div>
+
+                    <div>
+                        <small>Huéspedes</small>
+                        <strong>2 personas</strong>
+                    </div>
+
+                    <div>
+                        <small>Visitante</small>
+                        <strong>{{ user.nombre_completo }}</strong>
+                    </div>
+
+                    <div>
+                        <small>Correo</small>
+                        <strong>{{ user.email }}</strong>
+                    </div>
+                </div>
+
+                <div class="booking-actions">
+                    <a href="{% url 'reservar_paso_2' parque_id %}" class="btn btn-secondary">Regresar</a>
+                    <a href="{% url 'reservacion_confirmada' %}" class="btn btn-primary">Confirmar reservación</a>
+                </div>
+
+            </div>
+
+            <aside class="booking-summary">
+                <h3>Total a pagar</h3>
+
+                <div class="summary-line">
+                    <span>Cabaña · 2 noches</span>
+                    <strong>$1,700</strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Cuota festival</span>
+                    <strong>$60</strong>
+                </div>
+
+                <hr>
+
+                <div class="summary-line total">
+                    <span>Total</span>
+                    <strong>$1,760</strong>
+                </div>
+            </aside>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,89 @@
+{% extends "core/base.html" %}
+
+{% block title %}Reservar · Paso 2{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+    <div class="booking-container">
+
+        <a href="{% url 'reservar_paso_1' parque_id %}" class="back-link">← Volver a fechas</a>
+
+        <p class="section-label">// Datos del visitante</p>
+        <h1>Completa los datos de tu visita</h1>
+
+        <div class="booking-steps">
+            <span>1 Fechas y huéspedes</span>
+            <span class="active">2 Datos del visitante</span>
+            <span>3 Confirmación</span>
+        </div>
+
+        <div class="booking-layout">
+
+            <form class="booking-card" method="GET" action="{% url 'reservar_paso_3' parque_id %}">
+
+                <h2>Datos del responsable</h2>
+                <p>Estos datos se usarán para validar tu llegada al santuario.</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre completo</label>
+                        <input type="text" value="{{ user.nombre_completo }}">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" value="{{ user.email }}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono de contacto</label>
+                    <input type="text" placeholder="+52 55 1234 5678">
+                </div>
+
+                <div class="form-group">
+                    <label>Comentarios adicionales</label>
+                    <textarea placeholder="Ej. Llegaremos después de las 7 pm"></textarea>
+                </div>
+
+                <div class="booking-actions">
+                    <a href="{% url 'reservar_paso_1' parque_id %}" class="btn btn-secondary">Regresar</a>
+                    <button class="btn btn-primary" type="submit">Continuar</button>
+                </div>
+
+            </form>
+
+            <aside class="booking-summary">
+                <h3>Resumen</h3>
+                <p>Santuario El Rosario</p>
+
+                <div class="summary-line">
+                    <span>Estancia</span>
+                    <strong>14 Jun — 16 Jun</strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Tipo</span>
+                    <strong>Cabaña</strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Huéspedes</span>
+                    <strong>2</strong>
+                </div>
+
+                <hr>
+
+                <div class="summary-line total">
+                    <span>Total</span>
+                    <strong>$1,700</strong>
+                </div>
+            </aside>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

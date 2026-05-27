@@ -1,0 +1,100 @@
+{% extends "core/base.html" %}
+
+{% block title %}Detalle de reservación{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+    <div class="client-container reservation-detail-container">
+
+        <a href="{% url 'mis_reservaciones' %}" class="back-link">
+            ← Volver
+        </a>
+
+        <p class="section-label">// {{ reservacion.folio }}</p>
+
+        <div class="reservation-detail-header">
+            <div>
+                <h1>{{ reservacion.parque }}</h1>
+                <p>{{ reservacion.tipo }}</p>
+            </div>
+
+            <span class="detail-status">{{ reservacion.estado }}</span>
+        </div>
+
+        <div class="reservation-detail-layout">
+
+            <div class="reservation-detail-main">
+
+                <article class="detail-card">
+                    <div class="detail-grid">
+
+                        <div>
+                            <small>Check-in</small>
+                            <strong>{{ reservacion.checkin }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Check-out</small>
+                            <strong>{{ reservacion.checkout }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Huéspedes</small>
+                            <strong>{{ reservacion.huespedes }} personas</strong>
+                        </div>
+
+                        <div>
+                            <small>Total</small>
+                            <strong>${{ reservacion.total }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Pago</small>
+                            <strong>{{ reservacion.pago }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Estado</small>
+                            <strong>{{ reservacion.estado }}</strong>
+                        </div>
+
+                    </div>
+                </article>
+
+                <article class="detail-card">
+                    <h2>Antes de tu visita</h2>
+
+                    <ul class="visit-list">
+                        <li>Lleva ropa abrigadora; la temperatura nocturna baja considerablemente.</li>
+                        <li>Se permiten lámparas con filtro rojo únicamente.</li>
+                        <li>Preséntate 30 minutos antes en el centro de visitantes.</li>
+                        <li>No se admiten mascotas en el área de avistamiento.</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <aside class="reservation-detail-actions">
+
+                <a href="#" class="btn btn-secondary">Descargar voucher PDF</a>
+
+                <a href="{% url 'mapa_cliente' %}" class="btn btn-secondary">Ver en el mapa</a>
+
+                <a href="#" class="btn btn-danger">Cancelar reservación</a>
+
+                <hr>
+
+                <p>
+                    Confirmada el 12 abr 2026<br>
+                    Folio: {{ reservacion.folio }}
+                </p>
+
+            </aside>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
