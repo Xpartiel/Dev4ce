@@ -1008,3 +1008,142 @@ body {
         min-height: 520px;
     }
 }
+
+/* ===== PARK DETAIL ===== */
+
+.park-detail-section {
+    min-height: calc(100vh - 72px);
+    background-color: var(--color-bg);
+    padding: 56px 24px;
+}
+
+.park-detail-container {
+    max-width: 1180px;
+    margin: 0 auto;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: var(--color-gold);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.park-detail-hero {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+
+.park-detail-image {
+    position: relative;
+    min-height: 420px;
+    border-radius: 22px;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 35% 45%, rgba(255,200,87,0.18), transparent 14%),
+        linear-gradient(160deg, #0B1426, #2D5016);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.large-moon {
+    width: 56px;
+    height: 56px;
+    top: 42px;
+    right: 42px;
+}
+
+.park-detail-info {
+    padding: 34px;
+    border-radius: 22px;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.park-detail-info h1 {
+    font-size: clamp(36px, 5vw, 58px);
+    line-height: 1;
+    letter-spacing: -2px;
+    margin-bottom: 18px;
+}
+
+.park-detail-description {
+    color: rgba(245,239,224,0.65);
+    line-height: 1.7;
+    margin-bottom: 28px;
+}
+
+.park-detail-meta {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.park-detail-meta div {
+    padding: 18px;
+    border-radius: 14px;
+    background-color: var(--color-surface-2);
+}
+
+.park-detail-meta small {
+    display: block;
+    color: rgba(245,239,224,0.45);
+    margin-bottom: 8px;
+}
+
+.park-detail-meta strong {
+    color: var(--color-gold);
+    font-size: 28px;
+}
+
+.park-detail-meta span {
+    color: rgba(245,239,224,0.55);
+    font-size: 13px;
+}
+
+.park-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+}
+
+.park-detail-card {
+    padding: 28px;
+    border-radius: 18px;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.park-detail-card h2 {
+    margin-bottom: 14px;
+}
+
+.park-detail-card p {
+    color: rgba(245,239,224,0.62);
+    line-height: 1.7;
+}
+
+.service-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.service-list span {
+    padding: 9px 12px;
+    border-radius: 999px;
+    color: var(--color-gold);
+    background-color: rgba(255,200,87,0.08);
+    border: 1px solid rgba(255,200,87,0.22);
+    font-size: 13px;
+}
+
+@media (max-width: 900px) {
+    .park-detail-hero,
+    .park-detail-grid {
+        grid-template-columns: 1fr;
+    }
+}

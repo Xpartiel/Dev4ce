@@ -1,0 +1,83 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ parque.nombre }}{% endblock %}
+
+{% block content %}
+
+<section class="park-detail-section">
+
+    <div class="park-detail-container">
+
+        <a href="{% url 'mapa_cliente' %}" class="back-link">
+            ← Volver al mapa
+        </a>
+
+        <div class="park-detail-hero">
+
+            <div class="park-detail-image">
+                <span class="park-status available">Disponible</span>
+                <span class="moon large-moon"></span>
+            </div>
+
+            <div class="park-detail-info">
+
+                <p class="section-label">// {{ parque.estado }}</p>
+
+                <h1>{{ parque.nombre }}</h1>
+
+                <p class="park-detail-description">
+                    {{ parque.descripcion }}
+                </p>
+
+                <div class="park-detail-meta">
+
+                    <div>
+                        <small>Desde</small>
+                        <strong>${{ parque.precio }}</strong>
+                        <span>/noche</span>
+                    </div>
+
+                    <div>
+                        <small>Disponibilidad</small>
+                        <strong>{{ parque.disponibles }}</strong>
+                        <span>espacios</span>
+                    </div>
+
+                </div>
+
+                <a href="#" class="btn btn-primary">
+                    Reservar ahora
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="park-detail-grid">
+
+            <article class="park-detail-card">
+                <h2>Sobre este santuario</h2>
+                <p>
+                    Este parque forma parte de la ruta del Festival Internacional de las Luciérnagas.
+                    Durante la temporada, los visitantes pueden reservar espacios de hospedaje,
+                    consultar disponibilidad y planear su experiencia nocturna.
+                </p>
+            </article>
+
+            <article class="park-detail-card">
+                <h2>Servicios disponibles</h2>
+
+                <div class="service-list">
+                    {% for servicio in parque.servicios %}
+                        <span>{{ servicio }}</span>
+                    {% endfor %}
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
