@@ -1,0 +1,152 @@
+{% extends "core/base.html" %}
+
+{% block title %}Dashboard cliente{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+
+    <div class="client-container">
+
+        <p class="section-label">// Hola, {{ user.nombre_completo }}</p>
+
+        <div class="client-header">
+            <div>
+                <h1>Faltan <span>45 días</span> para tu primera noche</h1>
+                <p>
+                    El festival arranca el 14 de junio. Estas son tus reservaciones próximas.
+                </p>
+            </div>
+
+            <a href="#" class="btn btn-primary">
+                + Nueva reservación
+            </a>
+        </div>
+
+        <div class="stats-grid">
+
+            <article class="stat-card">
+                <p>Reservaciones activas</p>
+                <strong>2</strong>
+            </article>
+
+            <article class="stat-card">
+                <p>Noches este festival</p>
+                <strong>4</strong>
+            </article>
+
+            <article class="stat-card">
+                <p>Parques visitados</p>
+                <strong>3</strong>
+            </article>
+
+            <article class="stat-card">
+                <p>Total invertido</p>
+                <strong>$3,000</strong>
+            </article>
+
+        </div>
+
+        <h2 class="client-subtitle">Próximas estancias</h2>
+
+        <div class="reservation-list">
+
+            <article class="reservation-card">
+                <div class="reservation-date">
+                    <small>Check-in</small>
+                    <strong>14</strong>
+                    <span>Jun</span>
+                </div>
+
+                <div class="reservation-info">
+                    <small>LUZ-2026-04812</small>
+                    <h3>Santuario El Rosario</h3>
+                    <p>Cabaña Oyamel 3 · 14 Jun → 16 Jun · 2 personas</p>
+                </div>
+
+                <div class="reservation-status">
+                    <span>confirmada</span>
+                    <strong>$1,700</strong>
+                </div>
+            </article>
+
+            <article class="reservation-card">
+                <div class="reservation-date">
+                    <small>Check-in</small>
+                    <strong>3</strong>
+                    <span>Jul</span>
+                </div>
+
+                <div class="reservation-info">
+                    <small>LUZ-2026-04788</small>
+                    <h3>Santuario Nanacamilpa</h3>
+                    <p>Cabaña Familiar B · 3 Jul → 5 Jul · 4 personas</p>
+                </div>
+
+                <div class="reservation-status">
+                    <span>confirmada</span>
+                    <strong>$1,300</strong>
+                </div>
+            </article>
+
+        </div>
+
+        <div class="client-section-header">
+            <h2 class="client-subtitle">Tal vez te interese</h2>
+            <a href="#">Ver todos</a>
+        </div>
+
+        <div class="park-grid">
+
+            <article class="park-card">
+                <div class="park-image park-green">
+                    <span class="park-status available">Disponible</span>
+                    <span class="moon"></span>
+                </div>
+                <div class="park-info">
+                    <h3>Santuario El Rosario</h3>
+                    <p>Michoacán</p>
+                    <div class="park-footer">
+                        <strong>$850</strong>
+                        <span>/noche</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="park-card">
+                <div class="park-image park-amber">
+                    <span class="park-status few">Pocos espacios</span>
+                    <span class="moon"></span>
+                </div>
+                <div class="park-info">
+                    <h3>Sierra Chincua</h3>
+                    <p>Michoacán</p>
+                    <div class="park-footer">
+                        <strong>$1180</strong>
+                        <span>/noche</span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="park-card">
+                <div class="park-image park-blue">
+                    <span class="park-status sold">Agotado</span>
+                    <span class="moon"></span>
+                </div>
+                <div class="park-info">
+                    <h3>Piedra Herrada</h3>
+                    <p>Estado de México</p>
+                    <div class="park-footer">
+                        <strong>$720</strong>
+                        <span>/noche</span>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

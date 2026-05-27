@@ -19,14 +19,20 @@ Iniciar sesión
         <p class="auth-description">
             Accede para consultar reservaciones y explorar parques.
         </p>
+        {% if error %}
+            <p class="form-error">{{ error }}</p>
+        {% endif %}
 
-        <form class="auth-form">
+        <form method="POST" class="auth-form">
+
+            {% csrf_token %}
 
             <div class="form-group">
                 <label>Correo electrónico</label>
 
                 <input
                     type="email"
+                    name="correo"
                     placeholder="correo@ejemplo.com"
                 >
             </div>
@@ -36,6 +42,7 @@ Iniciar sesión
 
                 <input
                     type="password"
+                    name="password"
                     placeholder="********"
                 >
             </div>

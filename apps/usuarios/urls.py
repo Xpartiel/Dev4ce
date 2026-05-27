@@ -14,4 +14,10 @@ urlpatterns = [
         name="recuperar_password"
     ),
 
+    path(
+        "logout/",
+        views.logout_view,
+        name="logout"
+    ),
+
 ]

@@ -1,0 +1,96 @@
+{% extends "core/base.html" %}
+
+{% block title %}Mapa interactivo{% endblock %}
+
+{% block content %}
+
+<section class="client-map-section">
+
+    <aside class="map-sidebar">
+
+        <p class="section-label">// Filtros</p>
+
+        <h1>Santuarios oficiales</h1>
+
+        <input
+            class="map-search"
+            type="text"
+            placeholder="Buscar parque o estado..."
+        >
+
+        <div class="map-filter-buttons">
+            <button class="active">Todos</button>
+            <button>Cabañas</button>
+            <button>Camping</button>
+        </div>
+
+        <div class="map-park-list">
+
+            <a href="#" class="map-park-item">
+                <div>
+                    <h3>Santuario El Rosario</h3>
+                    <p>Michoacán</p>
+                    <small>$850/noche</small>
+                </div>
+                <span class="available-text">47 libres</span>
+            </a>
+
+            <a href="#" class="map-park-item">
+                <div>
+                    <h3>Sierra Chincua</h3>
+                    <p>Michoacán</p>
+                    <small>$1180/noche</small>
+                </div>
+                <span class="few-text">12 libres</span>
+            </a>
+
+            <a href="#" class="map-park-item">
+                <div>
+                    <h3>Piedra Herrada</h3>
+                    <p>Estado de México</p>
+                    <small>$720/noche</small>
+                </div>
+                <span class="sold-text">agotado</span>
+            </a>
+
+            <a href="#" class="map-park-item">
+                <div>
+                    <h3>Cerro Pelón</h3>
+                    <p>Edo. México / Michoacán</p>
+                    <small>$980/noche</small>
+                </div>
+                <span class="available-text">23 libres</span>
+            </a>
+
+            <a href="#" class="map-park-item">
+                <div>
+                    <h3>Santuario Nanacamilpa</h3>
+                    <p>Tlaxcala</p>
+                    <small>$650/noche</small>
+                </div>
+                <span class="available-text">84 libres</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+    <div class="interactive-map">
+
+        <div class="map-bg-line line-a"></div>
+        <div class="map-bg-line line-b"></div>
+
+        <a href="#" class="firefly-marker marker-1"></a>
+        <a href="#" class="firefly-marker marker-2"></a>
+        <a href="#" class="firefly-marker marker-3"></a>
+        <a href="#" class="firefly-marker marker-4"></a>
+        <a href="#" class="firefly-marker marker-5"></a>
+        <a href="#" class="firefly-marker marker-6"></a>
+        <a href="#" class="firefly-marker marker-7"></a>
+        <a href="#" class="firefly-marker marker-8"></a>
+
+    </div>
+
+</section>
+
+{% endblock %}

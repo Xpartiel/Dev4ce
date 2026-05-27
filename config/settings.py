@@ -124,3 +124,8 @@ STATIC_URL = 'static/'
 
 # Línea para poder usar el sistema de autenticación de Django
 AUTH_USER_MODEL = "usuarios.Usuario"
+
+# Se configura redirección si no hay sesión
+LOGIN_URL = "login"
+LOGIN_REDIRECT_URL = "dashboard_cliente"
+LOGOUT_REDIRECT_URL = "landing"
