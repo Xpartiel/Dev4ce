@@ -9,6 +9,16 @@ class Parque(models.Model):
     estado = models.CharField(max_length=100)
     descripcion = models.TextField()
 
+    latitud = models.DecimalField(
+        max_digits=9,
+        decimal_places=6
+    )
+
+    longitud = models.DecimalField(
+        max_digits=9,
+        decimal_places=6
+    )
+
     capacidad_total = models.PositiveIntegerField()
 
     precio_cabana = models.DecimalField(max_digits=10, decimal_places=2)
