@@ -505,3 +505,168 @@ body {
         padding: 48px 24px;
     }
 }
+
+/* ===== AUTH ===== */
+
+.auth-section {
+
+    min-height: calc(100vh - 72px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 40px 20px;
+
+}
+
+.auth-card {
+
+    width: 100%;
+    max-width: 460px;
+
+    padding: 42px;
+
+    border-radius: 20px;
+
+    background-color: var(--color-surface);
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+}
+
+.auth-label {
+
+    color: var(--color-gold);
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 12px;
+
+}
+
+.auth-card h1 {
+
+    font-size: 42px;
+
+    margin-bottom: 14px;
+
+}
+
+.auth-description {
+
+    color: rgba(245,239,224,0.65);
+
+    margin-bottom: 32px;
+
+    line-height: 1.6;
+
+}
+
+.auth-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+}
+
+.form-group label {
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+}
+
+.form-group input {
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    border: 1px solid rgba(255,255,255,0.08);
+
+    background-color: var(--color-surface-2);
+
+    color: var(--color-text);
+
+    outline: none;
+
+}
+
+.form-group input:focus {
+
+    border-color: var(--color-gold);
+
+}
+
+.auth-button {
+
+    width: 100%;
+
+    border: none;
+
+    cursor: pointer;
+
+    margin-top: 10px;
+
+}
+
+.auth-links {
+
+    margin-top: 24px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 16px;
+
+}
+
+.auth-links a {
+
+    color: rgba(245,239,224,0.7);
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+}
+
+.auth-links a:hover {
+
+    color: var(--color-gold);
+
+}
+
+.form-error {
+    margin-bottom: 20px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background-color: rgba(255, 77, 90, 0.12);
+    border: 1px solid rgba(255, 77, 90, 0.4);
+    color: #FF4D5A;
+    font-size: 14px;
+}

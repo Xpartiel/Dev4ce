@@ -1,0 +1,65 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Iniciar sesión
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <p class="auth-label">
+            Bienvenido de nuevo
+        </p>
+
+        <h1>Iniciar sesión</h1>
+
+        <p class="auth-description">
+            Accede para consultar reservaciones y explorar parques.
+        </p>
+
+        <form class="auth-form">
+
+            <div class="form-group">
+                <label>Correo electrónico</label>
+
+                <input
+                    type="email"
+                    placeholder="correo@ejemplo.com"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+
+                <input
+                    type="password"
+                    placeholder="********"
+                >
+            </div>
+
+            <button class="btn btn-primary auth-button">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <div class="auth-links">
+
+            <a href="/usuarios/recuperar-password/">
+                ¿Olvidaste tu contraseña?
+            </a>
+
+            <a href="/usuarios/registro/">
+                Crear cuenta
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
