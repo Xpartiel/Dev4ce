@@ -1,0 +1,121 @@
+{% extends "core/base.html" %}
+
+{% block title %}Calendario por parque{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    <aside class="admin-sidebar">
+
+        <div class="admin-logo">
+            <span class="logo-icon">△</span>
+            <strong>dev4ce</strong>
+        </div>
+
+        <p class="admin-label">// Administración</p>
+
+        <nav class="admin-menu">
+            <a href="{% url 'admin_dashboard' %}">Panel</a>
+            <a href="{% url 'admin_parques' %}">Parques</a>
+            <a href="{% url 'admin_reservaciones' %}">Reservaciones</a>
+            <a href="{% url 'admin_calendario' %}" class="active">Calendario</a>
+            <a href="{% url 'admin_reportes' %}">Reportes</a>
+        </nav>
+
+        <div class="admin-user-box">
+            <strong>{{ user.nombre_completo }}</strong>
+            <small>Admin</small>
+        </div>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+
+            <div>
+                <p class="section-label">// Calendario</p>
+                <h1>Disponibilidad por parque</h1>
+            </div>
+
+        </div>
+
+        <article class="admin-panel">
+
+            <div class="calendar-tabs">
+
+                <button class="calendar-tab active">
+                    Santuario El Rosario
+                </button>
+
+                <button class="calendar-tab">
+                    Sierra Chincua
+                </button>
+
+                <button class="calendar-tab">
+                    Piedra Herrada
+                </button>
+
+                <button class="calendar-tab">
+                    Cerro Pelón
+                </button>
+
+                <button class="calendar-tab">
+                    Nanacamilpa
+                </button>
+
+            </div>
+
+            <div class="calendar-header">
+
+                <div>
+                    <h3>Santuario El Rosario</h3>
+                    <p>Junio 2026 · capacidad 120</p>
+                </div>
+
+                <div class="calendar-legend">
+
+                    <span>
+                        <i class="dot free"></i>
+                        libre
+                    </span>
+
+                    <span>
+                        <i class="dot few"></i>
+                        pocos
+                    </span>
+
+                    <span>
+                        <i class="dot full"></i>
+                        agotado
+                    </span>
+
+                    <span>
+                        <i class="dot maintenance"></i>
+                        mantto
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="admin-calendar-grid">
+                {% for dia in dias_calendario %}
+                    <div class="calendar-day">
+                        <div class="calendar-day-top">
+                            <strong>{{ dia.numero }}</strong>
+                            <span class="dot {{ dia.estado }}"></span>
+                        </div>
+                        <small>{{ dia.texto }}</small>
+                    </div>
+                {% endfor %}
+            </div>
+
+        </article>
+
+    </main>
+
+</section>
+
+{% endblock %}

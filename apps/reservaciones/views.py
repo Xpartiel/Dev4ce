@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import render,redirect
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 
 @login_required
@@ -116,3 +116,58 @@ def detalle_reservacion(request, reservacion_id):
 def mi_perfil(request):
 
     return render(request, "reservaciones/mi_perfil.html")
+
+def solo_admin(user):
+    return user.is_authenticated and getattr(user, "tipoAdministrador", False)
+
+@user_passes_test(solo_admin, login_url="login")
+def admin_dashboard(request):
+    return render(request, "reservaciones/admin_dashboard.html")
+
+@user_passes_test(solo_admin, login_url="login")
+def admin_parques(request):
+    return render(request, "reservaciones/admin_parques.html")
+
+
+@user_passes_test(solo_admin, login_url="login")
+def admin_reservaciones(request):
+    return render(request, "reservaciones/admin_reservaciones.html")
+
+
+@user_passes_test(solo_admin, login_url="login")
+def admin_calendario(request):
+
+    dias_calendario = []
+
+    for i in range(1, 29):
+
+        if i in [2, 9, 16, 23]:
+            estado = "maintenance"
+            texto = "mantenimiento"
+
+        elif i in [4, 14, 24, 27]:
+            estado = "full"
+            texto = "120/120"
+
+        elif i in [3, 13, 19, 26]:
+            estado = "few"
+            texto = "102/120"
+
+        else:
+            estado = "free"
+            texto = "48/120"
+
+        dias_calendario.append({
+            "numero": i,
+            "estado": estado,
+            "texto": texto,
+        })
+
+    return render(request, "reservaciones/admin_calendario.html", {
+        "dias_calendario": dias_calendario
+    })
+
+
+@user_passes_test(solo_admin, login_url="login")
+def admin_reportes(request):
+    return render(request, "reservaciones/admin_reportes.html")

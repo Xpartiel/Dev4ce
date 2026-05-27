@@ -8,16 +8,10 @@ urlpatterns = [
 
     path("registro/", views.registro_view, name="registro"),
 
-    path(
-        "recuperar-password/",
-        views.recuperar_password_view,
-        name="recuperar_password"
-    ),
+    path("registro-admin/", views.registro_admin_view, name="registro_admin"),
 
-    path(
-        "logout/",
-        views.logout_view,
-        name="logout"
-    ),
+    path("recuperar-password/", views.recuperar_password_view, name="recuperar_password"),
+
+    path("logout/", views.logout_view, name="logout"),
 
 ]

@@ -1,0 +1,145 @@
+{% extends "core/base.html" %}
+
+{% block title %}Gestión de parques{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    <aside class="admin-sidebar">
+        <div class="admin-logo">
+            <span class="logo-icon">△</span>
+            <strong>dev4ce</strong>
+        </div>
+
+        <p class="admin-label">// Administración</p>
+
+        <nav class="admin-menu">
+            <a href="{% url 'admin_dashboard' %}">Panel</a>
+            <a href="{% url 'admin_parques' %}" class="active">Parques</a>
+            <a href="{% url 'admin_reservaciones' %}">Reservaciones</a>
+            <a href="{% url 'admin_calendario' %}">Calendario</a>
+            <a href="{% url 'admin_reportes' %}">Reportes</a>
+        </nav>
+
+        <div class="admin-user-box">
+            <strong>{{ user.nombre_completo }}</strong>
+            <small>Admin</small>
+        </div>
+    </aside>
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+            <div>
+                <p class="section-label">// Gestión de parques</p>
+                <h1>Parques oficiales</h1>
+            </div>
+
+            <button class="btn btn-primary">+ Nuevo parque</button>
+        </div>
+
+        <article class="admin-panel">
+
+            <table class="admin-table parks-admin-table">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Ubicación</th>
+                        <th>Capacidad</th>
+                        <th>Ocupación</th>
+                        <th>Precio</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>Santuario El Rosario</strong>
+                            <small>rosario</small>
+                        </td>
+                        <td>Michoacán</td>
+                        <td>120</td>
+                        <td>
+                            <div class="admin-progress">
+                                <span style="width: 61%"></span>
+                            </div>
+                            61%
+                        </td>
+                        <td>$850</td>
+                        <td class="admin-actions-cell">
+                            <button>✎</button>
+                            <button class="danger">🗑</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>Sierra Chincua</strong>
+                            <small>chincua</small>
+                        </td>
+                        <td>Michoacán</td>
+                        <td>96</td>
+                        <td>
+                            <div class="admin-progress danger-progress">
+                                <span style="width: 88%"></span>
+                            </div>
+                            88%
+                        </td>
+                        <td>$1100</td>
+                        <td class="admin-actions-cell">
+                            <button>✎</button>
+                            <button class="danger">🗑</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>Piedra Herrada</strong>
+                            <small>piedra</small>
+                        </td>
+                        <td>Estado de México</td>
+                        <td>80</td>
+                        <td>
+                            <div class="admin-progress danger-progress">
+                                <span style="width: 100%"></span>
+                            </div>
+                            100%
+                        </td>
+                        <td>$720</td>
+                        <td class="admin-actions-cell">
+                            <button>✎</button>
+                            <button class="danger">🗑</button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <strong>Santuario Nanacamilpa</strong>
+                            <small>nanacamilpa</small>
+                        </td>
+                        <td>Tlaxcala</td>
+                        <td>200</td>
+                        <td>
+                            <div class="admin-progress">
+                                <span style="width: 58%"></span>
+                            </div>
+                            58%
+                        </td>
+                        <td>$650</td>
+                        <td class="admin-actions-cell">
+                            <button>✎</button>
+                            <button class="danger">🗑</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </article>
+
+    </main>
+
+</section>
+
+{% endblock %}

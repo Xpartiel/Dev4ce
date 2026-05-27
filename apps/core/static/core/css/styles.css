@@ -1748,3 +1748,518 @@ textarea {
     }
 
 }
+
+/* ===== ADMIN AREA ===== */
+
+.admin-layout {
+    min-height: calc(100vh - 72px);
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    background-color: var(--color-bg);
+}
+
+.admin-sidebar {
+    padding: 28px 22px;
+    background-color: #050810;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-logo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 36px;
+}
+
+.admin-label {
+    color: rgba(245,239,224,0.4);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    margin-bottom: 16px;
+}
+
+.admin-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-menu a {
+    padding: 12px 14px;
+    border-radius: 10px;
+    color: rgba(245,239,224,0.7);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.admin-menu a:hover,
+.admin-menu .active {
+    color: var(--color-text);
+    background-color: var(--color-surface-3);
+    border-left: 3px solid var(--color-gold);
+}
+
+.admin-user-box {
+    margin-top: auto;
+    padding: 16px;
+    border-radius: 14px;
+    background-color: var(--color-surface-3);
+}
+
+.admin-user-box small {
+    display: block;
+    color: rgba(245,239,224,0.5);
+    margin-top: 4px;
+}
+
+.admin-content {
+    padding: 36px;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.admin-header h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.admin-header p {
+    color: rgba(245,239,224,0.58);
+}
+
+.admin-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.admin-kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.admin-kpi-card,
+.admin-panel {
+    padding: 24px;
+    border-radius: 16px;
+    background-color: var(--color-surface);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+.admin-kpi-card p {
+    color: rgba(245,239,224,0.45);
+    margin-bottom: 12px;
+}
+
+.admin-kpi-card strong {
+    display: block;
+    font-size: 34px;
+    margin-bottom: 8px;
+}
+
+.positive {
+    color: #9DFF6E;
+}
+
+.negative {
+    color: #FF4D5A;
+}
+
+.admin-dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 18px;
+    margin-bottom: 24px;
+}
+
+.admin-panel h2 {
+    margin-bottom: 20px;
+}
+
+.fake-chart {
+    height: 240px;
+    display: flex;
+    align-items: end;
+    gap: 18px;
+    padding-top: 30px;
+}
+
+.fake-chart span {
+    flex: 1;
+    border-radius: 8px 8px 0 0;
+    background: linear-gradient(180deg, var(--color-gold), var(--color-amber));
+}
+
+.occupancy-circle {
+    width: 160px;
+    height: 160px;
+    margin: 20px auto;
+    border-radius: 50%;
+    border: 18px solid var(--color-gold);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.occupancy-circle strong {
+    font-size: 38px;
+}
+
+.occupancy-circle span {
+    color: rgba(245,239,224,0.55);
+}
+
+.legend p {
+    color: rgba(245,239,224,0.65);
+    margin-bottom: 10px;
+}
+
+.gold-dot,
+.blue-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.gold-dot {
+    background-color: var(--color-gold);
+}
+
+.blue-dot {
+    background-color: var(--color-surface-3);
+}
+
+.admin-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-panel-header a {
+    color: var(--color-gold);
+    text-decoration: none;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.admin-table td {
+    padding: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+
+.admin-table td:first-child {
+    color: var(--color-gold);
+    font-weight: 700;
+}
+
+.status {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+}
+
+.status.confirmed {
+    color: #9DFF6E;
+    background-color: rgba(157,255,110,0.1);
+    border: 1px solid rgba(157,255,110,0.3);
+}
+
+.status.pending {
+    color: var(--color-gold);
+    background-color: rgba(255,200,87,0.1);
+    border: 1px solid rgba(255,200,87,0.3);
+}
+
+@media (max-width: 900px) {
+    .admin-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .admin-sidebar {
+        display: none;
+    }
+
+    .admin-header,
+    .admin-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .admin-kpi-grid,
+    .admin-dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== ADMIN PARKS ===== */
+
+.admin-table th {
+    text-align: left;
+    padding: 14px 16px;
+    color: rgba(245,239,224,0.45);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.parks-admin-table small {
+    display: block;
+    color: rgba(245,239,224,0.42);
+    margin-top: 4px;
+}
+
+.admin-progress {
+    display: inline-block;
+    width: 120px;
+    height: 8px;
+    margin-right: 10px;
+    border-radius: 999px;
+    background-color: var(--color-surface-3);
+    overflow: hidden;
+}
+
+.admin-progress span {
+    display: block;
+    height: 100%;
+    background-color: var(--color-gold);
+}
+
+.danger-progress span {
+    background-color: #FF4D5A;
+}
+
+.admin-actions-cell {
+    display: flex;
+    gap: 8px;
+}
+
+.admin-actions-cell button {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background-color: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.admin-actions-cell .danger {
+    color: #FF4D5A;
+    border-color: rgba(255,77,90,0.35);
+}
+
+/* ===== ADMIN RESERVATIONS ===== */
+
+.admin-toolbar {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.admin-search {
+    flex: 1;
+    min-width: 280px;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background-color: var(--color-surface-2);
+    color: var(--color-text);
+    outline: none;
+}
+
+.status.completed {
+    color: #7EB3FF;
+    background-color: rgba(126,179,255,0.1);
+    border: 1px solid rgba(126,179,255,0.25);
+}
+
+.status.cancelled {
+    color: #FF4D5A;
+    background-color: rgba(255,77,90,0.1);
+    border: 1px solid rgba(255,77,90,0.25);
+}
+
+/* ===== ADMIN CALENDAR ===== */
+
+.calendar-tabs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 28px;
+}
+
+.calendar-tab {
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background-color: transparent;
+    color: var(--color-text);
+    cursor: pointer;
+}
+
+.calendar-tab.active {
+    background-color: var(--color-gold);
+    color: #111;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.calendar-legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.calendar-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+.calendar-day {
+    min-height: 120px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background-color: var(--color-surface-2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.calendar-day-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.calendar-day small {
+    color: rgba(245,239,224,0.45);
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    display: inline-block;
+}
+
+.dot.free {
+    background-color: #7BA65B;
+}
+
+.dot.few {
+    background-color: #FF9F1C;
+}
+
+.dot.full {
+    background-color: #FF4D5A;
+}
+
+.dot.maintenance {
+    background-color: #4B5D88;
+}
+
+/* ===== ADMIN REPORTS ===== */
+
+.report-chart-panel {
+    margin-bottom: 24px;
+}
+
+.line-chart {
+    position: relative;
+    height: 260px;
+    border-radius: 14px;
+    background:
+        repeating-linear-gradient(
+            to top,
+            transparent 0,
+            transparent 48px,
+            rgba(255,255,255,0.05) 49px
+        );
+    overflow: hidden;
+}
+
+.line-chart span {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-gold);
+    border-radius: 50%;
+    box-shadow: 0 0 18px var(--color-gold);
+}
+
+.ranking-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.ranking-list div p {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.ranking-list div strong {
+    color: var(--color-gold);
+}
+
+.ranking-list div span {
+    display: block;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-gold), var(--color-amber));
+}
+
+.donut-chart {
+    width: 180px;
+    height: 180px;
+    margin: 22px auto;
+    border-radius: 50%;
+    background:
+        conic-gradient(
+            var(--color-gold) 0 62%,
+            var(--color-green) 62% 100%
+        );
+    position: relative;
+}
+
+.donut-chart::after {
+    content: "";
+    position: absolute;
+    inset: 42px;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+}
