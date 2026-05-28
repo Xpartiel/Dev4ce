@@ -22,7 +22,7 @@ class TipoUsuario( models.Model ):
     )
 
 
-class Usuario(AbstractUser):
+class Usuario( AbstractUser ):
     '''
     Modelo de Usuario que contiene datos publicos.
         Tabla Correspondiente: Perfil
@@ -37,7 +37,7 @@ class Usuario(AbstractUser):
     nick_name = models.CharField( max_length=128 )
     
     # TODO considerar si incluir foto de perfil
-    foto_perfil = models.CharField()
+    foto_perfil = models.CharField( max_length=500 )
     
     # Esto se considera dato privado
     # TODO removerlo de este modelo y reservarlo a *Persona*
@@ -54,7 +54,9 @@ class Usuario(AbstractUser):
     tipo_usuario = models.ForeignKey(
         TipoUsuario,
         related_name='tipo_actual',
-        blank=True
+        blank=True,
+        null=True,
+        on_delete=models.PROTECT
     )
 
     tipoAdministrador = models.BooleanField(default=False)
@@ -72,13 +74,15 @@ class HistorialTipoUsuario( models.Model ):
     # Referencia al usuario que se da seguimiento
     usuario = models.ForeignKey(
         Usuario,
-        related_name='historico_ususario'
+        related_name='historico_ususario',
+        on_delete=models.PROTECT
     )
     
     # Referencia al tipo asignado
     tipo = models.ForeignKey(
         TipoUsuario,
-        related_name='historico_asignacion'
+        related_name='historico_asignacion',
+        on_delete=models.PROTECT
     )
     
     # Fecha de registro de inicio con este estatus
@@ -113,7 +117,7 @@ class Persona( models.Model ):
     )
     
     @property
-    def nombre_completo( self ):
+    def nombre_completo( self ) -> str:
         return str(
             self.nombre) if self.nombre else '' + str(
             self.self.apellido_paterno ) if self.self.apellido_paterno else '' + str(
