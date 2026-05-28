@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class TipoUsuario( models.Model ):
     '''
     Modelo auxiliar para dar indicar a un perfil el tipo de usuario es.
@@ -20,6 +21,7 @@ class TipoUsuario( models.Model ):
     prioridad = models.IntegerField(
         default=0
     )
+
 
 
 class Usuario(AbstractUser):
@@ -62,6 +64,8 @@ class Usuario(AbstractUser):
     def __str__(self):
         return self.username or self.email
 
+
+
 class HistorialTipoUsuario( models.Model ):
     '''
     Modelo que pretende mantener un registro historico de las
@@ -89,7 +93,9 @@ class HistorialTipoUsuario( models.Model ):
     fecha_fin = models.DateTimeField( null=True )
     
     motivo_cambio = models.TextField( null=True , blank=True )
-    
+
+
+
 class Persona( models.Model ):
     '''
     Modelo dedicado a manejar los datos privados de un usuario
