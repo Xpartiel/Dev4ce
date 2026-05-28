@@ -9,12 +9,6 @@ class TipoUsuario( models.Model ):
     Util para propositos de administración futura.
     '''
     
-    
-    # Numero de usuario, usado para ser usado de FK en Usuario
-    id = models.AutoField(
-        primary_key=True
-    )
-    
     # Nombre asignado al tipo de usuario; debe ser breve
     nombre = models.CharField( max_length = 255 )
     
@@ -23,6 +17,7 @@ class TipoUsuario( models.Model ):
     
     # Nivel de importancia de este rol; a mas alto el numero, mas importante
     # 0 se asigna al rol con menos privilegios (usuario común)
+    # Considerar usar valores negaticos para rechazar acceso (ban)
     prioridad = models.IntegerField(
         default=0
     )
@@ -36,6 +31,12 @@ class Usuario(AbstractUser):
         max_length=20,
         blank=True,
         null=True
+    )
+    
+    tipo_usuario = models.ForeignKey(
+        TipoUsuario,
+        related_name='tipo_actual',
+        blank=True
     )
 
     tipoAdministrador = models.BooleanField(default=False)
