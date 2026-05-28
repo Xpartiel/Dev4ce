@@ -3,8 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 class TipoUsuario( models.Model ):
     '''
-    Modelo auxiliar para dar indicar a un perfil que
-    tipo de usuario es.
+    Modelo auxiliar para dar indicar a un perfil el tipo de usuario es.
     
     Util para propositos de administración futura.
     '''
@@ -43,3 +42,31 @@ class Usuario(AbstractUser):
 
     def __str__(self):
         return self.email or self.username
+
+class HistorialTipoUsuario( models.Model ):
+    '''
+    Modelo que pretende mantener un registro historico de las
+    fechas y tipos de usuario que adquiere un dado usuario a
+    lo largo del tiempo
+    '''
+    
+    # Referencia al usuario que se da seguimiento
+    usuario = models.ForeignKey(
+        Usuario,
+        related_name='historico_ususario'
+    )
+    
+    # Referencia al tipo asignado
+    tipo = models.ForeignKey(
+        TipoUsuario,
+        related_name='historico_asignacion'
+    )
+    
+    # Fecha de registro de inicio con este estatus
+    fecha_inicio = models.DateTimeField( auto_now_add=True )
+    
+    # Fecha de fin de vigencia de estatus
+    # null indica vigencia activa
+    fecha_fin = models.DateTimeField( null=True )
+    
+    motivo_cambio = models.TextField( null=True , blank=True )
