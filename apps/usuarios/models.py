@@ -23,9 +23,28 @@ class TipoUsuario( models.Model ):
 
 
 class Usuario(AbstractUser):
+    '''
+    Modelo de Usuario que contiene datos publicos.
+        Tabla Correspondiente: Perfil
+    Hereda de AbstractUser para aprovechar las funciones
+    de autenticacion de Django
+    '''
 
+    # Nombre publico de usuario.
+    # Se asigna por defecto el email antes del domino
+    # EJ
+    # ejemplo@correo.com -> ejemplo
+    nick_name = models.CharField( max_length=128 )
+    
+    # TODO considerar si incluir foto de perfil
+    foto_perfil = models.CharField()
+    
+    # Esto se considera dato privado
+    # TODO removerlo de este modelo y reservarlo a *Persona*
     nombre_completo = models.CharField(max_length=255)
 
+    # Esto se considera dato privado
+    # TODO removerlo de este modelo y reservarlo a *Persona*
     telefono = models.CharField(
         max_length=20,
         blank=True,
@@ -41,7 +60,7 @@ class Usuario(AbstractUser):
     tipoAdministrador = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.email or self.username
+        return self.username or self.email
 
 class HistorialTipoUsuario( models.Model ):
     '''
@@ -70,3 +89,32 @@ class HistorialTipoUsuario( models.Model ):
     fecha_fin = models.DateTimeField( null=True )
     
     motivo_cambio = models.TextField( null=True , blank=True )
+    
+class Persona( models.Model ):
+    '''
+    Modelo dedicado a manejar los datos privados de un usuario
+        Tabla Correspondiente: Persona
+    '''
+    
+    usuario = models.OneToOneField(
+        Usuario,
+        primary_key=True,
+        on_delete=models.CASCADE
+    )
+    
+    nombre = models.CharField( max_length=255 )
+    apellido_paterno = models.CharField( max_length=255 )
+    apellido_materno = models.CharField( max_length=255 )
+    email = models.CharField(
+        max_length = 255,
+        unique=True,
+        blank=False,
+        null=False
+    )
+    
+    @property
+    def nombre_completo( self ):
+        return str(
+            self.nombre) if self.nombre else '' + str(
+            self.self.apellido_paterno ) if self.self.apellido_paterno else '' + str(
+            self.self.apellido_materno ) if self.self.apellido_materno else ''
