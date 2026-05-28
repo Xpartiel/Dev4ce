@@ -1,6 +1,32 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+class TipoUsuario( models.Model ):
+    '''
+    Modelo auxiliar para dar indicar a un perfil que
+    tipo de usuario es.
+    
+    Util para propositos de administración futura.
+    '''
+    
+    
+    # Numero de usuario, usado para ser usado de FK en Usuario
+    id = models.AutoField(
+        primary_key=True
+    )
+    
+    # Nombre asignado al tipo de usuario; debe ser breve
+    nombre = models.CharField( max_length = 255 )
+    
+    # Descripcion detallada de las responsabilidades de este tipo de usuario
+    descripcion = models.TextField()
+    
+    # Nivel de importancia de este rol; a mas alto el numero, mas importante
+    # 0 se asigna al rol con menos privilegios (usuario común)
+    prioridad = models.IntegerField(
+        default=0
+    )
+
 
 class Usuario(AbstractUser):
 
