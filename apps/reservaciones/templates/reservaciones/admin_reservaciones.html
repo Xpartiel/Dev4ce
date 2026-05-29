@@ -81,80 +81,47 @@
 
                 <tbody>
 
-                    <tr>
-                        <td>LUZ-2026-04812</td>
-                        <td>Santuario El Rosario</td>
-                        <td>2026-06-14 → 2026-06-16</td>
-                        <td>2</td>
-                        <td>Cabaña</td>
-                        <td>$1700</td>
-                        <td>
-                            <span class="status confirmed">
-                                confirmada
-                            </span>
-                        </td>
-                        <td>•••</td>
-                    </tr>
+                    {% for reservacion in reservaciones %}
 
                     <tr>
-                        <td>LUZ-2026-04788</td>
-                        <td>Santuario Nanacamilpa</td>
-                        <td>2026-07-03 → 2026-07-05</td>
-                        <td>4</td>
-                        <td>Cabaña</td>
-                        <td>$1300</td>
+
+                        <td>{{ reservacion.folio }}</td>
+
+                        <td>{{ reservacion.parque.nombre }}</td>
+
                         <td>
-                            <span class="status confirmed">
-                                confirmada
-                            </span>
+                            {{ reservacion.checkin }}
+                            →
+                            {{ reservacion.checkout }}
                         </td>
+
+                        <td>{{ reservacion.huespedes }}</td>
+
+                        <td>{{ reservacion.get_tipo_hospedaje_display }}</td>
+
+                        <td>${{ reservacion.total }}</td>
+
+                        <td>
+
+                            <span class="status {{ reservacion.estado }}">
+                                {{ reservacion.get_estado_display }}
+                            </span>
+
+                        </td>
+
                         <td>•••</td>
+
                     </tr>
 
-                    <tr>
-                        <td>LUZ-2026-04621</td>
-                        <td>Cerro Pelón</td>
-                        <td>2026-06-22 → 2026-06-24</td>
-                        <td>2</td>
-                        <td>Camping</td>
-                        <td>$980</td>
-                        <td>
-                            <span class="status pending">
-                                pendiente
-                            </span>
-                        </td>
-                        <td>•••</td>
-                    </tr>
+                    {% empty %}
 
                     <tr>
-                        <td>LUZ-2026-04102</td>
-                        <td>Sierra Chincua</td>
-                        <td>2026-05-30 → 2026-06-01</td>
-                        <td>3</td>
-                        <td>Cabaña</td>
-                        <td>$2200</td>
-                        <td>
-                            <span class="status completed">
-                                completada
-                            </span>
+                        <td colspan="8">
+                            No hay reservaciones registradas.
                         </td>
-                        <td>•••</td>
                     </tr>
 
-                    <tr>
-                        <td>LUZ-2026-03987</td>
-                        <td>Piedra Herrada</td>
-                        <td>2026-07-15 → 2026-07-16</td>
-                        <td>2</td>
-                        <td>Camping</td>
-                        <td>$720</td>
-                        <td>
-                            <span class="status cancelled">
-                                cancelada
-                            </span>
-                        </td>
-                        <td>•••</td>
-                    </tr>
+                    {% endfor %}
 
                 </tbody>
 

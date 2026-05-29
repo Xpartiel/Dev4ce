@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import date
-
+from .models import DisponibilidadParque
+from apps.parques.models import Parque
 from .models import Reservacion
 
 # Criterio único de "reservación activa" (RF-08.1).
@@ -115,45 +116,76 @@ def solo_admin(user):
 
 @user_passes_test(solo_admin, login_url="login")
 def admin_dashboard(request):
-    return render(request, "reservaciones/admin_dashboard.html")
+    total_reservaciones = Reservacion.objects.count()
+
+    ingresos = sum(
+        reservacion.total
+        for reservacion in Reservacion.objects.all()
+    )
+
+    total_parques = Parque.objects.count()
+
+    cancelaciones = Reservacion.objects.filter(
+        estado="cancelada"
+    ).count()
+
+    reservaciones_recientes = Reservacion.objects.select_related(
+        "parque"
+    )[:5]
+
+    return render(request, "reservaciones/admin_dashboard.html", {
+
+        "total_reservaciones": total_reservaciones,
+        "ingresos": ingresos,
+        "total_parques": total_parques,
+        "cancelaciones": cancelaciones,
+        "reservaciones_recientes": reservaciones_recientes,
+
+    })
 
 @user_passes_test(solo_admin, login_url="login")
 def admin_parques(request):
-    return render(request, "reservaciones/admin_parques.html")
+    parques = Parque.objects.all()
+
+    return render(request, "reservaciones/admin_parques.html", {
+        "parques": parques
+    })
 
 
 @user_passes_test(solo_admin, login_url="login")
 def admin_reservaciones(request):
-    return render(request, "reservaciones/admin_reservaciones.html")
+    reservaciones = Reservacion.objects.select_related(
+        "parque",
+        "usuario"
+    ).all()
+
+    return render(request, "reservaciones/admin_reservaciones.html", {
+        "reservaciones": reservaciones
+    })
 
 
 @user_passes_test(solo_admin, login_url="login")
 def admin_calendario(request):
 
+    disponibilidades = DisponibilidadParque.objects.select_related(
+        "parque"
+    ).all()
+
     dias_calendario = []
 
-    for i in range(1, 29):
+    for disponibilidad in disponibilidades:
 
-        if i in [2, 9, 16, 23]:
-            estado = "maintenance"
-            texto = "mantenimiento"
-
-        elif i in [4, 14, 24, 27]:
-            estado = "full"
-            texto = "120/120"
-
-        elif i in [3, 13, 19, 26]:
-            estado = "few"
-            texto = "102/120"
-
-        else:
-            estado = "free"
-            texto = "48/120"
+        estado_css = {
+            "libre": "free",
+            "pocos": "few",
+            "agotado": "full",
+            "mantenimiento": "maintenance",
+        }.get(disponibilidad.estado, "free")
 
         dias_calendario.append({
-            "numero": i,
-            "estado": estado,
-            "texto": texto,
+            "numero": disponibilidad.fecha.day,
+            "estado": estado_css,
+            "texto": f"{disponibilidad.capacidad_disponible} disponibles",
         })
 
     return render(request, "reservaciones/admin_calendario.html", {

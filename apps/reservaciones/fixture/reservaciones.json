@@ -1,0 +1,96 @@
+[
+    {
+        "model": "reservaciones.reservacion",
+        "pk": 1,
+        "fields": {
+            "usuario": 1,
+            "parque": 1,
+            "folio": "LUZ-2026-04812",
+            "checkin": "2026-06-14",
+            "checkout": "2026-06-16",
+            "huespedes": 2,
+            "tipo_hospedaje": "cabana",
+            "total": "1700.00",
+            "estado": "confirmada",
+            "comentarios": "Reservación para pareja.",
+            "creado_en": "2026-05-01T12:00:00Z",
+            "actualizado_en": "2026-05-01T12:00:00Z"
+        }
+    },
+
+    {
+        "model": "reservaciones.reservacion",
+        "pk": 2,
+        "fields": {
+            "usuario": 1,
+            "parque": 2,
+            "folio": "LUZ-2026-04788",
+            "checkin": "2026-07-03",
+            "checkout": "2026-07-05",
+            "huespedes": 4,
+            "tipo_hospedaje": "cabana",
+            "total": "1300.00",
+            "estado": "confirmada",
+            "comentarios": "Viaje familiar.",
+            "creado_en": "2026-05-03T15:30:00Z",
+            "actualizado_en": "2026-05-03T15:30:00Z"
+        }
+    },
+
+    {
+        "model": "reservaciones.reservacion",
+        "pk": 3,
+        "fields": {
+            "usuario": 2,
+            "parque": 3,
+            "folio": "LUZ-2026-04621",
+            "checkin": "2026-06-22",
+            "checkout": "2026-06-24",
+            "huespedes": 2,
+            "tipo_hospedaje": "camping",
+            "total": "980.00",
+            "estado": "pendiente",
+            "comentarios": "Esperando confirmación.",
+            "creado_en": "2026-05-05T09:10:00Z",
+            "actualizado_en": "2026-05-05T09:10:00Z"
+        }
+    },
+
+    {
+        "model": "reservaciones.reservacion",
+        "pk": 4,
+        "fields": {
+            "usuario": 2,
+            "parque": 4,
+            "folio": "LUZ-2026-04102",
+            "checkin": "2026-05-30",
+            "checkout": "2026-06-01",
+            "huespedes": 3,
+            "tipo_hospedaje": "cabana",
+            "total": "2200.00",
+            "estado": "completada",
+            "comentarios": "Reservación completada.",
+            "creado_en": "2026-05-07T11:00:00Z",
+            "actualizado_en": "2026-05-07T11:00:00Z"
+        }
+    },
+
+    {
+        "model": "reservaciones.reservacion",
+        "pk": 5,
+        "fields": {
+            "usuario": 1,
+            "parque": 5,
+            "folio": "LUZ-2026-03987",
+            "checkin": "2026-07-15",
+            "checkout": "2026-07-16",
+            "huespedes": 2,
+            "tipo_hospedaje": "camping",
+            "total": "720.00",
+            "estado": "cancelada",
+            "comentarios": "Cancelada por el usuario.",
+            "creado_en": "2026-05-09T16:45:00Z",
+            "actualizado_en": "2026-05-09T16:45:00Z"
+        }
+    }
+]
