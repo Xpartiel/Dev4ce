@@ -1,10 +1,30 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
+from datetime import date
 
+from .models import Reservacion
+
+# Criterio único de "reservación activa" (RF-08.1).
+# Lo reutilizaremos en el dashboard para mantener consistencia.
+ESTADOS_ACTIVOS = ("pendiente", "confirmada")
+FESTIVAL_INICIO = date(2026, 6, 14)
 
 @login_required
 def dashboard_cliente(request):
-    return render(request, "reservaciones/dashboard_cliente.html")
+    activas = (
+        Reservacion.objects
+        .filter(usuario=request.user, estado__in=ESTADOS_ACTIVOS)
+        .select_related("parque")
+        .order_by("checkin")
+    )
+
+    dias_para_festival = (FESTIVAL_INICIO - date.today()).days
+
+    return render(request, "reservaciones/dashboard_cliente.html", {
+        "proximas": activas[:2],          # solo las 2 más cercanas
+        "total_activas": activas.count(),
+        "dias_para_festival": dias_para_festival,
+    })
 
 @login_required
 def mapa_cliente(request):
@@ -61,61 +81,34 @@ def reservacion_confirmada(request):
 
 @login_required
 def mis_reservaciones(request):
-
-    reservaciones = [
-        {
-            "id": 1,
-            "folio": "LUZ-2026-04812",
-            "parque": "Santuario El Rosario",
-            "tipo": "Cabaña Oyamel 3",
-            "checkin": "2026-06-14",
-            "checkout": "2026-06-16",
-            "huespedes": 2,
-            "total": 1700,
-            "estado": "confirmada",
-        },
-        {
-            "id": 2,
-            "folio": "LUZ-2026-04788",
-            "parque": "Santuario Nanacamilpa",
-            "tipo": "Cabaña Familiar B",
-            "checkin": "2026-07-03",
-            "checkout": "2026-07-05",
-            "huespedes": 4,
-            "total": 1300,
-            "estado": "confirmada",
-        },
-    ]
-
+    reservaciones = (
+        Reservacion.objects
+        .filter(usuario=request.user, estado__in=ESTADOS_ACTIVOS)
+        .select_related("parque")
+        .order_by("checkin")
+    )
     return render(request, "reservaciones/mis_reservaciones.html", {
-        "reservaciones": reservaciones
+        "reservaciones": reservaciones,
     })
 
 
 @login_required
 def detalle_reservacion(request, reservacion_id):
-
-    reservacion = {
-        "id": reservacion_id,
-        "folio": "LUZ-2026-04812",
-        "parque": "Santuario El Rosario",
-        "tipo": "Cabaña Oyamel 3",
-        "checkin": "2026-06-14",
-        "checkout": "2026-06-16",
-        "huespedes": 2,
-        "total": 1700,
-        "estado": "confirmada",
-        "pago": "Tarjeta terminación 4421",
-    }
-
+    reservacion = get_object_or_404(
+        Reservacion.objects.select_related("parque"),
+        id=reservacion_id,
+        usuario=request.user,
+    )
     return render(request, "reservaciones/detalle_reservacion.html", {
-        "reservacion": reservacion
+        "reservacion": reservacion,
     })
 
 @login_required
 def mi_perfil(request):
-
-    return render(request, "reservaciones/mi_perfil.html")
+    total_reservaciones = Reservacion.objects.filter(usuario=request.user).count()
+    return render(request, "reservaciones/mi_perfil.html", {
+        "total_reservaciones": total_reservaciones,
+    })
 
 def solo_admin(user):
     return user.is_authenticated and getattr(user, "tipoAdministrador", False)

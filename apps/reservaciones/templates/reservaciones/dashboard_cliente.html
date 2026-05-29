@@ -12,13 +12,17 @@
 
         <div class="client-header">
             <div>
-                <h1>Faltan <span>45 días</span> para tu primera noche</h1>
+                {% if dias_para_festival > 0 %}
+                    <h1>Faltan <span>{{ dias_para_festival }} días</span> para tu primera noche</h1>
+                {% else %}
+                    <h1><span>El festival ya comenzó</span></h1>
+                {% endif %}
                 <p>
                     El festival arranca el 14 de junio. Estas son tus reservaciones próximas.
                 </p>
             </div>
 
-            <a href="#" class="btn btn-primary">
+            <a href="{% url 'mapa_cliente' %}" class="btn btn-primary">
                 + Nueva reservación
             </a>
         </div>
@@ -27,7 +31,7 @@
 
             <article class="stat-card">
                 <p>Reservaciones activas</p>
-                <strong>2</strong>
+                <strong>{{ total_activas }}</strong>
             </article>
 
             <article class="stat-card">
@@ -51,49 +55,48 @@
 
         <div class="reservation-list">
 
-            <article class="reservation-card">
-                <div class="reservation-date">
-                    <small>Check-in</small>
-                    <strong>14</strong>
-                    <span>Jun</span>
-                </div>
-
-                <div class="reservation-info">
-                    <small>LUZ-2026-04812</small>
-                    <h3>Santuario El Rosario</h3>
-                    <p>Cabaña Oyamel 3 · 14 Jun → 16 Jun · 2 personas</p>
-                </div>
-
-                <div class="reservation-status">
-                    <span>confirmada</span>
-                    <strong>$1,700</strong>
-                </div>
-            </article>
+            {% for reservacion in proximas %}
 
             <article class="reservation-card">
                 <div class="reservation-date">
                     <small>Check-in</small>
-                    <strong>3</strong>
-                    <span>Jul</span>
+                    <strong>{{ reservacion.checkin|date:"d" }}</strong>
+                    <span>{{ reservacion.checkin|date:"M" }}</span>
                 </div>
 
                 <div class="reservation-info">
-                    <small>LUZ-2026-04788</small>
-                    <h3>Santuario Nanacamilpa</h3>
-                    <p>Cabaña Familiar B · 3 Jul → 5 Jul · 4 personas</p>
+                    <small>{{ reservacion.folio }}</small>
+                    <h3>{{ reservacion.parque.nombre }}</h3>
+                    <p>
+                        {{ reservacion.get_tipo_hospedaje_display }} ·
+                        {{ reservacion.checkin|date:"d M" }} → {{ reservacion.checkout|date:"d M" }}
+                        · {{ reservacion.huespedes }} personas
+                    </p>
                 </div>
 
                 <div class="reservation-status">
-                    <span>confirmada</span>
-                    <strong>$1,300</strong>
+                    <span>{{ reservacion.get_estado_display }}</span>
+                    <strong>${{ reservacion.total|floatformat:0 }}</strong>
                 </div>
             </article>
+
+            {% empty %}
+
+            <article class="reservation-card">
+                <div class="reservation-info">
+                    <h3>No tienes estancias próximas</h3>
+                    <p>Reserva tu primera noche del festival.</p>
+                </div>
+            </article>
+
+            {% endfor %}
 
         </div>
 
+
         <div class="client-section-header">
             <h2 class="client-subtitle">Tal vez te interese</h2>
-            <a href="#">Ver todos</a>
+            <a href="{% url 'mapa_cliente' %}">Ver todos</a>
         </div>
 
         <div class="park-grid">
