@@ -36,7 +36,7 @@
             {% else %}
                 <a href="{% url 'landing' %}" class="logo-link">
             {% endif %}
-                <span class="logo-icon">△</span>
+                {% include "core/_logo.html" %}
                 <span class="logo-text">dev4ce</span>
             </a>
         </div>
