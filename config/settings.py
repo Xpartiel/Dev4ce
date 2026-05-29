@@ -129,3 +129,7 @@ AUTH_USER_MODEL = "usuarios.Usuario"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "dashboard_cliente"
 LOGOUT_REDIRECT_URL = "landing"
+
+# Para manejar imagenes de perfil de usuarios
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
