@@ -17,7 +17,9 @@
         <nav class="admin-menu">
             <a href="{% url 'admin_dashboard' %}">Panel</a>
             <a href="{% url 'admin_parques' %}">Parques</a>
-            <a href="{% url 'admin_reservaciones' %}" class="active">Reservaciones</a>
+            <a href="{% url 'admin_reservaciones' %}" class="active">
+                Reservaciones
+            </a>
             <a href="{% url 'admin_calendario' %}">Calendario</a>
             <a href="{% url 'admin_reportes' %}">Reportes</a>
         </nav>
@@ -38,9 +40,18 @@
                 <h1>Lista global</h1>
             </div>
 
-            <button class="btn btn-secondary">
-                Exportar CSV
-            </button>
+            <div class="admin-actions">
+
+                <a href="{% url 'crear_reservacion' %}"
+                   class="btn btn-primary">
+                    + Nueva reservación
+                </a>
+
+                <button class="btn btn-secondary">
+                    Exportar CSV
+                </button>
+
+            </div>
 
         </div>
 
@@ -75,7 +86,7 @@
                         <th>Tipo</th>
                         <th>Total</th>
                         <th>Estado</th>
-                        <th></th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
 
@@ -97,9 +108,13 @@
 
                         <td>{{ reservacion.huespedes }}</td>
 
-                        <td>{{ reservacion.get_tipo_hospedaje_display }}</td>
+                        <td>
+                            {{ reservacion.get_tipo_hospedaje_display }}
+                        </td>
 
-                        <td>${{ reservacion.total }}</td>
+                        <td>
+                            ${{ reservacion.total }}
+                        </td>
 
                         <td>
 
@@ -109,7 +124,23 @@
 
                         </td>
 
-                        <td>•••</td>
+                        <td class="admin-actions-cell">
+
+                            <a
+                                href="{% url 'editar_reservacion' reservacion.id %}"
+                                class="btn btn-secondary"
+                            >
+                                Editar
+                            </a>
+
+                            <a
+                                href="{% url 'eliminar_reservacion' reservacion.id %}"
+                                class="btn btn-danger"
+                            >
+                                Eliminar
+                            </a>
+
+                        </td>
 
                     </tr>
 

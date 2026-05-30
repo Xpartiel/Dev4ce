@@ -17,7 +17,6 @@
             "actualizado_en": "2026-05-01T12:00:00Z"
         }
     },
-
     {
         "model": "reservaciones.reservacion",
         "pk": 2,
@@ -36,12 +35,11 @@
             "actualizado_en": "2026-05-03T15:30:00Z"
         }
     },
-
     {
         "model": "reservaciones.reservacion",
         "pk": 3,
         "fields": {
-            "usuario": 2,
+            "usuario": 1,
             "parque": 3,
             "folio": "LUZ-2026-04621",
             "checkin": "2026-06-22",
@@ -55,12 +53,11 @@
             "actualizado_en": "2026-05-05T09:10:00Z"
         }
     },
-
     {
         "model": "reservaciones.reservacion",
         "pk": 4,
         "fields": {
-            "usuario": 2,
+            "usuario": 1,
             "parque": 4,
             "folio": "LUZ-2026-04102",
             "checkin": "2026-05-30",
@@ -74,7 +71,6 @@
             "actualizado_en": "2026-05-07T11:00:00Z"
         }
     },
-
     {
         "model": "reservaciones.reservacion",
         "pk": 5,

@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import date
 import folium
 from django.urls import reverse
-
+from apps.parques.forms import ParqueForm
+from .forms import ReservacionForm
 from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
 from apps.parques.mapas import construir_mapa
@@ -154,6 +155,75 @@ def admin_reservaciones(request):
         "reservaciones": reservaciones
     })
 
+@user_passes_test(solo_admin, login_url="login")
+def crear_reservacion(request):
+
+    if request.method == "POST":
+
+        form = ReservacionForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("admin_reservaciones")
+
+    else:
+
+        form = ReservacionForm()
+
+    return render(
+        request,
+        "reservaciones/reservacion_form.html",
+        {"form": form}
+    )
+
+
+@user_passes_test(solo_admin, login_url="login")
+def editar_reservacion(request, reservacion_id):
+
+    reservacion = get_object_or_404(
+        Reservacion,
+        pk=reservacion_id
+    )
+
+    if request.method == "POST":
+
+        form = ReservacionForm(
+            request.POST,
+            instance=reservacion
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect("admin_reservaciones")
+
+    else:
+
+        form = ReservacionForm(
+            instance=reservacion
+        )
+
+    return render(
+        request,
+        "reservaciones/reservacion_form.html",
+        {
+            "form": form,
+            "reservacion": reservacion
+        }
+    )
+
+
+@user_passes_test(solo_admin, login_url="login")
+def eliminar_reservacion(request, reservacion_id):
+
+    reservacion = get_object_or_404(
+        Reservacion,
+        pk=reservacion_id
+    )
+
+    reservacion.delete()
+
+    return redirect("admin_reservaciones")
+
 
 @user_passes_test(solo_admin, login_url="login")
 def admin_calendario(request):
@@ -187,3 +257,68 @@ def admin_calendario(request):
 @user_passes_test(solo_admin, login_url="login")
 def admin_reportes(request):
     return render(request, "reservaciones/admin_reportes.html")
+
+@user_passes_test(solo_admin, login_url="login")
+def crear_parque(request):
+
+    if request.method == "POST":
+        form = ParqueForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect("admin_parques")
+
+    else:
+        form = ParqueForm()
+
+    return render(
+        request,
+        "reservaciones/parque_form.html",
+        {"form": form}
+    )
+
+@user_passes_test(solo_admin, login_url="login")
+def editar_parque(request, parque_id):
+
+    parque = get_object_or_404(
+        Parque,
+        pk=parque_id
+    )
+
+    if request.method == "POST":
+
+        form = ParqueForm(
+            request.POST,
+            instance=parque
+        )
+
+        if form.is_valid():
+            form.save()
+            return redirect("admin_parques")
+
+    else:
+
+        form = ParqueForm(
+            instance=parque
+        )
+
+    return render(
+        request,
+        "reservaciones/parque_form.html",
+        {
+            "form": form,
+            "parque": parque
+        }
+    )
+
+@user_passes_test(solo_admin, login_url="login")
+def eliminar_parque(request, parque_id):
+
+    parque = get_object_or_404(
+        Parque,
+        pk=parque_id
+    )
+
+    parque.delete()
+
+    return redirect("admin_parques")
