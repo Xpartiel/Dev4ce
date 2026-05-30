@@ -93,7 +93,9 @@ class HistorialTipoUsuario( models.Model ):
     fecha_fin = models.DateTimeField( null=True )
     
     motivo_cambio = models.TextField( null=True , blank=True )
-    
+
+
+
 class Persona( models.Model ):
     '''
     Modelo dedicado a manejar los datos privados de un usuario

@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
+from parques.models import Parque
 
 
 @login_required
@@ -36,6 +37,9 @@ def detalle_parque(request, parque_id):
 
 @login_required
 def reservar_paso_1(request, parque_id):
+    
+    parque = Parque.objects.filter(pk=parque_id)
+    
     return render(request, "reservaciones/reservar_paso_1.html", {
         "parque_id": parque_id
     })
