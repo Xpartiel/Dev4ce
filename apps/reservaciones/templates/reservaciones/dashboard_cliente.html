@@ -101,50 +101,40 @@
 
         <div class="park-grid">
 
-            <article class="park-card">
-                <div class="park-image park-green">
-                    <span class="park-status available">Disponible</span>
-                    <span class="moon"></span>
-                </div>
-                <div class="park-info">
-                    <h3>Santuario El Rosario</h3>
-                    <p>Michoacán</p>
-                    <div class="park-footer">
-                        <strong>$850</strong>
-                        <span>/noche</span>
-                    </div>
-                </div>
-            </article>
+            {% for parque in sugeridos %}
+            <a href="{% url 'detalle_parque' parque.pk %}" class="park-card">
 
-            <article class="park-card">
-                <div class="park-image park-amber">
-                    <span class="park-status few">Pocos espacios</span>
-                    <span class="moon"></span>
-                </div>
-                <div class="park-info">
-                    <h3>Sierra Chincua</h3>
-                    <p>Michoacán</p>
-                    <div class="park-footer">
-                        <strong>$1180</strong>
-                        <span>/noche</span>
-                    </div>
-                </div>
-            </article>
+                <div class="park-image {% cycle 'park-green' 'park-amber' 'park-blue' %}">
 
-            <article class="park-card">
-                <div class="park-image park-blue">
-                    <span class="park-status sold">Agotado</span>
+                    {% comment %} Disponibilidad hardcodeada por ahora (depende de Dan) {% endcomment %}
+                    {% if forloop.counter == 1 %}
+                        <span class="park-status available">Disponible</span>
+                    {% elif forloop.counter == 2 %}
+                        <span class="park-status few">Pocos espacios</span>
+                    {% else %}
+                        <span class="park-status sold">Agotado</span>
+                    {% endif %}
+
                     <span class="moon"></span>
+
+                    <div class="park-fireflies">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
                 </div>
+
                 <div class="park-info">
-                    <h3>Piedra Herrada</h3>
-                    <p>Estado de México</p>
+                    <h3>{{ parque.nombre }}</h3>
+                    <p>{{ parque.estado }}</p>
                     <div class="park-footer">
-                        <strong>$720</strong>
+                        <strong>${{ parque.precio_camping }}</strong>
                         <span>/noche</span>
                     </div>
                 </div>
-            </article>
+
+            </a>
+            {% empty %}
+            <p>Aún no hay parques para sugerir.</p>
+            {% endfor %}
 
         </div>
 

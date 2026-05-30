@@ -4,6 +4,38 @@
 Festival Internacional de las Luciérnagas
 {% endblock %}
 
+{% block extra_css %}
+<style>
+  .park-image { position: relative; overflow: hidden; }
+
+  .park-fireflies span {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #FFC857;
+    box-shadow: 0 0 6px 2px rgba(255, 200, 87, .9);
+    opacity: 0;
+    animation: card-ff 4s ease-in-out infinite;
+  }
+  .park-fireflies span:nth-child(1) { left: 14%; top: 62%; animation-delay: 0s;   }
+  .park-fireflies span:nth-child(2) { left: 32%; top: 28%; animation-delay: .9s;  }
+  .park-fireflies span:nth-child(3) { left: 55%; top: 70%; animation-delay: 1.7s; }
+  .park-fireflies span:nth-child(4) { left: 72%; top: 40%; animation-delay: 2.4s; }
+  .park-fireflies span:nth-child(5) { left: 86%; top: 60%; animation-delay: 3.1s; }
+
+  /* La tarjeta es un enlace: que no se vea como link */
+  .park-card { text-decoration: none; color: inherit; display: block; }
+  .park-card h3,
+  .park-card p,
+  .park-card .park-footer { color: inherit; }
+
+  @keyframes card-ff {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(.6); }
+    50%      { opacity: 1; transform: translateY(-8px) scale(1); }
+  }
+</style>
+{% endblock %}
+
 {% block content %}
 
 <section class="hero-section">
@@ -36,7 +68,7 @@ Festival Internacional de las Luciérnagas
                 Crear cuenta y reservar
             </a>
 
-            <a href="#" class="btn btn-secondary">
+            <a href="#mapa" class="btn btn-secondary">
                 Explorar el mapa
             </a>
         </div>
@@ -62,23 +94,14 @@ Festival Internacional de las Luciérnagas
 
 </section>
 
-<section class="map-preview-section">
+<section class="map-preview-section" id="mapa">
 
     <p class="section-label">// Ruta bioluminiscente</p>
 
     <h2>Ocho santuarios, un mapa</h2>
 
     <div class="map-preview">
-        <div class="map-line"></div>
-
-        <span class="map-point point-1"></span>
-        <span class="map-point point-2"></span>
-        <span class="map-point point-3"></span>
-        <span class="map-point point-4"></span>
-        <span class="map-point point-5"></span>
-        <span class="map-point point-6"></span>
-        <span class="map-point point-7"></span>
-        <span class="map-point point-8"></span>
+        {{ mapa_html|safe }}
     </div>
 
 </section>
@@ -91,56 +114,41 @@ Festival Internacional de las Luciérnagas
 
     <div class="park-grid">
 
-        <article class="park-card">
-            <div class="park-image park-green">
-                <span class="park-status available">Disponible</span>
+        {% for parque in destacados %}
+        <a href="{% url 'detalle_parque' parque.pk %}" class="park-card">
+
+            <div class="park-image {% cycle 'park-green' 'park-amber' 'park-blue' %}">
+
+                {% comment %} Disponibilidad hardcodeada por ahora (depende de Dan) {% endcomment %}
+                {% if forloop.counter == 1 %}
+                    <span class="park-status available">Disponible</span>
+                {% elif forloop.counter == 2 %}
+                    <span class="park-status few">Pocos lugares</span>
+                {% else %}
+                    <span class="park-status sold">Agotado</span>
+                {% endif %}
+
                 <span class="moon"></span>
+
+                <div class="park-fireflies">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
             </div>
 
             <div class="park-info">
-                <h3>Santuario El Rosario</h3>
-                <p>Escucha de verano con 2,000 luciérnagas bajo cielos oscuros.</p>
+                <h3>{{ parque.nombre }}</h3>
+                <p>{{ parque.descripcion|truncatewords:14 }}</p>
 
                 <div class="park-footer">
-                    <strong>$950</strong>
+                    <strong>${{ parque.precio_camping }}</strong>
                     <span>noche</span>
                 </div>
             </div>
-        </article>
 
-        <article class="park-card">
-            <div class="park-image park-amber">
-                <span class="park-status few">Pocos lugares</span>
-                <span class="moon"></span>
-            </div>
-
-            <div class="park-info">
-                <h3>Sierra Chincua</h3>
-                <p>Hospedaje panorámico con senderos nocturnos y avistamiento.</p>
-
-                <div class="park-footer">
-                    <strong>$1180</strong>
-                    <span>noche</span>
-                </div>
-            </div>
-        </article>
-
-        <article class="park-card">
-            <div class="park-image park-blue">
-                <span class="park-status sold">Agotado</span>
-                <span class="moon"></span>
-            </div>
-
-            <div class="park-info">
-                <h3>Piedra Herrada</h3>
-                <p>Zona ideal para familias, naturaleza y recorridos guiados.</p>
-
-                <div class="park-footer">
-                    <strong>$720</strong>
-                    <span>noche</span>
-                </div>
-            </div>
-        </article>
+        </a>
+        {% empty %}
+        <p>Pronto anunciaremos los santuarios participantes.</p>
+        {% endfor %}
 
     </div>
 

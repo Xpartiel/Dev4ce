@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from datetime import date
-from .models import DisponibilidadParque
+import folium
+from django.urls import reverse
+
+from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
-from .models import Reservacion
+from apps.parques.mapas import construir_mapa
 
 # Criterio único de "reservación activa" (RF-08.1).
 # Lo reutilizaremos en el dashboard para mantener consistencia.
@@ -22,37 +25,25 @@ def dashboard_cliente(request):
     dias_para_festival = (FESTIVAL_INICIO - date.today()).days
 
     return render(request, "reservaciones/dashboard_cliente.html", {
-        "proximas": activas[:2],          # solo las 2 más cercanas
+        "proximas": activas[:2],
         "total_activas": activas.count(),
         "dias_para_festival": dias_para_festival,
+        "sugeridos": Parque.objects.filter(activo=True)[:3],
     })
 
 @login_required
 def mapa_cliente(request):
-    return render(request, "reservaciones/mapa_cliente.html")
+    parques = Parque.objects.filter(activo=True)
+    return render(request, "reservaciones/mapa_cliente.html", {
+        "mapa_html": construir_mapa(parques, con_enlaces=True),
+        "parques": parques,
+    })
 
 @login_required
 def detalle_parque(request, parque_id):
-
-    parque = {
-        "id": parque_id,
-        "nombre": "Santuario El Rosario",
-        "estado": "Michoacán",
-        "descripcion": "Un santuario rodeado de bosque, ideal para vivir una experiencia nocturna entre luciérnagas.",
-        "precio": 850,
-        "disponibles": 47,
-        "servicios": [
-            "Cabañas",
-            "Camping",
-            "Senderos guiados",
-            "Estacionamiento",
-            "Baños",
-            "Zona de alimentos",
-        ],
-    }
-
+    parque = get_object_or_404(Parque, pk=parque_id, activo=True)
     return render(request, "reservaciones/detalle_parque.html", {
-        "parque": parque
+        "parque": parque,
     })
 
 @login_required

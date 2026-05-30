@@ -1,3 +1,39 @@
+.map-preview iframe {
+    width: 100%;
+    min-height: 460px;
+    border: none;
+    border-radius: 16px;
+    display: block;
+}
+
+/* === Tarjetas de parque (landing + dashboard) === */
+.park-card { text-decoration: none; color: inherit; display: block; }
+.park-card h3,
+.park-card p,
+.park-card .park-footer { color: inherit; }
+
+.park-image { position: relative; overflow: hidden; }
+
+.park-fireflies span {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #FFC857;
+    box-shadow: 0 0 6px 2px rgba(255, 200, 87, .9);
+    opacity: 0;
+    animation: card-ff 4s ease-in-out infinite;
+}
+.park-fireflies span:nth-child(1) { left: 14%; top: 62%; animation-delay: 0s;   }
+.park-fireflies span:nth-child(2) { left: 32%; top: 28%; animation-delay: .9s;  }
+.park-fireflies span:nth-child(3) { left: 55%; top: 70%; animation-delay: 1.7s; }
+.park-fireflies span:nth-child(4) { left: 72%; top: 40%; animation-delay: 2.4s; }
+.park-fireflies span:nth-child(5) { left: 86%; top: 60%; animation-delay: 3.1s; }
+
+@keyframes card-ff {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(.6); }
+    50%      { opacity: 1; transform: translateY(-8px) scale(1); }
+}
+
 /* ===== VARIABLES ===== */
 /*
  * Tokens de diseño — Festival Internacional de las Luciérnagas 2026.
@@ -622,6 +658,10 @@ body {
         radial-gradient(circle at 80% 30%, rgba(24, 41, 75, 0.8), transparent 18%),
         linear-gradient(135deg, var(--color-surface), var(--color-surface-3));
     border: 1px solid var(--color-line);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 200, 87, .25);
+    box-shadow: 0 0 24px rgba(255, 200, 87, .12);
 }
 
 .map-line {
