@@ -9,8 +9,7 @@
     <aside class="admin-sidebar">
 
         <div class="admin-logo">
-            <span class="logo-icon">△</span>
-            <strong>dev4ce</strong>
+            {% include "core/_logo.html" %}
         </div>
 
         <p class="admin-label">// Administración</p>
@@ -41,35 +40,57 @@
 
             <div class="admin-actions">
                 <button class="btn btn-secondary">Exportar</button>
-                <a href="{% url 'admin_parques' %}" class="btn btn-primary">+ Nuevo parque</a>
-                <a href="{% url 'registro_admin' %}" class="btn btn-secondary">+ Nuevo admin</a>
+
+                <a href="{% url 'admin_parques' %}" class="btn btn-primary">
+                    + Nuevo parque
+                </a>
+
+                <a href="{% url 'registro_admin' %}" class="btn btn-secondary">
+                    + Nuevo admin
+                </a>
             </div>
         </div>
 
         <div class="admin-kpi-grid">
 
             <article class="admin-kpi-card">
-                <p>Reservaciones mes</p>
-                <strong>247</strong>
-                <span class="positive">+18% vs ant.</span>
+                <p>Reservaciones totales</p>
+
+                <strong>{{ total_reservaciones }}</strong>
+
+                <span class="positive">
+                    Reservaciones registradas
+                </span>
             </article>
 
             <article class="admin-kpi-card">
-                <p>Ingresos mes</p>
-                <strong>$184,520</strong>
-                <span class="positive">+12.3%</span>
+                <p>Ingresos totales</p>
+
+                <strong>${{ ingresos }}</strong>
+
+                <span class="positive">
+                    Ingresos acumulados
+                </span>
             </article>
 
             <article class="admin-kpi-card">
-                <p>Ocupación promedio</p>
-                <strong>67%</strong>
-                <span class="positive">+4 pts</span>
+                <p>Parques registrados</p>
+
+                <strong>{{ total_parques }}</strong>
+
+                <span class="positive">
+                    Parques activos
+                </span>
             </article>
 
             <article class="admin-kpi-card">
                 <p>Cancelaciones</p>
-                <strong>14</strong>
-                <span class="negative">-2.1%</span>
+
+                <strong>{{ cancelaciones }}</strong>
+
+                <span class="negative">
+                    Reservaciones canceladas
+                </span>
             </article>
 
         </div>
@@ -77,6 +98,7 @@
         <div class="admin-dashboard-grid">
 
             <article class="admin-panel large">
+
                 <h2>Reservaciones por parque</h2>
 
                 <div class="fake-chart">
@@ -88,20 +110,30 @@
                     <span style="height: 58%"></span>
                     <span style="height: 36%"></span>
                 </div>
+
             </article>
 
             <article class="admin-panel">
+
                 <h2>Ocupación global</h2>
 
                 <div class="occupancy-circle">
-                    <strong>67%</strong>
-                    <span>ocupado</span>
+                    <strong>{{ total_reservaciones }}</strong>
+                    <span>reservaciones</span>
                 </div>
 
                 <div class="legend">
-                    <p><span class="gold-dot"></span> Reservado 520</p>
-                    <p><span class="blue-dot"></span> Disponible 254</p>
+                    <p>
+                        <span class="gold-dot"></span>
+                        Parques: {{ total_parques }}
+                    </p>
+
+                    <p>
+                        <span class="blue-dot"></span>
+                        Cancelaciones: {{ cancelaciones }}
+                    </p>
                 </div>
+
             </article>
 
         </div>
@@ -109,36 +141,55 @@
         <article class="admin-panel">
 
             <div class="admin-panel-header">
+
                 <h2>Actividad reciente</h2>
-                <a href="{% url 'admin_reservaciones' %}">Ver todo</a>
+
+                <a href="{% url 'admin_reservaciones' %}">
+                    Ver todo
+                </a>
+
             </div>
 
             <table class="admin-table">
+
                 <tbody>
-                    <tr>
-                        <td>LUZ-2026-04812</td>
-                        <td>Santuario El Rosario</td>
-                        <td>2026-06-14 → 2026-06-16</td>
-                        <td>$1700</td>
-                        <td><span class="status confirmed">confirmada</span></td>
-                    </tr>
+
+                    {% for reservacion in reservaciones_recientes %}
 
                     <tr>
-                        <td>LUZ-2026-04788</td>
-                        <td>Santuario Nanacamilpa</td>
-                        <td>2026-07-03 → 2026-07-05</td>
-                        <td>$1300</td>
-                        <td><span class="status confirmed">confirmada</span></td>
+
+                        <td>{{ reservacion.folio }}</td>
+
+                        <td>{{ reservacion.parque.nombre }}</td>
+
+                        <td>
+                            {{ reservacion.checkin }}
+                            →
+                            {{ reservacion.checkout }}
+                        </td>
+
+                        <td>${{ reservacion.total }}</td>
+
+                        <td>
+                            <span class="status {{ reservacion.estado }}">
+                                {{ reservacion.get_estado_display }}
+                            </span>
+                        </td>
+
                     </tr>
 
+                    {% empty %}
+
                     <tr>
-                        <td>LUZ-2026-04621</td>
-                        <td>Cerro Pelón</td>
-                        <td>2026-06-22 → 2026-06-24</td>
-                        <td>$980</td>
-                        <td><span class="status pending">pendiente</span></td>
+                        <td colspan="5">
+                            No hay actividad reciente.
+                        </td>
                     </tr>
+
+                    {% endfor %}
+
                 </tbody>
+
             </table>
 
         </article>

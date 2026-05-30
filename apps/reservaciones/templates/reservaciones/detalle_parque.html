@@ -4,80 +4,88 @@
 
 {% block content %}
 
-<section class="park-detail-section">
+<section class="booking-section">
+  <div class="booking-container">
 
-    <div class="park-detail-container">
+    <a href="{% url 'mapa_cliente' %}" class="back-link">← Volver al mapa</a>
 
-        <a href="{% url 'mapa_cliente' %}" class="back-link">
-            ← Volver al mapa
-        </a>
+    <p class="section-label">// Detalle del parque</p>
+    <h1>{{ parque.nombre }}</h1>
+    <p class="park-estado">{{ parque.estado }}</p>
 
-        <div class="park-detail-hero">
+    <div class="booking-layout">
 
-            <div class="park-detail-image">
-                <span class="park-status available">Disponible</span>
-                <span class="moon large-moon"></span>
-            </div>
+      <div class="booking-card">
 
-            <div class="park-detail-info">
+        <h2>Sobre este parque</h2>
+        <p>{{ parque.descripcion }}</p>
 
-                <p class="section-label">// {{ parque.estado }}</p>
+        {% if parque.direccion %}
+        <div class="detail-row">
+          <span class="detail-label">Dirección</span>
+          <span>{{ parque.direccion }}</span>
+        </div>
+        {% endif %}
 
-                <h1>{{ parque.nombre }}</h1>
+        {% if parque.horario %}
+        <div class="detail-row">
+          <span class="detail-label">Horario</span>
+          <span>{{ parque.horario }}</span>
+        </div>
+        {% endif %}
 
-                <p class="park-detail-description">
-                    {{ parque.descripcion }}
-                </p>
+        {% if parque.lista_servicios %}
+        <div class="detail-row">
+          <span class="detail-label">Servicios</span>
+          <ul class="servicios-list">
+            {% for servicio in parque.lista_servicios %}
+            <li>{{ servicio }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
 
-                <div class="park-detail-meta">
-
-                    <div>
-                        <small>Desde</small>
-                        <strong>${{ parque.precio }}</strong>
-                        <span>/noche</span>
-                    </div>
-
-                    <div>
-                        <small>Disponibilidad</small>
-                        <strong>{{ parque.disponibles }}</strong>
-                        <span>espacios</span>
-                    </div>
-
-                </div>
-
-                <a href="{% url 'reservar_paso_1' parque.id %}" class="btn btn-primary">
-                    Reservar ahora
-                </a>
-
-            </div>
-
+        <div class="booking-actions" style="margin-top: 2rem;">
+          <a href="{% url 'reservar_paso_1' parque.pk %}" class="btn btn-primary">
+            Reservar en este parque
+          </a>
         </div>
 
-        <div class="park-detail-grid">
+      </div>
 
-            <article class="park-detail-card">
-                <h2>Sobre este santuario</h2>
-                <p>
-                    Este parque forma parte de la ruta del Festival Internacional de las Luciérnagas.
-                    Durante la temporada, los visitantes pueden reservar espacios de hospedaje,
-                    consultar disponibilidad y planear su experiencia nocturna.
-                </p>
-            </article>
+      <aside class="booking-summary">
 
-            <article class="park-detail-card">
-                <h2>Servicios disponibles</h2>
+        <h3>Hospedaje disponible</h3>
 
-                <div class="service-list">
-                    {% for servicio in parque.servicios %}
-                        <span>{{ servicio }}</span>
-                    {% endfor %}
-                </div>
-            </article>
-
+        <div class="summary-line">
+          <span>Camping</span>
+          <strong>${{ parque.precio_camping }}/noche</strong>
         </div>
+
+        {% if parque.tiene_cabanas %}
+        <div class="summary-line">
+          <span>Cabaña</span>
+          <strong>${{ parque.precio_cabana }}/noche</strong>
+        </div>
+        {% else %}
+        <div class="summary-line">
+          <span>Cabaña</span>
+          <strong>No disponible</strong>
+        </div>
+        {% endif %}
+
+        <hr>
+
+        <div class="summary-line">
+          <span>Capacidad total</span>
+          <strong>{{ parque.capacidad_total }} personas</strong>
+        </div>
+
+      </aside>
 
     </div>
 
+  </div>
 </section>
 
 {% endblock %}

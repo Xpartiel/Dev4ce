@@ -28,25 +28,38 @@
 
                 <div class="reservation-date">
                     <small>Check-in</small>
-                    <strong>{{ reservacion.checkin|slice:"8:10" }}</strong>
-                    <span>{{ reservacion.checkin|slice:"5:7" }}</span>
+                    <strong>{{ reservacion.checkin|date:"d" }}</strong>
+                    <span>{{ reservacion.checkin|date:"M" }}</span>
                 </div>
 
                 <div class="reservation-info">
                     <small>{{ reservacion.folio }}</small>
-                    <h3>{{ reservacion.parque }}</h3>
+                    <h3>{{ reservacion.parque.nombre }}</h3>
                     <p>
-                        {{ reservacion.tipo }} · {{ reservacion.checkin }} → {{ reservacion.checkout }}
+                        {{ reservacion.get_tipo_hospedaje_display }} ·
+                        {{ reservacion.checkin|date:"d M" }} → {{ reservacion.checkout|date:"d M" }}
                         · {{ reservacion.huespedes }} personas
                     </p>
                 </div>
 
                 <div class="reservation-status">
-                    <span>{{ reservacion.estado }}</span>
-                    <strong>${{ reservacion.total }}</strong>
+                    <span>{{ reservacion.get_estado_display }}</span>
+                    <strong>${{ reservacion.total|floatformat:0 }}</strong>
                 </div>
 
             </a>
+
+            {% empty %}
+
+            <div class="reservation-page-card">
+                <div class="reservation-info">
+                    <h3>Aún no tienes reservaciones</h3>
+                    <p>Explora los santuarios oficiales y reserva tu primera noche.</p>
+                </div>
+                <a href="{% url 'mapa_cliente' %}" class="btn btn-primary">
+                    Ver el mapa
+                </a>
+            </div>
 
             {% endfor %}
 

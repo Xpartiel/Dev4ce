@@ -34,14 +34,14 @@ class Usuario( AbstractUser ):
     # Se asigna por defecto el email antes del domino
     # EJ
     # ejemplo@correo.com -> ejemplo
-    nick_name = models.CharField( max_length=128 )
+    nick_name = models.CharField( max_length=128, blank=True, null=True)
     
     # TODO considerar si incluir foto de perfil
-    foto_perfil = models.CharField( max_length=500 )
+    foto_perfil = models.ImageField( upload_to='perfiles/', default='perfiles/default.png', blank=True )
     
     # Esto se considera dato privado
     # TODO removerlo de este modelo y reservarlo a *Persona*
-    nombre_completo = models.CharField(max_length=255)
+    nombre_completo = models.CharField(max_length=255, blank=True, null=True)
 
     # Esto se considera dato privado
     # TODO removerlo de este modelo y reservarlo a *Persona*

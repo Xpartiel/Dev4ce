@@ -22,4 +22,12 @@ urlpatterns = [
     path("admin-reservaciones/", views.admin_reservaciones, name="admin_reservaciones"),
     path("admin-calendario/", views.admin_calendario, name="admin_calendario"),
     path("admin-reportes/", views.admin_reportes, name="admin_reportes"),
+
+    path("admin-parques/crear/", views.crear_parque,name="crear_parque"),
+    path("admin-parques/<int:parque_id>/editar/",views.editar_parque,name="editar_parque"),
+    path("admin-parques/<int:parque_id>/eliminar/",views.eliminar_parque,name="eliminar_parque"),
+
+    path("admin-reservaciones/crear/",views.crear_reservacion,name="crear_reservacion"),
+    path("admin-reservaciones/<int:reservacion_id>/editar/",views.editar_reservacion,name="editar_reservacion"),
+    path("admin-reservaciones/<int:reservacion_id>/eliminar/",views.eliminar_reservacion,name="eliminar_reservacion"),
 ]

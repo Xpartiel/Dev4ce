@@ -10,3 +10,5 @@ dependencies:
       - django
       - django-environ
       - psycopg2-binary
+      - folium
+      - pillow

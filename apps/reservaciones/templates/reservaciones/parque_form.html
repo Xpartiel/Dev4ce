@@ -1,0 +1,25 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Parque
+{% endblock %}
+
+{% block content %}
+
+<h1>Formulario de Parque</h1>
+
+<form method="post">
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit">
+        Guardar
+    </button>
+</form>
+
+<a href="{% url 'admin_parques' %}">
+    Volver
+</a>
+
+{% endblock %}
