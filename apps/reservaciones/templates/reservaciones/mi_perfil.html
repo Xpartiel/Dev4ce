@@ -42,7 +42,7 @@
 
             <article class="profile-stat-card">
                 <small>Reservaciones</small>
-                <strong>2</strong>
+                <strong>{{ total_reservaciones }}</strong>
             </article>
 
             <article class="profile-stat-card">
@@ -57,7 +57,7 @@
 
             <article class="profile-stat-card">
                 <small>Cuenta creada</small>
-                <strong>2026</strong>
+                <strong>{{ user.date_joined|date:"Y" }}</strong>
             </article>
 
         </div>
@@ -136,7 +136,7 @@
 
                         <div>
                             <small>Último acceso</small>
-                            <strong>{{ user.last_login }}</strong>
+                            <strong>{{ user.last_login|date:"d M Y, H:i"|default:"-" }}</strong>
                         </div>
 
                         <div>

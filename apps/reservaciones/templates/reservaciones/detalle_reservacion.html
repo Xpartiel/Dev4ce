@@ -15,11 +15,19 @@
 
         <div class="reservation-detail-header">
             <div>
-                <h1>{{ reservacion.parque }}</h1>
-                <p>{{ reservacion.tipo }}</p>
+                <h1>{{ reservacion.parque.nombre }}</h1>
+                <p>{{ reservacion.get_tipo_hospedaje_display }}</p>
             </div>
 
-            <span class="detail-status">{{ reservacion.estado }}</span>
+            {% if reservacion.estado == "confirmada" %}
+                <span class="status confirmed">{{ reservacion.get_estado_display }}</span>
+            {% elif reservacion.estado == "pendiente" %}
+                <span class="status pending">{{ reservacion.get_estado_display }}</span>
+            {% elif reservacion.estado == "completada" %}
+                <span class="status completed">{{ reservacion.get_estado_display }}</span>
+            {% else %}
+                <span class="status cancelled">{{ reservacion.get_estado_display }}</span>
+            {% endif %}
         </div>
 
         <div class="reservation-detail-layout">
@@ -31,12 +39,12 @@
 
                         <div>
                             <small>Check-in</small>
-                            <strong>{{ reservacion.checkin }}</strong>
+                            <strong>{{ reservacion.checkin|date:"d M Y" }}</strong>
                         </div>
 
                         <div>
                             <small>Check-out</small>
-                            <strong>{{ reservacion.checkout }}</strong>
+                            <strong>{{ reservacion.checkout|date:"d M Y" }}</strong>
                         </div>
 
                         <div>
@@ -46,17 +54,17 @@
 
                         <div>
                             <small>Total</small>
-                            <strong>${{ reservacion.total }}</strong>
+                            <strong>${{ reservacion.total|floatformat:0 }}</strong>
                         </div>
 
                         <div>
-                            <small>Pago</small>
-                            <strong>{{ reservacion.pago }}</strong>
+                            <small>Tipo</small>
+                            <strong>{{ reservacion.get_tipo_hospedaje_display }}</strong>
                         </div>
 
                         <div>
                             <small>Estado</small>
-                            <strong>{{ reservacion.estado }}</strong>
+                            <strong>{{ reservacion.get_estado_display }}</strong>
                         </div>
 
                     </div>
@@ -81,12 +89,20 @@
 
                 <a href="{% url 'mapa_cliente' %}" class="btn btn-secondary">Ver en el mapa</a>
 
-                <a href="#" class="btn btn-danger">Cancelar reservación</a>
+                {% if reservacion.estado in "pendiente,confirmada" %}
+                <form method="POST" action="{% url 'cancelar_reservacion' reservacion.id %}"
+                        onsubmit="return confirm('¿Confirmas la cancelación de esta reservación?')">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" style="width:100%">
+                        Cancelar reservación
+                    </button>
+                </form>
+                {% endif %}
 
                 <hr>
 
                 <p>
-                    Confirmada el 12 abr 2026<br>
+                    Creada el {{ reservacion.creado_en|date:"d M Y" }}<br>
                     Folio: {{ reservacion.folio }}
                 </p>
 

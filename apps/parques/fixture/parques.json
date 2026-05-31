@@ -1,0 +1,249 @@
+[
+    {
+        "model": "parques.parque",
+        "pk": 1,
+        "fields": {
+            "nombre": "Bosque Esmeralda",
+            "slug": "bosque-esmeralda",
+            "estado": "Puebla",
+            "descripcion": "Parque ecoturístico rodeado de bosque y zonas de camping.",
+            "latitud": "19.1220552",
+            "longitud": "-98.7380497",
+            "capacidad_max_cabana": 40,
+            "capacidad_max_camping": 80,
+            "precio_cabana": "850.00",
+            "precio_camping": "450.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 2,
+        "fields": {
+            "nombre": "Eco Reino Aventura",
+            "slug": "eco-reino-aventura",
+            "estado": "Puebla",
+            "descripcion": "Experiencia natural con senderos y observación nocturna.",
+            "latitud": "19.4858932",
+            "longitud": "-98.5655533",
+            "capacidad_max_cabana": 30,
+            "capacidad_max_camping": 60,
+            "precio_cabana": "950.00",
+            "precio_camping": "500.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 3,
+        "fields": {
+            "nombre": "Dos aguas",
+            "slug": "dos-aguas",
+            "estado": "Puebla",
+            "descripcion": "Zona natural ideal para recorridos y camping.",
+            "latitud": "19.2125259",
+            "longitud": "-98.7372815",
+            "capacidad_max_cabana": 30,
+            "capacidad_max_camping": 50,
+            "precio_cabana": "700.00",
+            "precio_camping": "350.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 4,
+        "fields": {
+            "nombre": "Rancho Alegre",
+            "slug": "rancho-alegre",
+            "estado": "Puebla",
+            "descripcion": "Área familiar con actividades recreativas.",
+            "latitud": "19.128435",
+            "longitud": "-98.73608",
+            "capacidad_max_cabana": 30,
+            "capacidad_max_camping": 70,
+            "precio_cabana": "800.00",
+            "precio_camping": "400.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 5,
+        "fields": {
+            "nombre": "Valle San Rafael",
+            "slug": "valle-san-rafael",
+            "estado": "Puebla",
+            "descripcion": "Valle ecológico con hospedaje y camping.",
+            "latitud": "19.295408",
+            "longitud": "-98.6292458",
+            "capacidad_max_cabana": 40,
+            "capacidad_max_camping": 100,
+            "precio_cabana": "1200.00",
+            "precio_camping": "600.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 6,
+        "fields": {
+            "nombre": "Ejido Santa Rita",
+            "slug": "ejido-santa-rita",
+            "estado": "Puebla",
+            "descripcion": "Parque natural con senderos y observación nocturna.",
+            "latitud": "19.3289464",
+            "longitud": "-98.6050036",
+            "capacidad_max_cabana": 30,
+            "capacidad_max_camping": 80,
+            "precio_cabana": "900.00",
+            "precio_camping": "450.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 7,
+        "fields": {
+            "nombre": "Los Manantiales",
+            "slug": "los-manantiales",
+            "estado": "Puebla",
+            "descripcion": "Zona ecológica con áreas recreativas y hospedaje.",
+            "latitud": "19.470506741",
+            "longitud": "-98.57781811",
+            "capacidad_max_cabana": 40,
+            "capacidad_max_camping": 90,
+            "precio_cabana": "1000.00",
+            "precio_camping": "500.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 8,
+        "fields": {
+            "nombre": "El nuevo bosque",
+            "slug": "el-nuevo-bosque",
+            "estado": "Puebla",
+            "descripcion": "Bosque ecoturístico con zonas de camping y cabañas.",
+            "latitud": "19.5378081",
+            "longitud": "-98.6228844",
+            "capacidad_max_cabana": 25,
+            "capacidad_max_camping": 70,
+            "precio_cabana": "870.00",
+            "precio_camping": "430.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 9,
+        "fields": {
+            "nombre": "Canto del Bosque",
+            "slug": "canto-del-bosque",
+            "estado": "Puebla",
+            "descripcion": "Parque ecológico rodeado de bosque y naturaleza.",
+            "latitud": "19.4612684",
+            "longitud": "-98.5823559",
+            "capacidad_max_cabana": 35,
+            "capacidad_max_camping": 70,
+            "precio_cabana": "920.00",
+            "precio_camping": "470.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 10,
+        "fields": {
+            "nombre": "Piedra Canteada",
+            "slug": "piedra-canteada",
+            "estado": "Puebla",
+            "descripcion": "Parque turístico con senderos y hospedaje ecológico.",
+            "latitud": "19.4564723",
+            "longitud": "-98.6025768",
+            "capacidad_max_cabana": 35,
+            "capacidad_max_camping": 80,
+            "precio_cabana": "980.00",
+            "precio_camping": "490.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 11,
+        "fields": {
+            "nombre": "Las 4 e",
+            "slug": "las-4-e",
+            "estado": "Puebla",
+            "descripcion": "Zona natural para camping y actividades nocturnas.",
+            "latitud": "19.5369814",
+            "longitud": "-98.6282128",
+            "capacidad_max_cabana": 25,
+            "capacidad_max_camping": 60,
+            "precio_cabana": "760.00",
+            "precio_camping": "380.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 12,
+        "fields": {
+            "nombre": "Santa Clara",
+            "slug": "santa-clara",
+            "estado": "Puebla",
+            "descripcion": "Parque familiar con zonas verdes y hospedaje.",
+            "latitud": "19.4659752",
+            "longitud": "-98.6016787",
+            "capacidad_max_cabana": 35,
+            "capacidad_max_camping": 90,
+            "precio_cabana": "930.00",
+            "precio_camping": "460.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    },
+    {
+        "model": "parques.parque",
+        "pk": 13,
+        "fields": {
+            "nombre": "Glamping Octli",
+            "slug": "glamping-octli",
+            "estado": "Puebla",
+            "descripcion": "Experiencia glamping premium en entorno natural.",
+            "latitud": "19.4828477",
+            "longitud": "-98.5607034",
+            "capacidad_max_cabana": 20,
+            "capacidad_max_camping": 50,
+            "precio_cabana": "1500.00",
+            "precio_camping": "700.00",
+            "activo": true,
+            "creado_en": "2026-05-27T00:00:00Z",
+            "actualizado_en": "2026-05-27T00:00:00Z"
+        }
+    }
+]

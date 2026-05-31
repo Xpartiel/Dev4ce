@@ -68,37 +68,20 @@
             </form>
 
             <aside class="booking-summary">
-                <h3>Santuario El Rosario</h3>
-                <p>Michoacán</p>
+                <h3>{{ parque.nombre }}</h3>
+                <p>{{parque.estado}}</p>
 
                 <div class="summary-line">
-                    <span>Check-in</span>
-                    <strong>2026-06-14</strong>
-                </div>
-
-                <div class="summary-line">
-                    <span>Check-out</span>
-                    <strong>2026-06-16</strong>
+                    <span>Cabaña / noche</span>
+                    <strong>${{parque.precio_cabana|floatformat:0}}</strong>
                 </div>
 
                 <div class="summary-line">
-                    <span>Huéspedes</span>
-                    <strong>2</strong>
+                    <span>Camping / noche</span>
+                    <strong>${{parque.precio_camping|floatformat:0}}</strong>
                 </div>
 
-                <hr>
-
-                <div class="summary-line">
-                    <span>Cabaña · 2 noches</span>
-                    <strong>$1,700</strong>
-                </div>
-
-                <div class="summary-line total">
-                    <span>Total</span>
-                    <strong>$1,700</strong>
-                </div>
             </aside>
-
         </div>
 
     </div>

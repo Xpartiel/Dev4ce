@@ -16,31 +16,34 @@
             Te enviamos el detalle a <strong>{{ user.email }}</strong>.
         </p>
 
+
+
         <div class="folio-box">
 
             <small>Folio</small>
-            <strong>LUZ-2026-65199</strong>
+            <strong>{{ reservacion.folio }}</strong>
 
             <div class="confirm-grid">
                 <div>
                     <small>Santuario</small>
-                    <strong>Santuario El Rosario</strong>
+                    <strong>{{ reservacion.parque.nombre }}</strong>
                 </div>
 
                 <div>
                     <small>Estancia</small>
-                    <strong>2026-06-14 → 2026-06-16</strong>
+                    <strong>{{ reservacion.checkin|date:"d M" }} - {{ reservacion.checkout|date:"d M" }}</strong>
                 </div>
 
                 <div>
-                    <small>Tipo</small>
-                    <strong>Cabaña</strong>
+                    <small>Hospedaje</small>
+                    <strong>{{ reservacion.get_tipo_hospedaje_display }}</strong>
                 </div>
 
                 <div>
-                    <small>Total</small>
-                    <strong>$1,760</strong>
+                    <small>Huéspedes</small>
+                    <strong>{{ reservacion.huespedes }} personas</strong>
                 </div>
+            
             </div>
 
         </div>

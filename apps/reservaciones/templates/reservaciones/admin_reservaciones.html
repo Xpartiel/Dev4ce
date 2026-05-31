@@ -9,8 +9,7 @@
     <aside class="admin-sidebar">
 
         <div class="admin-logo">
-            <span class="logo-icon">△</span>
-            <strong>dev4ce</strong>
+            {% include "core/_logo.html" %}
         </div>
 
         <p class="admin-label">// Administración</p>
@@ -18,7 +17,9 @@
         <nav class="admin-menu">
             <a href="{% url 'admin_dashboard' %}">Panel</a>
             <a href="{% url 'admin_parques' %}">Parques</a>
-            <a href="{% url 'admin_reservaciones' %}" class="active">Reservaciones</a>
+            <a href="{% url 'admin_reservaciones' %}" class="active">
+                Reservaciones
+            </a>
             <a href="{% url 'admin_calendario' %}">Calendario</a>
             <a href="{% url 'admin_reportes' %}">Reportes</a>
         </nav>
@@ -39,9 +40,18 @@
                 <h1>Lista global</h1>
             </div>
 
-            <button class="btn btn-secondary">
-                Exportar CSV
-            </button>
+            <div class="admin-actions">
+
+                <a href="{% url 'crear_reservacion' %}"
+                   class="btn btn-primary">
+                    + Nueva reservación
+                </a>
+
+                <button class="btn btn-secondary">
+                    Exportar CSV
+                </button>
+
+            </div>
 
         </div>
 
@@ -76,86 +86,73 @@
                         <th>Tipo</th>
                         <th>Total</th>
                         <th>Estado</th>
-                        <th></th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                    <tr>
-                        <td>LUZ-2026-04812</td>
-                        <td>Santuario El Rosario</td>
-                        <td>2026-06-14 → 2026-06-16</td>
-                        <td>2</td>
-                        <td>Cabaña</td>
-                        <td>$1700</td>
-                        <td>
-                            <span class="status confirmed">
-                                confirmada
-                            </span>
-                        </td>
-                        <td>•••</td>
-                    </tr>
+                    {% for reservacion in reservaciones %}
 
                     <tr>
-                        <td>LUZ-2026-04788</td>
-                        <td>Santuario Nanacamilpa</td>
-                        <td>2026-07-03 → 2026-07-05</td>
-                        <td>4</td>
-                        <td>Cabaña</td>
-                        <td>$1300</td>
+
+                        <td>{{ reservacion.folio }}</td>
+
+                        <td>{{ reservacion.parque.nombre }}</td>
+
                         <td>
-                            <span class="status confirmed">
-                                confirmada
-                            </span>
+                            {{ reservacion.checkin }}
+                            →
+                            {{ reservacion.checkout }}
                         </td>
-                        <td>•••</td>
+
+                        <td>{{ reservacion.huespedes }}</td>
+
+                        <td>
+                            {{ reservacion.get_tipo_hospedaje_display }}
+                        </td>
+
+                        <td>
+                            ${{ reservacion.total }}
+                        </td>
+
+                        <td>
+
+                            <span class="status {{ reservacion.estado }}">
+                                {{ reservacion.get_estado_display }}
+                            </span>
+
+                        </td>
+
+                        <td class="admin-actions-cell">
+
+                            <a
+                                href="{% url 'editar_reservacion' reservacion.id %}"
+                                class="btn btn-secondary"
+                            >
+                                Editar
+                            </a>
+
+                            <a
+                                href="{% url 'eliminar_reservacion' reservacion.id %}"
+                                class="btn btn-danger"
+                            >
+                                Eliminar
+                            </a>
+
+                        </td>
+
                     </tr>
 
-                    <tr>
-                        <td>LUZ-2026-04621</td>
-                        <td>Cerro Pelón</td>
-                        <td>2026-06-22 → 2026-06-24</td>
-                        <td>2</td>
-                        <td>Camping</td>
-                        <td>$980</td>
-                        <td>
-                            <span class="status pending">
-                                pendiente
-                            </span>
-                        </td>
-                        <td>•••</td>
-                    </tr>
+                    {% empty %}
 
                     <tr>
-                        <td>LUZ-2026-04102</td>
-                        <td>Sierra Chincua</td>
-                        <td>2026-05-30 → 2026-06-01</td>
-                        <td>3</td>
-                        <td>Cabaña</td>
-                        <td>$2200</td>
-                        <td>
-                            <span class="status completed">
-                                completada
-                            </span>
+                        <td colspan="8">
+                            No hay reservaciones registradas.
                         </td>
-                        <td>•••</td>
                     </tr>
 
-                    <tr>
-                        <td>LUZ-2026-03987</td>
-                        <td>Piedra Herrada</td>
-                        <td>2026-07-15 → 2026-07-16</td>
-                        <td>2</td>
-                        <td>Camping</td>
-                        <td>$720</td>
-                        <td>
-                            <span class="status cancelled">
-                                cancelada
-                            </span>
-                        </td>
-                        <td>•••</td>
-                    </tr>
+                    {% endfor %}
 
                 </tbody>
 

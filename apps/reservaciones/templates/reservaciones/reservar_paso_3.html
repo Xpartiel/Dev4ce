@@ -32,7 +32,7 @@
 
                     <div>
                         <small>Estancia</small>
-                        <strong>14 Jun — 16 Jun</strong>
+                        <strong>14 Jun - 16 Jun</strong>
                     </div>
 
                     <div>
@@ -57,8 +57,19 @@
                 </div>
 
                 <div class="booking-actions">
-                    <a href="{% url 'reservar_paso_2' parque_id %}" class="btn btn-secondary">Regresar</a>
-                    <a href="{% url 'reservacion_confirmada' %}" class="btn btn-primary">Confirmar reservación</a>
+                    {% if error_cupo %}
+                    <div class="alert alert-danger" style="color:red; margin-bottom:1rem;">
+                        {{ error_cupo }}
+                    </div>
+                    {% endif %}
+
+                    <form method="POST" action="{% url 'reservar_paso_3' parque_id %}">
+                    {% csrf_token %}
+                    <div class="booking-actions">
+                        <a href="{% url 'reservar_paso_2' parque_id %}" class="btn btn-secondary">Regresar</a>
+                        <button type="submit" class="btn btn-primary">Confirmar reservación</button>
+                    </div>
+                </form>
                 </div>
 
             </div>
@@ -67,20 +78,15 @@
                 <h3>Total a pagar</h3>
 
                 <div class="summary-line">
-                    <span>Cabaña · 2 noches</span>
-                    <strong>$1,700</strong>
-                </div>
-
-                <div class="summary-line">
-                    <span>Cuota festival</span>
-                    <strong>$60</strong>
+                    <span>{{ tipo|capfirst }} · {{ checkin }} → {{ checkout }}</span>
+                    <strong>${{ total|floatformat:0 }}</strong>
                 </div>
 
                 <hr>
 
                 <div class="summary-line total">
                     <span>Total</span>
-                    <strong>$1,760</strong>
+                    <strong>${{ total|floatformat:0 }}</strong>
                 </div>
             </aside>
 
