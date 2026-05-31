@@ -14,6 +14,8 @@ urlpatterns = [
     path("reservacion-confirmada/", views.reservacion_confirmada, name="reservacion_confirmada"),
     path("mis-reservaciones/", views.mis_reservaciones, name="mis_reservaciones"),
     path("mis-reservaciones/<int:reservacion_id>/", views.detalle_reservacion, name="detalle_reservacion"),
+    path("mis-reservaciones/<int:reservacion_id>/cancelar/", views.cancelar_reservacion, name="cancelar_reservacion"),
+    path("reservacion-confirmada/<int:reservacion_id>/", views.reservacion_confirmada, name="reservacion_confirmada_folio"),
     path("mi-perfil/", views.mi_perfil, name="mi_perfil"),
 
     # Vistas de admin
