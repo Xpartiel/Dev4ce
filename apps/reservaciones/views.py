@@ -224,6 +224,18 @@ def mis_reservaciones(request):
 @login_required
 def detalle_reservacion(request, reservacion_id):
     reservacion = get_object_or_404(
+        Reservacion.objects.select_related("parque"),
+        id=reservacion_id,
+        usuario=request.user,
+    )
+    return render(request, "reservaciones/detalle_reservacion.html", {
+        "reservacion": reservacion,
+    })
+
+
+@login_required
+def cancelar_reservacion(request, reservacion_id):
+    reservacion = get_object_or_404(
         Reservacion,
         id=reservacion_id,
         usuario=request.user,
