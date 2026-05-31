@@ -12,7 +12,7 @@ from apps.parques.mapas import construir_mapa
 # Criterio único de "reservación activa" (RF-08.1).
 # Lo reutilizaremos en el dashboard para mantener consistencia.
 ESTADOS_ACTIVOS = ("pendiente", "confirmada")
-FESTIVAL_INICIO = date(2026, 6, 14)from parques.models import Parque
+FESTIVAL_INICIO = date(2026, 6, 14)
 
 
 @login_required
