@@ -36,10 +36,10 @@ class Parque( models.Model ):
     # Todos los parques tienen camping; las cabañas son opcionales (regla de negocio)
     tiene_cabanas = models.BooleanField(default=True)
 
-    capacidad_max_cabana = models.IntegerField(max_digits=10)
+    capacidad_max_cabana = models.IntegerField()
     precio_cabana = models.DecimalField(max_digits=10, decimal_places=2)
     
-    capacidad_max_camping = models.IntegerField(max_digits=10)
+    capacidad_max_camping = models.IntegerField()
     precio_camping = models.DecimalField(max_digits=10, decimal_places=2)
 
     activo = models.BooleanField(default=True)
@@ -66,17 +66,29 @@ class Parque( models.Model ):
         
 
 class Servicio( models.Model ):
+    '''
+    Modelo para que se puedan registrar y referenciar servicios
+    para multiples parques desde un panel de administracion.
+    '''
     
     nombre = models.CharField(max_length=255)
     
     descripcion = models.TextField()
-    
+
+
+
 class ServiciosParque( models.Model ):
+    '''
+    Modelo de enlace entre Servicios y Parques
+    
+    '''
     
     id_parque = models.ForeignKey(
-        Parque
+        Parque,
+        on_delete=models.CASCADE
     )
     
     id_servicio = models.ForeignKey(
-        Servicio
+        Servicio,
+        on_delete=models.CASCADE
     )

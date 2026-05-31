@@ -7,7 +7,8 @@ class DisponibilidadParqueAdmin(admin.ModelAdmin):
     list_display = (
         "parque",
         "fecha",
-        "capacidad_disponible",
+        "camping_disponible",
+        "cabania_disponible",
         "estado",
     )
 
