@@ -2,7 +2,7 @@ from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import user_passes_test
-from usuarios.models import Usuario, Persona
+from .models import Usuario, Persona
 
 User = get_user_model()
 
