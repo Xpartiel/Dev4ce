@@ -105,7 +105,7 @@ Contraseña:
 Una vez configurado el proyecto por primera vez, únicamente es necesario:
 
 ```bash
-conda activate Luciernagas
+conda activate luciernagas
 python manage.py runserver
 ```
 

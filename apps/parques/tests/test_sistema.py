@@ -1,5 +1,5 @@
 """
-Pruebas de SISTEMA — app parques.
+Pruebas de SISTEMA app parques.
 
 Flujo de extremo a extremo: el cliente explora el mapa y abre el detalle de un
 parque. Sin navegador (cliente de pruebas de Django).

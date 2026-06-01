@@ -1,5 +1,5 @@
 """
-Pruebas de INTEGRACION — app reservaciones.
+Pruebas de INTEGRACION app reservaciones.
 
 Vistas de cliente y de administrador + ORM, mediante el cliente de pruebas.
 Cada prueba cita su requisito.

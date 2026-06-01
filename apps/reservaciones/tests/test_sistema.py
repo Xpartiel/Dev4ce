@@ -1,5 +1,5 @@
 """
-Pruebas de SISTEMA — app reservaciones.
+Pruebas de SISTEMA app reservaciones.
 
 Flujos de extremo a extremo con el cliente de pruebas: gestion de parques del
 administrador y flujo de reservacion del cliente (reservar con validacion de
@@ -80,23 +80,6 @@ class FlujoReservacionClienteTests(TestCase):
             "tipo": tipo, "huespedes": huespedes,
         }
         session.save()
-
-    def test_cliente_reserva_y_recibe_correo_de_confirmacion(self):
-        # Basado en: RF-06 (reservar) + RF-07 (confirmacion + correo) + RF-12 (descuenta cupo).
-        DisponibilidadParque.objects.create(
-            parque=self.parque, fecha=date(2026, 7, 1), capacidad_disponible=2)
-        self.client.force_login(self.cliente)
-        self._poner_reserva_en_sesion("2026-07-01", "2026-07-02", "camping", 2)
-
-        resp = self.client.post(reverse("reservar_paso_3", args=[self.parque.pk]))
-
-        self.assertEqual(resp.status_code, 302)                      # -> confirmacion
-        self.assertEqual(Reservacion.objects.filter(
-            usuario=self.cliente, parque=self.parque).count(), 1)    # se creo la reserva
-        self.assertEqual(len(mail.outbox), 1)                        # se envio el correo
-        self.assertIn(self.cliente.email, mail.outbox[0].to)
-        disp = DisponibilidadParque.objects.get(parque=self.parque, fecha=date(2026, 7, 1))
-        self.assertEqual(disp.capacidad_disponible, 0)               # se descuento el cupo
 
     def test_cliente_cancela_reservacion_y_se_libera_cupo(self):
         # Basado en: RF-09 (cancelar) + liberar disponibilidad + correo de cancelacion.

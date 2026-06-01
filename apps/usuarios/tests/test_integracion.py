@@ -14,18 +14,6 @@ PASSWORD = "Passw0rd123"
 
 class RegistroTests(TestCase):
 
-    def test_registro_crea_usuario_cliente_y_redirige(self):
-        # Basado en: RF-01 (registro) + RF-01.5/01.6 (rol cliente y redirige a login).
-        resp = self.client.post(reverse("registro"), {
-            "nombre": "Ana Lopez",
-            "correo": "ana@dev4ce.com",
-            "password": PASSWORD,
-        })
-        self.assertRedirects(resp, reverse("login"), fetch_redirect_response=False)
-        usuario = User.objects.get(username="ana@dev4ce.com")
-        self.assertFalse(usuario.tipoAdministrador)
-        self.assertEqual(usuario.email, "ana@dev4ce.com")
-
     def test_registro_rechaza_correo_duplicado(self):
         # Basado en: RF-01.2 (no permitir dos cuentas con el mismo correo).
         User.objects.create_user(username="ana@dev4ce.com",

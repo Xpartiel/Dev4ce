@@ -1,5 +1,5 @@
 """
-Pruebas de INTEGRACION — app parques.
+Pruebas de INTEGRACION app parques.
 
 Vista + ORM + plantilla mediante el cliente de pruebas. Cada prueba cita su
 requisito.

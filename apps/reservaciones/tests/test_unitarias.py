@@ -1,5 +1,5 @@
 """
-Pruebas de UNIDAD — app reservaciones.
+Pruebas de UNIDAD app reservaciones.
 
 Verifican piezas aisladas del modelo Reservacion (sin base de datos). Cada
 prueba cita su requisito.

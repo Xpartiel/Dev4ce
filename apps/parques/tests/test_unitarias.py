@@ -1,5 +1,5 @@
 """
-Pruebas de UNIDAD — app parques.
+Pruebas de UNIDAD app parques.
 
 Metodos del modelo Parque y el constructor del mapa, en aislamiento (sin BD).
 Cada prueba indica el requisito en que se basa.

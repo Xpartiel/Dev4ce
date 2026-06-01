@@ -1,5 +1,5 @@
 """
-Pruebas de UNIDAD — app usuarios.
+Pruebas de UNIDAD app usuarios.
 
 Verifican piezas aisladas (un metodo de modelo, una funcion auxiliar) sin
 tocar la base de datos ni el ciclo HTTP. Cada prueba indica en comentario
