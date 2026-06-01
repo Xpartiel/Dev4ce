@@ -6,20 +6,80 @@ Parque
 
 {% block content %}
 
-<h1>Formulario de Parque</h1>
+<section class="admin-form-page">
 
-<form method="post">
-    {% csrf_token %}
+    <div class="admin-header">
 
-    {{ form.as_p }}
+        <div>
 
-    <button type="submit">
-        Guardar
-    </button>
-</form>
+            <p class="section-label">
+                // Administración
+            </p>
 
-<a href="{% url 'admin_parques' %}">
-    Volver
-</a>
+            {% if form.instance.pk %}
+                <h1>Editar Parque</h1>
+            {% else %}
+                <h1>Crear Parque</h1>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <article class="admin-panel">
+
+        <form method="post" class="admin-form">
+
+            {% csrf_token %}
+
+            {% for field in form %}
+
+                <div class="admin-form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small>
+                            {{ field.help_text }}
+                        </small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <small style="color: var(--color-danger);">
+                            {{ field.errors }}
+                        </small>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            <div class="admin-form-actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Guardar
+                </button>
+
+                <a
+                    href="{% url 'admin_parques' %}"
+                    class="btn btn-secondary"
+                >
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </article>
+
+</section>
 
 {% endblock %}

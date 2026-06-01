@@ -124,14 +124,23 @@ def registro_admin_view(request):
 
         else:
 
-            User.objects.create_user(
-                username=correo,
-                email=correo,
-                password=password,
-                nombre_completo=nombre,
-                tipoAdministrador=True,
-                is_staff=True,
-            )
+            with transaction.atomic():
+
+                usuario = User.objects.create_user(
+                    username=correo,
+                    email=correo,
+                    password=password,
+                    nick_name=nombre,
+                    tipoAdministrador=True,
+                    is_staff=True,
+                )
+
+                Persona.objects.create(
+                    usuario=usuario,
+                    nombre=nombre,
+                    apellido_paterno="",
+                    apellido_materno=""
+                )
 
             return redirect("admin_dashboard")
 

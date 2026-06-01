@@ -2660,3 +2660,65 @@ textarea {
     border-radius: 50%;
     background-color: var(--color-surface);
 }
+
+/* ===== FORMULARIOS ADMIN ===== */
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.admin-form-group label {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.admin-input,
+.admin-textarea {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--color-line);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    font-size: 14px;
+}
+
+.admin-input:focus,
+.admin-textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+.admin-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.admin-checkbox {
+    width: 18px;
+    height: 18px;
+}
+
+.admin-form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.admin-form-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.admin-form-page .admin-panel {
+    width: 100%;
+}
