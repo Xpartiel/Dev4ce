@@ -1,0 +1,42 @@
+[
+  {
+    "model": "mi_app.Persona",
+    "pk": 1,
+    "fields": {
+      "nombre": "Ana",
+      "apellido_paterno": "García",
+      "apellido_materno": "López",
+      "telefono": "555-123-4567"
+    }
+  },
+  {
+    "model": "mi_app.Persona",
+    "pk": 2,
+    "fields": {
+      "nombre": "Luis",
+      "apellido_paterno": "Martínez",
+      "apellido_materno": "Rodríguez",
+      "telefono": "555-234-5678"
+    }
+  },
+  {
+    "model": "mi_app.Persona",
+    "pk": 3,
+    "fields": {
+      "nombre": "María",
+      "apellido_paterno": "Hernández",
+      "apellido_materno": "Pérez",
+      "telefono": "555-345-6789"
+    }
+  },
+  {
+    "model": "mi_app.Persona",
+    "pk": 4,
+    "fields": {
+      "nombre": "Juan",
+      "apellido_paterno": "Ramírez",
+      "apellido_materno": "Gómez",
+      "telefono": "555-456-7890"
+    }
+  }
+]

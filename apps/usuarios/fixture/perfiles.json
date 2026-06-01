@@ -1,0 +1,78 @@
+[
+  {
+    "model": "mi_app.Usuario",
+    "pk": 1,
+    "fields": {
+      "username": "ana_comun",
+      "email": "ana@example.com",
+      "password": "123",  
+      "nick_name": "anita",
+      "foto_perfil": "perfiles/default.png",
+      "tipo_usuario": 1,
+      "tipoAdministrador": false,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "date_joined": "2024-01-15T10:00:00Z"
+    }
+  },
+  {
+    "model": "mi_app.Usuario",
+    "pk": 2,
+    "fields": {
+      "username": "luis_colaborador",
+      "email": "luis@example.com",
+      "password": "123",
+      "nick_name": "luis_dev",
+      "foto_perfil": "perfiles/default.png",
+      "tipo_usuario": 2,
+      "tipoAdministrador": false,
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "date_joined": "2024-02-10T09:30:00Z"
+    }
+  },
+  {
+    "model": "mi_app.Usuario",
+    "pk": 3,
+    "fields": {
+      "username": "maria_mod",
+      "email": "maria@example.com",
+      "password": "123",
+      "nick_name": "maria_mod",
+      "foto_perfil": "perfiles/default.png",
+      "tipo_usuario": 3,
+      "tipoAdministrador": false,
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": false,
+      "first_name": "",
+      "last_name": "",
+      "date_joined": "2024-03-01T14:20:00Z"
+    }
+  },
+  {
+    "model": "mi_app.Usuario",
+    "pk": 4,
+    "fields": {
+      "username": "juan_admin",
+      "email": "juan@admin.com",
+      "password": "123",
+      "nick_name": "jefe",
+      "foto_perfil": "perfiles/default.png",
+      "tipo_usuario": 4,
+      "tipoAdministrador": true,
+      "is_active": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "first_name": "",
+      "last_name": "",
+      "date_joined": "2024-01-01T00:00:00Z"
+    }
+  }
+]

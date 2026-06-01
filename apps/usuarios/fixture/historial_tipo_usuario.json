@@ -1,0 +1,57 @@
+[
+  {
+    "model": "mi_app.HistorialTipoUsuario",
+    "pk": 1,
+    "fields": {
+      "usuario": 1,
+      "tipo": 1,
+      "fecha_inicio": "2024-01-15T10:00:00Z",
+      "fecha_fin": null,
+      "motivo_cambio": "Registro inicial"
+    }
+  },
+  {
+    "model": "mi_app.HistorialTipoUsuario",
+    "pk": 2,
+    "fields": {
+      "usuario": 2,
+      "tipo": 1,
+      "fecha_inicio": "2024-02-10T09:30:00Z",
+      "fecha_fin": "2024-02-20T18:00:00Z",
+      "motivo_cambio": "Registro inicial como usuario común"
+    }
+  },
+  {
+    "model": "mi_app.HistorialTipoUsuario",
+    "pk": 3,
+    "fields": {
+      "usuario": 2,
+      "tipo": 2,
+      "fecha_inicio": "2024-02-21T09:00:00Z",
+      "fecha_fin": null,
+      "motivo_cambio": "Ascenso a colaborador por actividad"
+    }
+  },
+  {
+    "model": "mi_app.HistorialTipoUsuario",
+    "pk": 4,
+    "fields": {
+      "usuario": 3,
+      "tipo": 3,
+      "fecha_inicio": "2024-03-01T14:20:00Z",
+      "fecha_fin": null,
+      "motivo_cambio": "Contratado como moderador"
+    }
+  },
+  {
+    "model": "mi_app.HistorialTipoUsuario",
+    "pk": 5,
+    "fields": {
+      "usuario": 4,
+      "tipo": 4,
+      "fecha_inicio": "2024-01-01T00:00:00Z",
+      "fecha_fin": null,
+      "motivo_cambio": "Administrador del sistema"
+    }
+  }
+]
