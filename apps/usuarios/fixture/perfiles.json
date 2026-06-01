@@ -5,7 +5,7 @@
     "fields": {
       "username": "ana@example.com",
       "email": "ana@example.com",
-      "password": "123",  
+      "password": "pbkdf2_sha256$1200000$AyKPdIwrSc9oCiNnQ2M5Yz$Ci6nHVWLqa8e5o4K3Qi5oqQa3oHgMO80CR3O3BXpSfo=",
       "nick_name": "anita",
       "foto_perfil": "perfiles/default.png",
       "tipo_usuario": 1,
@@ -24,7 +24,7 @@
     "fields": {
       "username": "luis@example.com",
       "email": "luis@example.com",
-      "password": "123",
+      "password": "pbkdf2_sha256$1200000$AyKPdIwrSc9oCiNnQ2M5Yz$Ci6nHVWLqa8e5o4K3Qi5oqQa3oHgMO80CR3O3BXpSfo=",
       "nick_name": "luis_dev",
       "foto_perfil": "perfiles/default.png",
       "tipo_usuario": 2,
@@ -43,7 +43,7 @@
     "fields": {
       "username": "maria@example.com",
       "email": "maria@example.com",
-      "password": "123",
+      "password": "pbkdf2_sha256$1200000$AyKPdIwrSc9oCiNnQ2M5Yz$Ci6nHVWLqa8e5o4K3Qi5oqQa3oHgMO80CR3O3BXpSfo=",
       "nick_name": "maria_mod",
       "foto_perfil": "perfiles/default.png",
       "tipo_usuario": 3,
@@ -62,7 +62,7 @@
     "fields": {
       "username": "juan@admin.com",
       "email": "juan@admin.com",
-      "password": "123",
+      "password": "pbkdf2_sha256$1200000$AyKPdIwrSc9oCiNnQ2M5Yz$Ci6nHVWLqa8e5o4K3Qi5oqQa3oHgMO80CR3O3BXpSfo=",
       "nick_name": "jefe",
       "foto_perfil": "perfiles/default.png",
       "tipo_usuario": 4,
