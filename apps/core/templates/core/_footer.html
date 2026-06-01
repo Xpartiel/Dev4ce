@@ -1,0 +1,76 @@
+{% comment %}
+  Footer global del sitio — Festival Internacional de las Luciérnagas 2026.
+  Se incluye desde base.html, justo después de </main>.
+
+  Esquema de enlaces:
+    · Acerca de        -> página interna pública (core:acerca)
+    · Parques oficiales -> mapa si hay sesión, login si no (gated)
+    · El resto          -> página "en construcción" (core:en_construccion)
+{% endcomment %}
+
+<footer class="site-footer">
+
+    <div class="footer-top">
+
+        <!-- Marca -->
+        <div class="footer-brand">
+            <a href="{% url 'landing' %}" class="footer-logo">
+                {% include "core/_logo.html" %}
+            </a>
+
+            <p class="footer-blurb">
+                Sistema oficial de reservación y mapeo del Festival
+                Internacional de las Luciérnagas 2026. Un proyecto del
+                equipo Dev4ce - Facultad de Ciencias, UNAM.
+            </p>
+
+            <p class="footer-version">v1.0.0 - build 2026.04.30</p>
+        </div>
+
+        <!-- Columna: FESTIVAL -->
+        <nav class="footer-col" aria-label="Festival">
+            <h4>Festival</h4>
+            <ul>
+                <li><a href="{% url 'core:acerca' %}">Acerca de</a></li>
+                <li>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'mapa_cliente' %}">Parques oficiales</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Parques oficiales</a>
+                    {% endif %}
+                </li>
+                <li><a href="{% url 'core:en_construccion' %}">Calendario 2026</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Códigos de conducta</a></li>
+            </ul>
+        </nav>
+
+        <!-- Columna: RESERVAR -->
+        <nav class="footer-col" aria-label="Reservar">
+            <h4>Reservar</h4>
+            <ul>
+                <li><a href="{% url 'core:en_construccion' %}">Cabañas</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Camping</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Tours guiados</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Política de cancelación</a></li>
+            </ul>
+        </nav>
+
+        <!-- Columna: COMUNIDAD -->
+        <nav class="footer-col" aria-label="Comunidad">
+            <h4>Comunidad</h4>
+            <ul>
+                <li><a href="{% url 'core:en_construccion' %}">Voluntariado</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Investigación</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Prensa</a></li>
+                <li><a href="{% url 'core:en_construccion' %}">Contacto</a></li>
+            </ul>
+        </nav>
+
+    </div>
+
+    <div class="footer-bottom">
+        <span>© 2026 Dev4ce · UNAM Facultad de Ciencias · Proyecto académico</span>
+        <span class="footer-domain">luciernagas.mx</span>
+    </div>
+
+</footer>
