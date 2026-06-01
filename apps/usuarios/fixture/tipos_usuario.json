@@ -1,6 +1,6 @@
 [
   {
-    "model": "mi_app.TipoUsuario",
+    "model": "usuarios.TipoUsuario",
     "pk": 1,
     "fields": {
       "nombre": "comun",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "model": "mi_app.TipoUsuario",
+    "model": "usuarios.TipoUsuario",
     "pk": 2,
     "fields": {
       "nombre": "colaborador",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "model": "mi_app.TipoUsuario",
+    "model": "usuarios.TipoUsuario",
     "pk": 3,
     "fields": {
       "nombre": "moderador",
@@ -27,7 +27,7 @@
     }
   },
   {
-    "model": "mi_app.TipoUsuario",
+    "model": "usuarios.TipoUsuario",
     "pk": 4,
     "fields": {
       "nombre": "admin",
@@ -36,7 +36,7 @@
     }
   },
   {
-    "model": "mi_app.TipoUsuario",
+    "model": "usuarios.TipoUsuario",
     "pk": 5,
     "fields": {
       "nombre": "baneado",

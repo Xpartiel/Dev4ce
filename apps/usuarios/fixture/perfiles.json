@@ -1,6 +1,6 @@
 [
   {
-    "model": "mi_app.Usuario",
+    "model": "usuarios.Usuario",
     "pk": 1,
     "fields": {
       "username": "ana_comun",
@@ -19,7 +19,7 @@
     }
   },
   {
-    "model": "mi_app.Usuario",
+    "model": "usuarios.Usuario",
     "pk": 2,
     "fields": {
       "username": "luis_colaborador",
@@ -38,7 +38,7 @@
     }
   },
   {
-    "model": "mi_app.Usuario",
+    "model": "usuarios.Usuario",
     "pk": 3,
     "fields": {
       "username": "maria_mod",
@@ -57,7 +57,7 @@
     }
   },
   {
-    "model": "mi_app.Usuario",
+    "model": "usuarios.Usuario",
     "pk": 4,
     "fields": {
       "username": "juan_admin",

@@ -1,6 +1,6 @@
 [
   {
-    "model": "mi_app.Persona",
+    "model": "usuarios.Persona",
     "pk": 1,
     "fields": {
       "nombre": "Ana",
@@ -10,7 +10,7 @@
     }
   },
   {
-    "model": "mi_app.Persona",
+    "model": "usuarios.Persona",
     "pk": 2,
     "fields": {
       "nombre": "Luis",
@@ -20,7 +20,7 @@
     }
   },
   {
-    "model": "mi_app.Persona",
+    "model": "usuarios.Persona",
     "pk": 3,
     "fields": {
       "nombre": "María",
@@ -30,7 +30,7 @@
     }
   },
   {
-    "model": "mi_app.Persona",
+    "model": "usuarios.Persona",
     "pk": 4,
     "fields": {
       "nombre": "Juan",
