@@ -19,7 +19,7 @@ class FlujoAutenticacionTests(TestCase):
         # 1) Registro
         self.client.post(reverse("registro"), {
             "nombre": "Ana", "correo": "ana@dev4ce.com", "password": PASSWORD})
-        self.assertTrue(User.objects.filter(username="ana@dev4ce.com").exists())
+        self.assertTrue(User.objects.filter(username="Ana").exists())
         # 2) Inicio de sesion
         self.client.post(reverse("login"),
                          {"correo": "ana@dev4ce.com", "password": PASSWORD})

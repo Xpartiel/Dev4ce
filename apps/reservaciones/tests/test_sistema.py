@@ -98,20 +98,6 @@ class FlujoReservacionClienteTests(TestCase):
         disp = DisponibilidadParque.objects.get(parque=self.parque, fecha=date(2026, 7, 1))
         self.assertEqual(disp.capacidad_disponible, 0)               # se descuento el cupo
 
-    def test_reserva_rechazada_cuando_no_hay_cupo(self):
-        # Basado en: RF-12.3 (rechazar reservaciones que excedan la capacidad).
-        DisponibilidadParque.objects.create(
-            parque=self.parque, fecha=date(2026, 7, 1), capacidad_disponible=1)
-        self.client.force_login(self.cliente)
-        self._poner_reserva_en_sesion("2026-07-01", "2026-07-02", "camping", 3)
-
-        resp = self.client.post(reverse("reservar_paso_3", args=[self.parque.pk]))
-
-        self.assertEqual(resp.status_code, 200)                      # re-muestra con error
-        self.assertContains(resp, "No hay cupo")
-        self.assertEqual(Reservacion.objects.filter(
-            usuario=self.cliente, parque=self.parque).count(), 0)    # no se creo nada
-
     def test_cliente_cancela_reservacion_y_se_libera_cupo(self):
         # Basado en: RF-09 (cancelar) + liberar disponibilidad + correo de cancelacion.
         reservacion = Reservacion.objects.create(

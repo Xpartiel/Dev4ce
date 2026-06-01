@@ -1,4 +1,4 @@
-# PRISMA - Sistema de Reservación y Mapeo para el Festival Internacional de las Luciérnagas 2026
+# Dev4ce - Sistema de Reservación y Mapeo para el Festival Internacional de las Luciérnagas 2026
 
 ## Requisitos
 
@@ -166,3 +166,31 @@ python setup_project.py
 ```
 
 para reconstruir la base de datos y cargar nuevamente los fixtures.
+
+---
+
+## Ejecución de pruebas
+
+El proyecto cuenta con una suite de pruebas automatizadas (unidad, integración y sistema) construida con el framework de pruebas integrado de Django. Las pruebas se ejecutan sobre una base de datos temporal, por lo que **no** modifican `db.sqlite3` ni los datos cargados.
+
+Para ejecutar todas las pruebas:
+
+```bash
+python manage.py test apps.usuarios apps.parques apps.reservaciones
+```
+
+Para ver el detalle de cada prueba, agregar **-v 2**:
+
+```bash
+python manage.py test apps.usuarios apps.parques apps.reservaciones -v 2
+```
+
+También es posible ejecutar las pruebas de una sola app o de un solo nivel:
+
+```bash
+# Una sola app
+python manage.py test apps.reservaciones
+
+# Un solo nivel (unidad / integración / sistema)
+python manage.py test apps.parques.tests.test_unidad
+```
