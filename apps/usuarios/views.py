@@ -39,7 +39,7 @@ def registro_view(request):
     if request.method != "POST":
         return render(request, "usuarios/registro.html")
 
-    nombre = request.POST.get("nombre")
+    nombre = request.POST.get("nombres")
     apellido_p = request.POST.get("apellidoP","")
     apellido_m = request.POST.get("apellidoM","")
     correo = request.POST.get("correo")
