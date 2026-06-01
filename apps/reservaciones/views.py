@@ -217,7 +217,7 @@ def reservar_paso_3(request, parque_id):
             disponibilidad.capacidad_disponible = max(0, disponibilidad.capacidad_disponible - huespedes)
             if disponibilidad.capacidad_disponible == 0:
                 disponibilidad.estado = "agotado"
-            elif disponibilidad.capacidad <= 5:
+            elif disponibilidad.capacidad_disponible <= 5:
                 disponibilidad.estado = "pocos"
             else: 
                 disponibilidad.estado = "libre"
