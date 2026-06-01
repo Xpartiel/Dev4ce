@@ -57,14 +57,19 @@
                 </div>
 
                 <div class="booking-actions">
-                    {% if error_cupo %}
-                    <div class="alert alert-danger" style="color:red; margin-bottom:1rem;">
-                        {{ error_cupo }}
-                    </div>
+                    {% if errores %}
+                        <div style="background:#fee; border:1px solid #c00; padding:1rem; border-radius:8px; margin-bottom:1rem;">
+                        <strong> No es posible completar esta reservación:</strong>
+                        <ul style="margin-top:.5rem;">
+                            {% for error in errores %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                </div>
                     {% endif %}
 
                     <form method="POST" action="{% url 'reservar_paso_3' parque_id %}">
-                    {% csrf_token %}
+                        {% csrf_token %}
                     <div class="booking-actions">
                         <a href="{% url 'reservar_paso_2' parque_id %}" class="btn btn-secondary">Regresar</a>
                         <button type="submit" class="btn btn-primary">Confirmar reservación</button>

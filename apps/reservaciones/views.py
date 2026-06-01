@@ -1,25 +1,65 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
+from django.db import transaction
 from datetime import date, timedelta
 import uuid
 import folium
 from django.urls import reverse
-from django.template.loader import render_to_string
 from apps.parques.forms import ParqueForm
 from .forms import ReservacionForm
 from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
 from apps.parques.mapas import construir_mapa
 
-ESTADOS_ACTIVOS = ("pendiente", "confirmada")
-FESTIVAL_INICIO = date(2026, 6, 14)
-
 
 # Criterio único de "reservación activa" (RF-08.1).
 # Lo reutilizaremos en el dashboard para mantener consistencia.
 ESTADOS_ACTIVOS = ("pendiente", "confirmada")
-FESTIVAL_INICIO = date(2026, 6, 14)
+FESTIVAL_INICIO = date(2026, 6, 26)
+FESTIVAL_FIN    = date(2026, 8, 2)   # ajustar a la finalizacion del festival
+
+
+def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
+    """
+    Devuelve una lista de errores (strings). Lista vacía = todo valido.
+      1. checkin debe ser dentro de la temporada.
+      2. checkin no puede caer en martes.
+      3. Si tipo_hospedaje es 'cabana', el parque debe tener cabañas.
+      4. huespedes no puede superar la capacidad máxima del tipo.
+      5. checkout debe ser posterior a checkin.
+    """
+    errores = []
+
+    # 1. Check-in dentro de la temporada
+    if checkin < FESTIVAL_INICIO or checkin > FESTIVAL_FIN: 
+        errores.append(
+            f"Solo se permiten reservaciones entre "
+            f"{FESTIVAL_INICIO.strftime('%d/%m/%Y')} y "
+            f"{FESTIVAL_FIN.strftime('%d/%m/%Y')}."
+        )
+    # 2. Check-in no puede caer en martes
+    if checkin.weekday() == 1:
+        errores.append("Las reservaciones no pueden realizarse los martes (día de mantenimiento).")
+    
+    # 3. Verificar el tipo hospedaje de los parques
+    if tipo == "cabana" and not parque.tiene_cabanas:
+        errores.append(f"{parque.nombre} no tiene cabañas disponibles.")
+
+    # 4. Verificar capacidad maxima del tipo
+    cap_max = parque.capacidad_max_cabana if tipo == "cabana" else parque.capacidad_max_camping
+    if cap_max and huespedes > cap_max:
+        errores.append(
+            f"El máximo de huéspedes para "
+            f"{'cabaña' if tipo == 'cabana' else 'camping'} "
+            f"es {cap_max}."
+        )
+
+    # 5. Check-out posterior a check-in 
+    if checkout <= checkin:
+        errores.append("La fecha de check-out debe ser posterior a la fecha de check-in.")
+    
+    return errores
 
 
 @login_required
@@ -59,17 +99,34 @@ def detalle_parque(request, parque_id):
 def reservar_paso_1(request, parque_id):
     parque = get_object_or_404(Parque, pk=parque_id, activo=True)
 
-    if request.method == "GET" and request.GET.get("checkin"):
-        # Guardar seleccion en la sesionn para usarla en el paso 3
+    if request.method == "POST":
+        checkin_str = request.POST.get("checkin", "")
+        checkout_str = request.POST.get("checkout", "")
+        tipo = request.POST.get("tipo", "camping")
+        huespedes_str = int(request.POST.get("huespedes", 1))
+
+        try:   
+            checkin = date.fromisoformat(checkin_str)
+            checkout = date.fromisoformat(checkout_str)
+        except ValueError:
+            return render(request, "reservaciones/reservar_paso_1.html", {
+                "parque": parque,
+                "parque_id": parque_id,
+                "error": "Fechas inválidas. Por favor ingrese las fechas correctamente."
+            })
+        
+        # Guardamos datos en sesión para usarlos en el paso 2 y 3
         request.session["reserva"] = {
             "parque_id": parque_id,
-            "checkin": request.GET.get("checkin"),
-            "checkout": request.GET.get("checkout"),
-            "tipo": request.GET.get("tipo", "camping"),
-            "huespedes": int(request.GET.get("huespedes", 1)),
+            "checkin": checkin_str,
+            "checkout": checkout_str,
+            "tipo": tipo,
+            "huespedes": huespedes_str,
         }
-        return redirect("reservar_paso_2", parque_id=parque_id)
 
+        return redirect("reservar_paso_2", parque_id=parque_id)
+    
+    # GET para mostrar formulario con datos reales del parque
     return render(request, "reservaciones/reservar_paso_1.html", {
         "parque": parque,
         "parque_id": parque_id,
@@ -78,41 +135,50 @@ def reservar_paso_1(request, parque_id):
 
 @login_required
 def reservar_paso_2(request, parque_id):
+    reserva = request.session.get("reserva", {})
+
+    # Si no hay datos de reserva en la sesion, redirigimos al paso 1
+    if not reserva or reserva.get("parque_id") != parque_id: 
+        return redirect("reservar_paso_1", parque_id=parque_id)
+    
+    parque = get_object_or_404(Parque, pk=parque_id, activo=True)
+
+    if request.method == "POST":
+        # Guardamos comentarios adicionales y redirigimos al paso 3
+        reserva["comentarios"] = request.POST.get("comentarios", "") 
+        request.session.modified = True  # Indicamos que la sesión ha sido modificada y forzamos guardado de sesion
+        return redirect("reservar_paso_3", parque_id=parque_id)
+    
     return render(request, "reservaciones/reservar_paso_2.html", {
-        "parque_id": parque_id
+        "parque": parque,
+        "parque_id": parque_id,
+        "reserva": reserva,
     })
+
+
 
 
 @login_required
 def reservar_paso_3(request, parque_id):
-    parque = get_object_or_404(Parque, pk=parque_id, activo=True)
     reserva = request.session.get("reserva", {})
     
     # Si no hay datos de reserva en la sesion, redirigimos al paso 1
     if not reserva or reserva.get("parque_id") != parque_id:
         return redirect("reservar_paso_1", parque_id=parque_id)
     
+    parque = get_object_or_404(Parque, pk=parque_id, activo=True)
     checkin = date.fromisoformat(reserva["checkin"])
     checkout = date.fromisoformat(reserva["checkout"])
     tipo = reserva["tipo"]
     huespedes = reserva["huespedes"]
+    precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
+    dias = (checkout - checkin).days
+    total = precio_noche * dias
 
-
-    # POST: Valida cupo fecha por fecha, crea reservacion, descuenta disponibilidad, envia correo de confirmacion y redirige 
     if request.method == "POST":
-        # 1. Validamos disponibilidad y revisamos cada dia de la estadia
-        dias = (checkout - checkin).days
-        fechas = [checkin + timedelta(days=i) for i in range(dias)]
-
-        sin_cupo = []
-        for fecha in fechas:
-            disponibilidad = DisponibilidadParque.objects.filter(
-                parque = parque, fecha = fecha
-                ).first()
-            if disponibilidad and disponibilidad.capacidad_disponible < huespedes:
-                sin_cupo.append(fecha)
-
-        if sin_cupo: 
+        # 1. Validamos 
+        errores = validar_reservacion(parque, checkin, checkout, tipo, huespedes)
+        if errores:
             return render(request, "reservaciones/reservar_paso_3.html", {
                 "parque": parque,
                 "parque_id": parque_id,
@@ -120,20 +186,16 @@ def reservar_paso_3(request, parque_id):
                 "checkout": checkout,
                 "tipo": tipo,
                 "huespedes": huespedes,
-                "error": f"No hay cupo para {huespedes} huéspedes en las fechas: {', '.join(str(d) for d in sin_cupo)}"
+                "total": total,
+                "error": " ".join(errores),
             })
         
-        # 2. Calculamos el precio
-
-        precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
-        total = precio_noche * dias
-
-        # 3. Creamos la reservacion
-        
+        # 2. Creamos reservacion en BD
         folio = f"LUZ-{date.today().year}-{uuid.uuid4().hex[:5].upper()}"
         reservacion = Reservacion.objects.create(
             usuario = request.user,
             parque = parque,
+            folio = folio,
             checkin = checkin,
             checkout = checkout,
             huespedes = huespedes,
@@ -142,7 +204,7 @@ def reservar_paso_3(request, parque_id):
             estado = "confirmada",
             comentarios = request.POST.get("comentarios", ""),
         )
-
+        '''
         # 4. Reducimos la disponibilidad de cada dia
 
         for fecha in fechas:
@@ -161,7 +223,9 @@ def reservar_paso_3(request, parque_id):
                 disponibilidad.estado = "libre"
             disponibilidad.save()
 
-        # 5. Enviamos correo de confirmacion
+
+
+            # 5. Enviamos correo de confirmacion
 
         asunto = f"Reservación confirmada - {folio}"
         cuerpo = (
@@ -178,13 +242,13 @@ def reservar_paso_3(request, parque_id):
 
         send_mail(asunto, cuerpo, None, [request.user.email], fail_silently=True)
 
-        # 6. Limpiamos datos de reserva en sesion y redirigimos a confirmacion
+        '''
+
+        # 3. Limpiamos datos de reserva en sesion y redirigimos a confirmacion
         del request.session ["reserva"]
         return redirect("reservacion_confirmada_folio", reservacion_id=reservacion.id)
-    
-    precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
-    total = precio_noche * (checkout - checkin).days
 
+    # GET para mostrar resumen de reserva y confirmacion final
     return render(request, "reservaciones/reservar_paso_3.html", {
         "parque": parque,
         "parque_id": parque_id,
@@ -203,10 +267,17 @@ def reservacion_confirmada(request, reservacion_id):
         Reservacion,
         id=reservacion_id,
         usuario=request.user,
-        )
+    )
     return render(request, "reservaciones/reservacion_confirmada.html", {
         "reservacion": reservacion,
     })
+
+
+@login_required
+def reservacion_confirmada_legacy(request):
+    """Fallback por si algún template aún apunta a la URL sin ID."""
+    return redirect("mis_reservaciones")
+
 
 @login_required
 def mis_reservaciones(request):
@@ -299,6 +370,10 @@ def mi_perfil(request):
     return render(request, "reservaciones/mi_perfil.html", {
         "total_reservaciones": total_reservaciones,
     })
+
+# -------------------------------------------------------------------------------------------------------
+# Vistas de administracion (solo para usuarios con tipoAdministrador=True)
+
 
 def solo_admin(user):
     return user.is_authenticated and getattr(user, "tipoAdministrador", False)
