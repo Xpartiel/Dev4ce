@@ -1,6 +1,6 @@
 [
   {
-    "model": "mi_app.HistorialTipoUsuario",
+    "model": "usuarios.HistorialTipoUsuario",
     "pk": 1,
     "fields": {
       "usuario": 1,
@@ -11,7 +11,7 @@
     }
   },
   {
-    "model": "mi_app.HistorialTipoUsuario",
+    "model": "usuarios.HistorialTipoUsuario",
     "pk": 2,
     "fields": {
       "usuario": 2,
@@ -22,7 +22,7 @@
     }
   },
   {
-    "model": "mi_app.HistorialTipoUsuario",
+    "model": "usuarios.HistorialTipoUsuario",
     "pk": 3,
     "fields": {
       "usuario": 2,
@@ -33,7 +33,7 @@
     }
   },
   {
-    "model": "mi_app.HistorialTipoUsuario",
+    "model": "usuarios.HistorialTipoUsuario",
     "pk": 4,
     "fields": {
       "usuario": 3,
@@ -44,7 +44,7 @@
     }
   },
   {
-    "model": "mi_app.HistorialTipoUsuario",
+    "model": "usuarios.HistorialTipoUsuario",
     "pk": 5,
     "fields": {
       "usuario": 4,
