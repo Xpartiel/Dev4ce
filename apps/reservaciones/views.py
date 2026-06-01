@@ -324,6 +324,7 @@ def admin_dashboard(request):
 
     return render(request, "reservaciones/admin_dashboard.html", {
 
+        "active_admin": "panel",
         "total_reservaciones": total_reservaciones,
         "ingresos": ingresos,
         "total_parques": total_parques,

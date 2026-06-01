@@ -6,40 +6,7 @@
 
 <section class="admin-layout">
 
-    <aside class="admin-sidebar">
-
-        <div class="admin-logo">
-            {% include "core/_logo.html" %}
-        </div>
-
-        <p class="admin-label">// Administración</p>
-
-        <nav class="admin-menu">
-            <a href="{% url 'admin_dashboard' %}">Panel</a>
-
-            <a href="{% url 'admin_parques' %}" class="active">
-                Parques
-            </a>
-
-            <a href="{% url 'admin_reservaciones' %}">
-                Reservaciones
-            </a>
-
-            <a href="{% url 'admin_calendario' %}">
-                Calendario
-            </a>
-
-            <a href="{% url 'admin_reportes' %}">
-                Reportes
-            </a>
-        </nav>
-
-        <div class="admin-user-box">
-            <strong>{{ user.nombre_completo }}</strong>
-            <small>Admin</small>
-        </div>
-
-    </aside>
+    {% include "reservaciones/_admin_sidebar.html" %}
 
     <main class="admin-content">
 

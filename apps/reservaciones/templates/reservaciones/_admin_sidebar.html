@@ -1,0 +1,20 @@
+<aside class="admin-sidebar">
+    <div class="admin-logo">
+        {% include "core/_logo.html" %}
+    </div>
+
+    <p class="admin-label">// Administración</p>
+
+    <nav class="admin-menu">
+        <a href="{% url 'admin_dashboard' %}" class="{% if active_admin == 'panel' %}active{% endif %}">Panel</a>
+        <a href="{% url 'admin_parques' %}" class="{% if active_admin == 'parques' %}active{% endif %}">Parques</a>
+        <a href="{% url 'admin_reservaciones' %}" class="{% if active_admin == 'reservaciones' %}active{% endif %}">Reservaciones</a>
+        <a href="{% url 'admin_calendario' %}" class="{% if active_admin == 'calendario' %}active{% endif %}">Calendario</a>
+        <a href="{% url 'core:en_construccion' %}" class="{% if active_admin == 'reportes' %}active{% endif %}">Reportes</a>
+    </nav>
+
+    <div class="admin-user-box">
+        <strong>{{ user.nombre_completo }}</strong>
+        <small>Admin</small>
+    </div>
+</aside>

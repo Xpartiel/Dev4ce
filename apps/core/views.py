@@ -1,3 +1,4 @@
 from django.shortcuts import render
 
-# Create your views here.
+def en_construccion(request):
+    return render(request, "core/en_construccion.html")
