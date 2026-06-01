@@ -10,6 +10,7 @@ dependencies:
       - django
       - django-environ
       - psycopg2-binary
+      - python-dotenv
       - folium
       - pillow
       - dotenv
