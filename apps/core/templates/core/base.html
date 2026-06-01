@@ -98,7 +98,7 @@
             {% if user.is_authenticated %}
 
                 <span class="nav-user">
-                    Hola, {{ user.nombre_completo }}
+                    Hola, {{ user.nick_name }}
                 </span>
 
                 <a href="{% url 'logout' %}" class="btn btn-secondary">
