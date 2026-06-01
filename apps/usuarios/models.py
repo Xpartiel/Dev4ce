@@ -1,4 +1,4 @@
-from django.db import models
+from django.db import models, transaction
 from django.contrib.auth.models import AbstractUser
 
 
@@ -36,22 +36,17 @@ class Usuario( AbstractUser ):
     # Se asigna por defecto el email antes del domino
     # EJ
     # ejemplo@correo.com -> ejemplo
-    nick_name = models.CharField( max_length=128, blank=True, null=True)
-    
-    # TODO considerar si incluir foto de perfil
-    foto_perfil = models.ImageField( upload_to='perfiles/', default='perfiles/default.png', blank=True )
-    
-    # Esto se considera dato privado
-    # TODO removerlo de este modelo y reservarlo a *Persona*
-    nombre_completo = models.CharField(max_length=255, blank=True, null=True)
-
-    # Esto se considera dato privado
-    # TODO removerlo de este modelo y reservarlo a *Persona*
-    telefono = models.CharField(
-        max_length=20,
+    nick_name = models.CharField(
+        max_length=255,
         blank=True,
-        null=True
-    )
+        null=True)
+    
+    # Imagen de perfil electa por el usuario para expresarse.
+    # Se carga una imagen por defecto al momento de crear el perfil
+    foto_perfil = models.ImageField(
+        upload_to='perfiles/',
+        default='perfiles/default.png',
+        blank=True )
     
     tipo_usuario = models.ForeignKey(
         TipoUsuario,
@@ -99,10 +94,6 @@ class HistorialTipoUsuario( models.Model ):
     motivo_cambio = models.TextField( null=True , blank=True )
 
 
-
-
-
-
 class Persona( models.Model ):
     '''
     Modelo dedicado a manejar los datos privados de un usuario
@@ -112,22 +103,27 @@ class Persona( models.Model ):
     usuario = models.OneToOneField(
         Usuario,
         primary_key=True,
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        related_name="persona"
     )
     
     nombre = models.CharField( max_length=255 )
     apellido_paterno = models.CharField( max_length=255 )
     apellido_materno = models.CharField( max_length=255 )
-    email = models.CharField(
-        max_length = 255,
-        unique=True,
-        blank=False,
-        null=False
-    )
     
     @property
-    def nombre_completo( self ) -> str:
-        return str(
-            self.nombre) if self.nombre else '' + str(
-            self.self.apellido_paterno ) if self.self.apellido_paterno else '' + str(
-            self.self.apellido_materno ) if self.self.apellido_materno else ''
+    def nombre_completo(self) -> str:
+        return " ".join(
+            parte for parte in (
+                self.nombre,
+                self.apellido_paterno,
+                self.apellido_materno
+            )
+            if parte
+        ).strip()
+    
+    telefono = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True
+    )

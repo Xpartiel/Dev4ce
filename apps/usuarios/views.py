@@ -1,6 +1,8 @@
+from django.db import transaction
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.contrib.auth.decorators import user_passes_test
+from usuarios.models import Usuario, Persona
 
 User = get_user_model()
 
@@ -32,31 +34,68 @@ def login_view(request):
 
     return render(request, "usuarios/login.html")
 
-
 def registro_view(request):
 
-    if request.method == "POST":
+    if request.method != "POST":
+        return render(request, "usuarios/registro.html")
 
-        nombre = request.POST.get("nombre")
-        correo = request.POST.get("correo")
-        password = request.POST.get("password")
+    nombre = request.POST.get("nombre").strip()
+    apellido_p = request.POST.get("apellidoP","").strip()
+    apellido_m = request.POST.get("apellidoM","").strip()
+    correo = request.POST.get("correo").strip()
+    password = request.POST.get("password")
+    
+    #Primeras validaciones
+        
+    if not nombre:
+        return render(request, "usuarios/registro.html", {
+            "error": "Debe indicar un nombre."
+        })
 
-        if User.objects.filter(username=correo).exists():
-            return render(request, "usuarios/registro.html", {
-                "error": "Ya existe una cuenta registrada con ese correo."
-            })
+    if not (apellido_p or apellido_m):
+        return render(request, "usuarios/registro.html", {
+            "error": "Debe indicarse al menos un apellido."
+        })
+        
+    if not correo:
+        return render(request, "usuarios/registro.html", {
+            "error": "Debe indicarse un correo electrónico."
+        })
+    
+    if not password:
+        return render(request, "usuarios/registro.html", {
+            "error": "Debe indicarse una contraseña."
+        })
 
-        User.objects.create_user(
-            username=correo,
-            email=correo,
-            password=password,
-            nombre_completo=nombre,
-            tipoAdministrador=False
-        )
+    # Evitar segundo registro con mismo correo
+        
+    if User.objects.filter(username=correo).exists():
+        return render(request, "usuarios/registro.html", {
+            "error": "Este correo ya tiene cuenta asociada."
+        })
+        
+    # Crear atomicamente los registros de Usuario y Persona
+    try:
+        with transaction.atomic():
+            usuario = Usuario.objects.create_user(
+                username=correo,
+                password=password,
+                nick_name=correo.split("@")[0]
+            )
 
-        return redirect("login")
+            Persona.objects.create(
+                usuario=usuario,
+                nombre=nombre,
+                apellido_paterno=apellido_p,
+                apellido_materno=apellido_m
+            )
+        
+    except Exception as e:
+        return render(request, "usuarios/registro.html", {
+        "error": f"No pudo completarse el registro: {e}"
+    })
 
-    return render(request, "usuarios/registro.html")
+    return redirect("login")
 
 
 def recuperar_password_view(request):
