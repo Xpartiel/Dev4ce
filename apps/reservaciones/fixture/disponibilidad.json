@@ -1,0 +1,4812 @@
+[
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 1,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 2,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 3,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 4,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 5,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 6,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 7,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 8,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 9,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 10,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 11,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 12,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 13,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 14,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 15,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 16,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 17,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 18,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 19,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 20,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 21,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 22,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 23,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 24,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 25,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 26,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 27,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 28,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 29,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 30,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 31,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 32,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 33,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 34,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 35,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 36,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 37,
+    "fields": {
+      "parque": 1,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 38,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 39,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 40,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 41,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 42,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 43,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 44,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 45,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 46,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 47,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 48,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 49,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 50,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 51,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 52,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 53,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 54,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 55,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 56,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 57,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 58,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 59,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 60,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 61,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 62,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 63,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 64,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 65,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 66,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 67,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 68,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 69,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 70,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 71,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 72,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 73,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 74,
+    "fields": {
+      "parque": 2,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 75,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 76,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 77,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 78,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 79,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 80,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 81,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 82,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 83,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 84,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 85,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 86,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 87,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 88,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 89,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 90,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 91,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 92,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 93,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 94,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 95,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 96,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 97,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 98,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 99,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 100,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 101,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 102,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 103,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 104,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 105,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 106,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 107,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 108,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 109,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 110,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 111,
+    "fields": {
+      "parque": 3,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 112,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 113,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 114,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 115,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 116,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 117,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 118,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 119,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 120,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 121,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 122,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 123,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 124,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 125,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 126,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 127,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 128,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 129,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 130,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 131,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 132,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 133,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 134,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 135,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 136,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 137,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 138,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 139,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 140,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 141,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 142,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 143,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 144,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 145,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 146,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 147,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 148,
+    "fields": {
+      "parque": 4,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 149,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 150,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 151,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 152,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 153,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 154,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 155,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 156,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 157,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 158,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 159,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 160,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 161,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 162,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 163,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 164,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 165,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 166,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 167,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 168,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 169,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 170,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 171,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 172,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 173,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 174,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 175,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 176,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 177,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 178,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 179,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 180,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 181,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 182,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 183,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 184,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 185,
+    "fields": {
+      "parque": 5,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 100,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 186,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 187,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 188,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 189,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 190,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 191,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 192,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 193,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 194,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 195,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 196,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 197,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 198,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 199,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 200,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 201,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 202,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 203,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 204,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 205,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 206,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 207,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 208,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 209,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 210,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 211,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 212,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 213,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 214,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 215,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 216,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 217,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 218,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 219,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 220,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 221,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 222,
+    "fields": {
+      "parque": 6,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 223,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 224,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 225,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 226,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 227,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 228,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 229,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 230,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 231,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 232,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 233,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 234,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 235,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 236,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 237,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 238,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 239,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 240,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 241,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 242,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 243,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 244,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 245,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 246,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 247,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 248,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 249,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 250,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 251,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 252,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 253,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 254,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 255,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 256,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 257,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 258,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 259,
+    "fields": {
+      "parque": 7,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 260,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 261,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 262,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 263,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 264,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 265,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 266,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 267,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 268,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 269,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 270,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 271,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 272,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 273,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 274,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 275,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 276,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 277,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 278,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 279,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 280,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 281,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 282,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 283,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 284,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 285,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 286,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 287,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 288,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 289,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 290,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 291,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 292,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 293,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 294,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 295,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 296,
+    "fields": {
+      "parque": 8,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 297,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 298,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 299,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 300,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 301,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 302,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 303,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 304,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 305,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 306,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 307,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 308,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 309,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 310,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 311,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 312,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 313,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 314,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 315,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 316,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 317,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 318,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 319,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 320,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 321,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 322,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 323,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 324,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 325,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 326,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 327,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 328,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 329,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 330,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 331,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 332,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 333,
+    "fields": {
+      "parque": 9,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 70,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 334,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 335,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 336,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 337,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 338,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 339,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 340,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 341,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 342,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 343,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 344,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 345,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 346,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 347,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 348,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 349,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 350,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 351,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 352,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 353,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 354,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 355,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 356,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 357,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 358,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 359,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 360,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 361,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 362,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 363,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 364,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 365,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 366,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 367,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 368,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 369,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 370,
+    "fields": {
+      "parque": 10,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 80,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 371,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 372,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 373,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 374,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 375,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 376,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 377,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 378,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 379,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 380,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 381,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 382,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 383,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 384,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 385,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 386,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 387,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 388,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 389,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 390,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 391,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 392,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 393,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 394,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 395,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 396,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 397,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 398,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 399,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 400,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 401,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 402,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 403,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 404,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 405,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 406,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 407,
+    "fields": {
+      "parque": 11,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 60,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 408,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 409,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 410,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 411,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 412,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 413,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 414,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 415,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 416,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 417,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 418,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 419,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 420,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 421,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 422,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 423,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 424,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 425,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 426,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 427,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 428,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 429,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 430,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 431,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 432,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 433,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 434,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 435,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 436,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 437,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 438,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 439,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 440,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 441,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 442,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 443,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 444,
+    "fields": {
+      "parque": 12,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 90,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 445,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-06-26",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 446,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-06-27",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 447,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-06-28",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 448,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-06-29",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 449,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-06-30",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 450,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-01",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 451,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-02",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 452,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-03",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 453,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-04",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 454,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-05",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 455,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-06",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 456,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-07",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 457,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-08",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 458,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-09",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 459,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-10",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 460,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-11",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 461,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-12",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 462,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-13",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 463,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-14",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 464,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-15",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 465,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-16",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 466,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-17",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 467,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-18",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 468,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-19",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 469,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-20",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 470,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-21",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 471,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-22",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 472,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-23",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 473,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-24",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 474,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-25",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 475,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-26",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 476,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-27",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 477,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-28",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 478,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-29",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 479,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-30",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 480,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-07-31",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  },
+  {
+    "model": "reservaciones.disponibilidadparque",
+    "pk": 481,
+    "fields": {
+      "parque": 13,
+      "fecha": "2026-08-01",
+      "capacidad_disponible": 50,
+      "estado": "libre"
+    }
+  }
+]
