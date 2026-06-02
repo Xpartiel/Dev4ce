@@ -13,8 +13,8 @@
         <div class="admin-header">
 
             <div>
-                <p class="section-label">// Calendario</p>
-                <h1>Disponibilidad por parque</h1>
+                <p class="section-label">// Disponibilidad</p>
+                <h1>Disponibilidad por Parque</h1>
             </div>
 
         </div>
@@ -22,26 +22,11 @@
         <article class="admin-panel">
 
             <div class="calendar-tabs">
-
-                <button class="calendar-tab active">
-                    Santuario El Rosario
-                </button>
-
-                <button class="calendar-tab">
-                    Sierra Chincua
-                </button>
-
-                <button class="calendar-tab">
-                    Piedra Herrada
-                </button>
-
-                <button class="calendar-tab">
-                    Cerro Pelón
-                </button>
-
-                <button class="calendar-tab">
-                    Nanacamilpa
-                </button>
+                {% for parque in nombre_parques %}
+                    <button class="calendar-tab">
+                        {{ parque.nombre }}
+                    </button>
+                {% endfor %}
 
             </div>
 
@@ -71,7 +56,7 @@
 
                     <span>
                         <i class="dot maintenance"></i>
-                        mantto
+                        mantenimiento
                     </span>
 
                 </div>
