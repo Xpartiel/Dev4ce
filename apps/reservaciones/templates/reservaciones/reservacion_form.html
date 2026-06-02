@@ -4,22 +4,71 @@
 
 {% block content %}
 
-<h1>Formulario de Reservación</h1>
+<section class="admin-layout">
 
-<form method="post">
+    {% include "reservaciones/_admin_sidebar.html" %}
 
-    {% csrf_token %}
+    <main class="admin-content">
 
-    {{ form.as_p }}
+        <div class="admin-header">
 
-    <button type="submit">
-        Guardar
-    </button>
+            <div>
+                <p class="section-label">// Reservaciones</p>
+                <h1>Formulario de reservación</h1>
+            </div>
 
-</form>
+        </div>
 
-<a href="{% url 'admin_reservaciones' %}">
-    Volver
-</a>
+        <article class="admin-panel">
+
+            <form method="post" class="admin-form">
+
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                    <small class="form-help">
+                        {{ field.help_text }}
+                    </small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                    <p class="form-error">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+
+                </div>
+
+                {% endfor %}
+
+                <div class="admin-actions">
+
+                    <a href="{% url 'admin_reservaciones' %}" class="btn btn-secondary">
+                        Volver
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+                        Guardar reservación
+                    </button>
+
+                </div>
+
+            </form>
+
+        </article>
+
+    </main>
+
+</section>
 
 {% endblock %}

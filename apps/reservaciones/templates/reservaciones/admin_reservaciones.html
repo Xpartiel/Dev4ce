@@ -19,14 +19,24 @@
 
             <div class="admin-actions">
 
+                {% comment %}
+                CAMBIO JOHN:
+                Se retiró el botón "+ Nueva reservación" del panel global de reservaciones.
+
                 <a href="{% url 'crear_reservacion' %}"
                    class="btn btn-primary">
                     + Nueva reservación
                 </a>
+                {% endcomment %}
+
+                {% comment %}
+                CAMBIO JOHN:
+                Se retiró el botón "Exportar CSV" del panel global de reservaciones.
 
                 <button class="btn btn-secondary">
                     Exportar CSV
                 </button>
+                {% endcomment %}
 
             </div>
 
@@ -36,19 +46,27 @@
 
             <div class="admin-toolbar">
 
-                <input
-                    type="text"
-                    placeholder="Buscar por folio, parque o cliente..."
-                    class="admin-search"
-                >
+                <input type="text"
+                       placeholder="Buscar por folio, parque o cliente..."
+                       class="admin-search">
+
+                {% comment %}
+                CAMBIO JOHN:
+                Se retiró el botón "Filtros" del panel global de reservaciones.
 
                 <button class="btn btn-secondary">
                     Filtros
                 </button>
+                {% endcomment %}
+
+                {% comment %}
+                CAMBIO JOHN:
+                Se retiró el botón "Rango de fechas" del panel global de reservaciones.
 
                 <button class="btn btn-secondary">
                     Rango de fechas
                 </button>
+                {% endcomment %}
 
             </div>
 
@@ -57,6 +75,14 @@
                 <thead>
                     <tr>
                         <th>Folio</th>
+
+                        {% comment %}
+                        CAMBIO JOHN:
+                        Se agregaron columnas para mostrar el nombre de usuario y correo.
+                        {% endcomment %}
+                        <th>Usuario</th>
+                        <th>Correo</th>
+
                         <th>Parque</th>
                         <th>Fechas</th>
                         <th>Huéspedes</th>
@@ -74,6 +100,19 @@
                     <tr>
 
                         <td>{{ reservacion.folio }}</td>
+
+                        {% comment %}
+                        CAMBIO JOHN:
+                        Se muestra el nombre del usuario y su correo en la lista global.
+                        Nota: esto asume que reservacion.usuario existe y está relacionado con el usuario.
+                        {% endcomment %}
+                        <td>
+                            {{ reservacion.usuario.get_full_name|default:reservacion.usuario.username }}
+                        </td>
+
+                        <td>
+                            {{ reservacion.usuario.email }}
+                        </td>
 
                         <td>{{ reservacion.parque.nombre }}</td>
 
@@ -103,17 +142,13 @@
 
                         <td class="admin-actions-cell">
 
-                            <a
-                                href="{% url 'editar_reservacion' reservacion.id %}"
-                                class="btn btn-secondary"
-                            >
+                            <a href="{% url 'editar_reservacion' reservacion.id %}"
+                               class="btn btn-secondary">
                                 Editar
                             </a>
 
-                            <a
-                                href="{% url 'eliminar_reservacion' reservacion.id %}"
-                                class="btn btn-danger"
-                            >
+                            <a href="{% url 'eliminar_reservacion' reservacion.id %}"
+                               class="btn btn-danger">
                                 Eliminar
                             </a>
 
@@ -124,7 +159,7 @@
                     {% empty %}
 
                     <tr>
-                        <td colspan="8">
+                        <td colspan="10">
                             No hay reservaciones registradas.
                         </td>
                     </tr>
