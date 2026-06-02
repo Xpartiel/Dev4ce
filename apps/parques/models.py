@@ -61,6 +61,25 @@ class Parque( models.Model ):
         return (self.capacidad_max_cabana if self.capacidad_max_cabana else 0
             ) + (self.capacidad_max_camping if self.capacidad_max_camping else 0)
 
+    @property
+    def disponibilidad_global(self):
+        """Estado agregado del parque para las fechas restantes del festival."""
+        from datetime import date as _date
+        hoy = _date.today()
+        fin  = _date(2026, 8, 1)
+        estados = list(
+            self.disponibilidades
+            .filter(fecha__gte=hoy, fecha__lte=fin)
+            .values_list("estado", flat=True)
+        )
+        if not estados:
+            return "libre"
+        if "agotado" in estados:
+            return "agotado"
+        if "pocos" in estados:
+            return "pocos"
+        return "libre"
+
 
 class Servicio( models.Model ):
 
