@@ -12,18 +12,12 @@
 
         <div class="admin-header">
             <div>
-                <p class="section-label">// Panel · 30 Abr 2026</p>
-                <h1>Buenas noches, {{ user.nombre_completo }}</h1>
-                <p>Faltan 45 días para la apertura del festival.</p>
+                <p class="section-label">// Panel · {% now "d M Y" %}</p>
+                <h1>{{ saludo }}, {{ nombre_admin }}</h1>
+                <p>{{ mensaje_festival }}</p>
             </div>
 
             <div class="admin-actions">
-                <button class="btn btn-secondary">Exportar</button>
-
-                <a href="{% url 'admin_parques' %}" class="btn btn-primary">
-                    + Nuevo parque
-                </a>
-
                 <a href="{% url 'registro_admin' %}" class="btn btn-secondary">
                     + Nuevo admin
                 </a>
@@ -80,15 +74,30 @@
 
                 <h2>Reservaciones por parque</h2>
 
-                <div class="fake-chart">
-                    <span style="height: 40%"></span>
-                    <span style="height: 62%"></span>
-                    <span style="height: 75%"></span>
-                    <span style="height: 48%"></span>
-                    <span style="height: 70%"></span>
-                    <span style="height: 58%"></span>
-                    <span style="height: 36%"></span>
+                {% if reservaciones_por_parque %}
+                <div class="admin-chart">
+
+                    <div class="admin-chart-track">
+                        {% for item in reservaciones_por_parque %}
+                        <div class="chart-col">
+                            <span class="chart-value">{{ item.num_reservaciones }}</span>
+                            <div class="chart-fill"
+                                 style="height: {% widthratio item.num_reservaciones max_reservaciones 100 %}%">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="admin-chart-labels">
+                        {% for item in reservaciones_por_parque %}
+                        <span title="{{ item.nombre }}">{{ item.nombre }}</span>
+                        {% endfor %}
+                    </div>
+
                 </div>
+                {% else %}
+                <p class="chart-empty">Aún no hay reservaciones registradas.</p>
+                {% endif %}
 
             </article>
 
@@ -96,20 +105,20 @@
 
                 <h2>Ocupación global</h2>
 
-                <div class="occupancy-circle">
-                    <strong>{{ total_reservaciones }}</strong>
-                    <span>reservaciones</span>
+                <div class="occupancy-circle" style="--pct: {{ porcentaje_ocupacion }}">
+                    <strong>{{ porcentaje_ocupacion }}%</strong>
+                    <span>ocupación</span>
                 </div>
 
                 <div class="legend">
                     <p>
                         <span class="gold-dot"></span>
-                        Parques: {{ total_parques }}
+                        Espacios reservados: {{ espacios_reservados }}
                     </p>
 
                     <p>
                         <span class="blue-dot"></span>
-                        Cancelaciones: {{ cancelaciones }}
+                        Capacidad total: {{ capacidad_total }}
                     </p>
                 </div>
 

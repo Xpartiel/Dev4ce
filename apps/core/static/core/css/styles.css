@@ -2280,30 +2280,121 @@ textarea {
     margin-bottom: 20px;
 }
 
-.fake-chart {
-    height: 240px;
+/* ===== PANEL ADMIN — gráfica y ocupación (datos reales) ===== */
+/*
+ * En styles.css:
+ *   1) Reemplaza el bloque .fake-chart (y .fake-chart span) por la sección GRÁFICA.
+ *   2) Reemplaza el bloque .occupancy-circle existente por la sección OCUPACIÓN.
+ */
+
+/* ---------- GRÁFICA: Reservaciones por parque ---------- */
+/* Eje X = parques (etiquetas abajo). Eje Y = nº de reservaciones (altura). */
+
+.admin-chart {
     display: flex;
-    align-items: end;
-    gap: 18px;
-    padding-top: 30px;
+    flex-direction: column;
 }
 
-.fake-chart span {
+.admin-chart-track {
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+    height: 220px;
+}
+
+.chart-col {
     flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.chart-value {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-dim);
+}
+
+.chart-fill {
+    width: 100%;
     border-radius: 8px 8px 0 0;
     background: linear-gradient(180deg, var(--color-gold), var(--color-amber));
+    min-height: 4px;
+    transition: height 0.3s ease;
 }
+
+.admin-chart-labels {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--color-line);
+}
+
+.admin-chart-labels span {
+    flex: 1;
+    min-width: 0;
+    font-size: 11px;
+    color: var(--color-text-mute);
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.chart-empty {
+    color: var(--color-text-mute);
+    padding: 40px 0;
+    text-align: center;
+}
+
+/* ---------- OCUPACIÓN GLOBAL: anillo proporcional ---------- */
+/*
+ * El anillo se llena según --pct (0–100), que se inyecta inline desde el
+ * template: style="--pct: {{ porcentaje_ocupacion }}". Ya no es decorativo.
+ */
 
 .occupancy-circle {
     width: 160px;
     height: 160px;
     margin: 20px auto;
     border-radius: 50%;
-    border: 18px solid var(--color-gold);
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background: conic-gradient(
+        var(--color-gold) calc(var(--pct, 0) * 1%),
+        var(--color-surface-3) 0
+    );
+}
+
+/* Círculo interior que deja ver solo el "anillo" exterior */
+.occupancy-circle::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+}
+
+.occupancy-circle strong,
+.occupancy-circle span {
+    position: relative;
+    z-index: 1;
+}
+
+.occupancy-circle strong {
+    font-size: 34px;
+}
+
+.occupancy-circle span {
+    color: var(--color-text-mute);
 }
 
 .occupancy-circle strong {

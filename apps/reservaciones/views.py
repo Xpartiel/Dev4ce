@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.mail import send_mail
 from django.db import transaction
+from django.db.models import Count, Sum
 from datetime import date, timedelta
 import uuid
 import folium
 from django.urls import reverse
 from apps.parques.forms import ParqueForm
+from datetime import date, datetime, timedelta
 from .forms import ReservacionForm
 from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
@@ -378,6 +380,7 @@ def mi_perfil(request):
 def solo_admin(user):
     return user.is_authenticated and getattr(user, "tipoAdministrador", False)
 
+
 @user_passes_test(solo_admin, login_url="login")
 def admin_dashboard(request):
     total_reservaciones = Reservacion.objects.count()
@@ -397,6 +400,65 @@ def admin_dashboard(request):
         "parque"
     )[:5]
 
+    # Saludo según la hora del día
+    hora = datetime.now().hour
+    if hora < 12:
+        saludo = "Buenos días"
+    elif hora < 19:
+        saludo = "Buenas tardes"
+    else:
+        saludo = "Buenas noches"
+
+    # Nombre del administrador (nombre_completo vive en Persona)
+    try:
+        nombre_admin = request.user.persona.nombre_completo
+    except Exception:
+        nombre_admin = ""
+    if not nombre_admin:
+        nombre_admin = request.user.nick_name or request.user.username
+
+    # Cuenta regresiva para la apertura del festival
+    hoy = date.today()
+    if hoy < FESTIVAL_INICIO:
+        dias = (FESTIVAL_INICIO - hoy).days
+        if dias == 1:
+            mensaje_festival = "Falta 1 día para la apertura del festival."
+        else:
+            mensaje_festival = f"Faltan {dias} días para la apertura del festival."
+    elif hoy <= FESTIVAL_FIN:
+        mensaje_festival = "El festival está en curso."
+    else:
+        mensaje_festival = "El festival ha finalizado."
+
+    # Gráfica "Reservaciones por parque" (datos reales) 
+    reservaciones_por_parque = list(
+        Parque.objects
+        .annotate(num_reservaciones=Count("reservaciones"))
+        .filter(num_reservaciones__gt=0)
+        .order_by("-num_reservaciones")
+        .values("nombre", "num_reservaciones")[:8]
+    )
+    max_reservaciones = max(
+        (p["num_reservaciones"] for p in reservaciones_por_parque),
+        default=1,
+    )
+
+    # Ocupación global (espacios reservados / capacidad total)
+    capacidades = Parque.objects.filter(activo=True).aggregate(
+        cab=Sum("capacidad_max_cabana"),
+        camp=Sum("capacidad_max_camping"),
+    )
+    capacidad_total = (capacidades["cab"] or 0) + (capacidades["camp"] or 0)
+
+    espacios_reservados = Reservacion.objects.filter(
+        estado__in=ESTADOS_ACTIVOS
+    ).aggregate(t=Sum("huespedes"))["t"] or 0
+
+    if capacidad_total:
+        porcentaje_ocupacion = round(espacios_reservados / capacidad_total * 100)
+    else:
+        porcentaje_ocupacion = 0
+
     return render(request, "reservaciones/admin_dashboard.html", {
 
         "active_admin": "panel",
@@ -405,6 +467,20 @@ def admin_dashboard(request):
         "total_parques": total_parques,
         "cancelaciones": cancelaciones,
         "reservaciones_recientes": reservaciones_recientes,
+
+        # Header dinámico
+        "saludo": saludo,
+        "nombre_admin": nombre_admin,
+        "mensaje_festival": mensaje_festival,
+
+        # Gráfica
+        "reservaciones_por_parque": reservaciones_por_parque,
+        "max_reservaciones": max_reservaciones,
+
+        # Ocupación
+        "porcentaje_ocupacion": porcentaje_ocupacion,
+        "espacios_reservados": espacios_reservados,
+        "capacidad_total": capacidad_total,
 
     })
 
