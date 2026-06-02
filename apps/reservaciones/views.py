@@ -25,34 +25,46 @@ FESTIVAL_FIN    = date(2026, 8, 2)   # ajustar a la finalizacion del festival
 
 def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
     """
-    Devuelve una lista de errores (strings). Lista vacía = todo valido.
+    Devuelve una diccionario de errores (strings). Lista vacía = todo valido.
       1. checkin debe ser dentro de la temporada.
       2. checkin no puede caer en martes.
       3. Si tipo_hospedaje es 'cabana', el parque debe tener cabañas.
       4. huespedes no puede superar la capacidad máxima del tipo.
       5. checkout debe ser posterior a checkin.
     """
-    errores = []
+    errores = {}
 
     # 1. Check-in dentro de la temporada
     if checkin < FESTIVAL_INICIO or checkin > FESTIVAL_FIN: 
-        errores.append(
+        errores['checkin'] = (
+            f"Solo reservaciones entre "
+            f"{FESTIVAL_INICIO.strftime('%d/%m/%Y')} y "
+            f"{FESTIVAL_FIN.strftime('%d/%m/%Y')}."
+        )
+    elif checkout < FESTIVAL_INICIO or checkout > FESTIVAL_FIN:
+        errores['checkout'] = (
             f"Solo se permiten reservaciones entre "
             f"{FESTIVAL_INICIO.strftime('%d/%m/%Y')} y "
             f"{FESTIVAL_FIN.strftime('%d/%m/%Y')}."
         )
-    # 2. Check-in no puede caer en martes
-    if checkin.weekday() == 1:
-        errores.append("Las reservaciones no pueden realizarse los martes (día de mantenimiento).")
+    # 2. Check-in no puede caer en martes (cambiar a 1)
+    elif checkin.weekday() == 0:
+        errores['checkin'] = "Las reservaciones no pueden realizarse los dias martes. Nos encontramos en mantenimiento"
     
     # 3. Verificar el tipo hospedaje de los parques
     if tipo == "cabana" and not parque.tiene_cabanas:
-        errores.append(f"{parque.nombre} no tiene cabañas disponibles.")
+        errores['tipo'] = f"{parque.nombre} no tiene cabañas disponibles."
+
+    # 3.1 Verificar que haya elegido alguna opcion de hospedaje
+    elif not tipo:
+        errores['tipo'] = "Debe seleccionar un tipo de hospedaje."
+    elif tipo not in ("cabana", "camping"):
+        errores['tipo'] = "Debe seleccionar un tipo de hospedaje válido."    
 
     # 4. Verificar capacidad maxima del tipo
     cap_max = parque.capacidad_max_cabana if tipo == "cabana" else parque.capacidad_max_camping
     if cap_max and huespedes > cap_max:
-        errores.append(
+        errores['huespedes'] = (
             f"El máximo de huéspedes para "
             f"{'cabaña' if tipo == 'cabana' else 'camping'} "
             f"es {cap_max}."
@@ -60,7 +72,7 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
 
     # 5. Check-out posterior a check-in 
     if checkout <= checkin:
-        errores.append("La fecha de check-out debe ser posterior a la fecha de check-in.")
+        errores['checkout'] = "La fecha de check-out debe ser posterior a la fecha de check-in."
     
     return errores
 
@@ -105,20 +117,45 @@ def reservar_paso_1(request, parque_id):
     if request.method == "POST":
         checkin_str = request.POST.get("checkin", "")
         checkout_str = request.POST.get("checkout", "")
-        tipo = request.POST.get("tipo", "camping")
-        huespedes_str = int(request.POST.get("huespedes", 1))
+        tipo = request.POST.get("tipo", "")
 
-        try:   
+        try: 
+            huespedes_str = int(request.POST.get("huespedes", 1))
+        except ValueError:
+            huespedes_str = 1
+
+        # Diccionario temporal para no perder los datos ingresados en caso de error
+        datos_formulario = {
+            "checkin": checkin_str,
+            "checkout": checkout_str,
+            "tipo": tipo,  
+            "huespedes": huespedes_str
+        }
+
+        try:
             checkin = date.fromisoformat(checkin_str)
             checkout = date.fromisoformat(checkout_str)
         except ValueError:
             return render(request, "reservaciones/reservar_paso_1.html", {
                 "parque": parque,
                 "parque_id": parque_id,
-                "error": "Fechas inválidas. Por favor ingrese las fechas correctamente."
+                "errores": {"checkin": "Fecha invalida", "checkout": "Fecha invalida"},
+                "reserva": datos_formulario,
             })
         
-        # Guardamos datos en sesión para usarlos en el paso 2 y 3
+
+        # Si hay algun error de validacion, mostramos el formulario de nuevo con los errores y los datos ingresados previamente
+        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes_str)
+
+        if errores_validacion:
+            return render(request, "reservaciones/reservar_paso_1.html", {
+                "parque": parque,
+                "parque_id": parque_id,
+                "errores": errores_validacion,
+                "reserva": datos_formulario,
+            })
+        
+        # Si es valido, guardamos datos en sesión para usarlos en el paso 2 y 3
         request.session["reserva"] = {
             "parque_id": parque_id,
             "checkin": checkin_str,
@@ -129,11 +166,15 @@ def reservar_paso_1(request, parque_id):
 
         return redirect("reservar_paso_2", parque_id=parque_id)
     
+    reserva_previa = request.session.get("reserva", {})
+    
     # GET para mostrar formulario con datos reales del parque
     return render(request, "reservaciones/reservar_paso_1.html", {
         "parque": parque,
         "parque_id": parque_id,
+        "reserva": reserva_previa,
     })
+
 
 
 @login_required
@@ -145,6 +186,13 @@ def reservar_paso_2(request, parque_id):
         return redirect("reservar_paso_1", parque_id=parque_id)
     
     parque = get_object_or_404(Parque, pk=parque_id, activo=True)
+    checkin = date.fromisoformat(reserva["checkin"])
+    checkout = date.fromisoformat(reserva["checkout"])
+    tipo = reserva["tipo"]
+    huespedes = reserva["huespedes"]
+    precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
+    dias = (checkout - checkin).days
+    total = precio_noche * dias * huespedes
 
     if request.method == "POST":
         # Guardamos comentarios adicionales y redirigimos al paso 3
@@ -155,8 +203,13 @@ def reservar_paso_2(request, parque_id):
     return render(request, "reservaciones/reservar_paso_2.html", {
         "parque": parque,
         "parque_id": parque_id,
-        "reserva": reserva,
+        "checkin": checkin,
+        "checkout": checkout,
+        "tipo": tipo,
+        "huespedes": huespedes,
+        "total": total,
     })
+
 
 
 
