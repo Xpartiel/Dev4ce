@@ -23,18 +23,27 @@
 
             <div class="calendar-tabs">
                 {% for parque in nombre_parques %}
-                    <button class="calendar-tab">
+                    <a
+                    href="?parque={{ parque.id }}"
+                    class=" no-underline  calendar-tab  {% if parque.id == parque_activo.id %}active{% endif %}">
                         {{ parque.nombre }}
-                    </button>
+                    </a>
                 {% endfor %}
-
             </div>
 
             <div class="calendar-header">
 
                 <div>
-                    <h3>Santuario El Rosario</h3>
-                    <p>Junio 2026 · capacidad 120</p>
+                    <h2> {{ parque_activo.nombre }} </h2> <h3> {{ mes_actual }} </h3>
+                    <p>
+                        Capacidad:
+                        <ul>
+                            {% if parque_activo.capacidad_max_cabana > 0 %}
+                                <li>Cabañas: {{ parque_activo.capacidad_max_cabana }}</li>
+                            {% endif %}
+                            <li>Camping: {{ parque_activo.capacidad_max_camping }}</li>
+                        </ul>
+                    </p>
                 </div>
 
                 <div class="calendar-legend">
@@ -60,9 +69,40 @@
                     </span>
 
                 </div>
-
             </div>
 
+            <div class="calendar-weekdays">
+                <span>Lun</span>
+                <span>Mar</span>
+                <span>Mié</span>
+                <span>Jue</span>
+                <span>Vie</span>
+                <span>Sáb</span>
+                <span>Dom</span>
+            </div>
+
+            <div class="admin-calendar-grid">
+                {% for semana in calendario %}
+                    {% for dia in semana %}
+                        {% if dia %}
+                            <div class="calendar-day {{ dia.estado }}">
+                                <div class="calendar-day-top">
+                                    <strong>{{ dia.numero }}</strong>
+                                    <span class="dot {{ dia.estado }}"></span>
+                                </div>
+                                <small>
+                                    {{ dia.disponibles }}/{{ dia.capacidad }}
+                                </small>
+                            </div>
+                        {% else %}
+                            <div class="calendar-day empty"></div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+        </div>
+            <!--
             <div class="admin-calendar-grid">
                 {% for dia in dias_calendario %}
                     <div class="calendar-day">
@@ -74,6 +114,7 @@
                     </div>
                 {% endfor %}
             </div>
+            -->
 
         </article>
 
