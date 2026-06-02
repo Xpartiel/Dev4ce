@@ -70,9 +70,9 @@
                 <a href="{% url 'mis_reservaciones' %}">Mis reservaciones</a>
                 <a href="{% url 'mi_perfil' %}">Mi perfil</a>
             {% else %}
-                <a href="{% url 'login' %}">Parques</a>
-                <a href="{% url 'login' %}">Mapa</a>
-                <a href="{% url 'login' %}">El Festival</a>
+                <a href="#">Parques</a>
+                <a href="#">Mapa</a>
+                <a href="#">El Festival</a>
             {% endif %}
 
         </nav>
@@ -160,6 +160,8 @@
         {% endblock %}
 
     </main>
+
+    {% include "core/_footer.html" %}
 
     <!-- Toggle de tema claro/oscuro -->
     <script>
