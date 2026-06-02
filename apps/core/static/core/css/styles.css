@@ -170,6 +170,11 @@
     display: none;
 }
 
+/* La special-state tiene su propio fondo opaco; sus luciérnagas se muestran igual */
+[data-theme="light"] .special-state .fireflies {
+    display: block;
+}
+
 /* La capa de ambiente: oculta en oscuro, visible y fija en claro */
 .day-ambient {
     display: none;
@@ -219,6 +224,34 @@
 
 @media (prefers-reduced-motion: reduce) {
     .day-ambient span { animation: luzPulse 4s ease-in-out infinite; }
+}
+
+/* ===== MODO CLARO: correcciones visuales ===== */
+
+/* Luna: var(--color-text) es azul oscuro en claro; reemplazar por dorado */
+[data-theme="light"] .moon {
+    background: var(--color-gold);
+    box-shadow: 0 0 18px var(--color-amber);
+}
+
+/* Tarjetas de parque: gradientes pensados para fondo oscuro → versiones cálidas */
+[data-theme="light"] .park-green {
+    background: linear-gradient(160deg, var(--color-surface), var(--color-moss));
+}
+
+[data-theme="light"] .park-amber {
+    background: linear-gradient(160deg, var(--color-surface), var(--color-amber));
+}
+
+[data-theme="light"] .park-blue {
+    background: linear-gradient(160deg, var(--color-surface), #4B7BB5);
+}
+
+/* Imagen de detalle de parque: contraste visible en fondo claro */
+[data-theme="light"] .park-detail-image {
+    background:
+        radial-gradient(circle at 35% 45%, rgba(201, 149, 38, 0.22), transparent 14%),
+        linear-gradient(160deg, var(--color-surface-2), var(--color-moss));
 }
 
 /* ===== RESET ===== */
@@ -440,6 +473,22 @@ body {
 
     background-color: var(--color-surface-3);
 
+}
+
+/* Botón "Panel" del header (solo admin): tinte dorado para que se lea como
+   un cambio de contexto/rol, distinto del btn-secondary de "Cerrar sesión". */
+.btn-panel {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    border: 1px solid var(--color-gold-line);
+    color: var(--color-gold);
+    background-color: var(--color-gold-soft-bg);
+}
+
+.btn-panel:hover {
+    border-color: var(--color-gold);
+    background-color: color-mix(in srgb, var(--color-gold) 16%, transparent);
 }
 
 /* ===== THEME BUTTON ===== */
@@ -1093,7 +1142,7 @@ body {
 }
 
 .client-header h1 {
-    font-size: clamp(32px, 5vw, 56px);
+    font-size: clamp(26px, 3vw, 38px);
     letter-spacing: -2px;
     margin-bottom: 10px;
 }
@@ -2148,12 +2197,12 @@ textarea {
 .admin-layout {
     min-height: calc(100vh - 72px);
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: 220px 1fr;
     background-color: var(--color-bg);
 }
 
 .admin-sidebar {
-    padding: 28px 22px;
+    padding: 25px 20px;
     background-color: var(--color-bg);
     border-right: 1px solid var(--color-line);
     display: flex;
@@ -2164,7 +2213,7 @@ textarea {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-bottom: 36px;
+    margin-bottom: 32px;
 }
 
 .admin-label {
@@ -2182,7 +2231,7 @@ textarea {
 }
 
 .admin-menu a {
-    padding: 12px 14px;
+    padding: 10px 12px;
     border-radius: 10px;
     color: var(--color-text-dim);
     text-decoration: none;
@@ -2198,7 +2247,7 @@ textarea {
 
 .admin-user-box {
     margin-top: auto;
-    padding: 16px;
+    padding: 14px;
     border-radius: 14px;
     background-color: var(--color-surface-3);
 }
@@ -2210,7 +2259,7 @@ textarea {
 }
 
 .admin-content {
-    padding: 36px;
+    padding: 20px 24px;
 }
 
 .admin-header {
@@ -2218,12 +2267,12 @@ textarea {
     justify-content: space-between;
     gap: 24px;
     align-items: center;
-    margin-bottom: 28px;
+    margin-bottom: 18px;
 }
 
 .admin-header h1 {
-    font-size: 36px;
-    margin-bottom: 8px;
+    font-size: 25px;
+    margin-bottom: 5px;
 }
 
 .admin-header p {
@@ -2238,13 +2287,13 @@ textarea {
 .admin-kpi-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 14px;
 }
 
 .admin-kpi-card,
 .admin-panel {
-    padding: 24px;
+    padding: 14px 18px;
     border-radius: 16px;
     background-color: var(--color-surface);
     border: 1px solid var(--color-line);
@@ -2252,13 +2301,14 @@ textarea {
 
 .admin-kpi-card p {
     color: var(--color-text-mute);
-    margin-bottom: 12px;
+    font-size: 12px;
+    margin-bottom: 7px;
 }
 
 .admin-kpi-card strong {
     display: block;
-    font-size: 34px;
-    margin-bottom: 8px;
+    font-size: 23px;
+    margin-bottom: 5px;
 }
 
 .positive {
@@ -2272,12 +2322,12 @@ textarea {
 .admin-dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 18px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 14px;
 }
 
 .admin-panel h2 {
-    margin-bottom: 20px;
+    margin-bottom: 18px;
 }
 
 /* ===== PANEL ADMIN — gráfica y ocupación (datos reales) ===== */
@@ -2441,11 +2491,13 @@ textarea {
 .admin-table {
     width: 100%;
     border-collapse: collapse;
+    font-size: 14px;
 }
 
 .admin-table td {
-    padding: 16px;
+    padding: 12px 14px;
     border-bottom: 1px solid var(--color-line);
+    vertical-align: middle;
 }
 
 .admin-table td:first-child {
@@ -2496,7 +2548,7 @@ textarea {
 
 .admin-table th {
     text-align: left;
-    padding: 14px 16px;
+    padding: 11px 14px;
     color: var(--color-text-mute);
     text-transform: uppercase;
     font-size: 11px;
@@ -2530,9 +2582,25 @@ textarea {
     background-color: var(--color-danger);
 }
 
+/*
+ * No usar display:flex en un <td>: lo saca del algoritmo de la tabla y su
+ * borde inferior deja de alinearse con el resto de la fila (se nota cuando la
+ * columna "Fechas" hace wrap). Se mantiene como celda de tabla y los botones
+ * van en línea con nowrap para que no se partan.
+ */
 .admin-actions-cell {
-    display: flex;
-    gap: 8px;
+    white-space: nowrap;
+}
+
+.admin-actions-cell .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+}
+
+.admin-actions-cell .btn + .btn {
+    margin-left: 8px;
 }
 
 .admin-actions-cell button {
@@ -2557,15 +2625,15 @@ textarea {
 
 .admin-toolbar {
     display: flex;
-    gap: 14px;
-    margin-bottom: 24px;
+    gap: 12px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
 }
 
 .admin-search {
     flex: 1;
-    min-width: 280px;
-    padding: 14px 16px;
+    min-width: 260px;
+    padding: 11px 14px;
     border-radius: 12px;
     border: 1px solid var(--color-line);
     background-color: var(--color-surface-2);
@@ -2676,7 +2744,7 @@ textarea {
 }
 
 .dot.maintenance {
-    background-color: #4B5D88;
+    background-color: var(--color-info);
 }
 
 /* ===== ADMIN REPORTS ===== */
@@ -2816,8 +2884,8 @@ textarea {
 
 .special-state {
   min-height: 100vh;
-  background: #030712;
-  color: #f8f5ec;
+  background: var(--color-bg);
+  color: var(--color-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2852,7 +2920,7 @@ textarea {
 }
 
 .special-card p {
-  color: #b8b8b8;
+  color: var(--color-text-dim);
   line-height: 1.6;
   margin-bottom: 2rem;
 }
@@ -2864,53 +2932,53 @@ textarea {
   flex-wrap: wrap;
 }
 
-.btn-primary,
-.btn-secondary {
+.special-state .btn-primary,
+.special-state .btn-secondary {
   padding: 0.8rem 1.2rem;
   border-radius: 10px;
   text-decoration: none;
   font-weight: 700;
 }
 
-.btn-primary {
-  background: #ffc44d;
-  color: #111827;
+.special-state .btn-primary {
+  background: var(--color-gold);
+  color: var(--color-on-gold);
 }
 
-.btn-secondary {
+.special-state .btn-secondary {
   background: transparent;
-  color: #f8f5ec;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text);
+  border: 1px solid var(--color-line-strong);
 }
 
-.fireflies span {
+.special-state .fireflies span {
   position: absolute;
   width: 5px;
   height: 5px;
-  background: #ffc44d;
+  background: var(--color-gold);
   border-radius: 50%;
-  box-shadow: 0 0 15px #ffc44d;
+  box-shadow: 0 0 15px var(--color-gold);
   animation: glow 3s infinite ease-in-out;
 }
 
-.fireflies span:nth-child(1) {
+.special-state .fireflies span:nth-child(1) {
   top: 18%;
   left: 15%;
 }
 
-.fireflies span:nth-child(2) {
+.special-state .fireflies span:nth-child(2) {
   top: 35%;
   right: 18%;
   animation-delay: 1s;
 }
 
-.fireflies span:nth-child(3) {
+.special-state .fireflies span:nth-child(3) {
   bottom: 25%;
   left: 28%;
   animation-delay: 1.8s;
 }
 
-.fireflies span:nth-child(4) {
+.special-state .fireflies span:nth-child(4) {
   bottom: 18%;
   right: 30%;
   animation-delay: 0.5s;

@@ -80,6 +80,21 @@
         <!-- Acciones -->
         <div class="nav-actions">
 
+            {% if user.is_authenticated %}
+
+                {% comment %}
+                    Puente al panel: solo para administradores. Va en nav-actions
+                    (no en nav-links) para que se lea como cambio de contexto/rol,
+                    no como una sección más del sitio.
+                {% endcomment %}
+                {% if user.tipoAdministrador %}
+                    <a href="{% url 'admin_dashboard' %}" class="btn btn-panel" title="Ir al panel de administración">
+                        Panel
+                    </a>
+                {% endif %}
+
+            {% endif %}
+
             <!-- Toggle modo -->
             <button class="theme-toggle" title="Cambiar tema" aria-label="Cambiar tema">
                 <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none"
@@ -145,8 +160,6 @@
         {% endblock %}
 
     </main>
-
-    {% include "core/_footer.html" %}
 
     <!-- Toggle de tema claro/oscuro -->
     <script>
