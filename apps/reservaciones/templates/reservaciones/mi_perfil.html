@@ -15,14 +15,18 @@
             <div class="profile-user">
 
                 <div class="profile-avatar">
-                    {{ user.nombre_completo|slice:":1" }}
+                    {% if user.foto_perfil %}
+                        <img src="{{ user.foto_perfil.url }}" alt="Foto de perfil">
+                    {% else %}
+                        {{ user.persona.nombre|default:user.username|slice:":1"|upper }}
+                    {% endif %}
                 </div>
 
                 <div>
 
-                    <h1>{{ user.nombre_completo }}</h1>
+                    <h1>{{ user.persona.nombre_completo|default:user.username }}</h1>
 
-                    <p>{{ user.email }}</p>
+                    <p>{{ user.email|default:user.username }}</p>
 
                 </div>
 
@@ -47,12 +51,12 @@
 
             <article class="profile-stat-card">
                 <small>Noches reservadas</small>
-                <strong>4</strong>
+                <strong>{{ noches_reservadas|default:0 }}</strong>
             </article>
 
             <article class="profile-stat-card">
                 <small>Parques visitados</small>
-                <strong>3</strong>
+                <strong>{{ parques_visitados|default:0 }}</strong>
             </article>
 
             <article class="profile-stat-card">
@@ -80,12 +84,12 @@
 
                         <div>
                             <small>Nombre completo</small>
-                            <strong>{{ user.nombre_completo }}</strong>
+                            <strong>{{ user.persona.nombre_completo|default:"—" }}</strong>
                         </div>
 
                         <div>
                             <small>Correo electrónico</small>
-                            <strong>{{ user.email }}</strong>
+                            <strong>{{ user.email|default:user.username }}</strong>
                         </div>
 
                         <div>
