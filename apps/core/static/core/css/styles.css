@@ -2670,6 +2670,14 @@ textarea {
     gap: 12px;
     flex-wrap: wrap;
     margin-bottom: 28px;
+
+    flex-direction: column;
+    max-height: calc(2 * 65px); /* Ajustar altura para 2 filas */
+    overflow-x: auto;
+    overflow-y: hidden;
+    gap: 7px;
+    padding: 11px;
+    align-content: flex-start;
 }
 
 .calendar-tab {
@@ -2711,6 +2719,17 @@ textarea {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 10px;
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-weekdays div {
+    text-align: center;
+    font-weight: 600;
+    padding: 0.75rem 0;
 }
 
 .calendar-day {
@@ -3216,4 +3235,8 @@ textarea {
     color: var(--color-gold);
     font-size: 12px;
     font-weight: 500;
+}
+
+.no-underline {
+    text-decoration: none;
 }
