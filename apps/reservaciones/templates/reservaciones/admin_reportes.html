@@ -22,7 +22,7 @@
         </nav>
 
         <div class="admin-user-box">
-            <strong>{{ user.nombre_completo }}</strong>
+            <strong>{{ user.persona.nombre_completo|default:user.username }}</strong>
             <small>Admin</small>
         </div>
     </aside>
