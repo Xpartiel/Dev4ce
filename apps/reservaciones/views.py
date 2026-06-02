@@ -13,6 +13,7 @@ from .forms import ReservacionForm
 from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
 from apps.parques.mapas import construir_mapa
+import calendar
 
 
 # Criterio único de "reservación activa" (RF-08.1).
@@ -554,30 +555,104 @@ def eliminar_reservacion(request, reservacion_id):
 @user_passes_test(solo_admin, login_url="login")
 def admin_calendario(request):
 
-    disponibilidades = DisponibilidadParque.objects.select_related(
-        "parque"
-    ).all()
+    parques = (
+        Parque.objects
+        .filter(activo=True)
+        .order_by("nombre")
+    )
 
-    dias_calendario = []
+    if not parques.exists():
+        return render(
+            request,
+            "reservaciones/admin_calendario.html",
+            {
+                "nombre_parques": [],
+                "calendario": [],
+            }
+        )
 
-    for disponibilidad in disponibilidades:
+    parque_id = request.GET.get("parque")
 
-        estado_css = {
-            "libre": "free",
-            "pocos": "few",
-            "agotado": "full",
-            "mantenimiento": "maintenance",
-        }.get(disponibilidad.estado, "free")
+    try:
+        parque_activo = parques.get(pk=parque_id)
+    except (Parque.DoesNotExist, ValueError, TypeError):
+        parque_activo = parques.first()
 
-        dias_calendario.append({
-            "numero": disponibilidad.fecha.day,
-            "estado": estado_css,
-            "texto": f"{disponibilidad.capacidad_disponible} disponibles",
-        })
+    hoy = date.today()
 
-    return render(request, "reservaciones/admin_calendario.html", {
-        "dias_calendario": dias_calendario
-    })
+    anio = hoy.year
+    mes = hoy.month
+
+    disponibilidades = (
+        DisponibilidadParque.objects
+        .filter(
+            parque=parque_activo,
+            fecha__year=anio,
+            fecha__month=mes
+        )
+    )
+
+    disponibilidad_por_dia = {
+        disponibilidad.fecha.day: disponibilidad
+        for disponibilidad in disponibilidades
+    }
+
+    semanas = calendar.monthcalendar(anio, mes)
+
+    calendario_mes = []
+
+    for semana in semanas:
+
+        fila = []
+
+        for numero_dia in semana:
+
+            if numero_dia == 0:
+                fila.append(None)
+                continue
+
+            disponibilidad = disponibilidad_por_dia.get(numero_dia)
+
+            if disponibilidad:
+
+                estado_css = {
+                    "libre": "free",
+                    "pocos": "few",
+                    "agotado": "full",
+                    "mantenimiento": "maintenance",
+                }.get(
+                    disponibilidad.estado,
+                    "free"
+                )
+
+                fila.append({
+                    "numero": numero_dia,
+                    "estado": estado_css,
+                    "disponibles": disponibilidad.capacidad_disponible,
+                    "capacidad": parque_activo.capacidad_total,
+                })
+
+            else:
+
+                fila.append({
+                    "numero": numero_dia,
+                    "estado": "free",
+                    "disponibles": parque_activo.capacidad_total,
+                    "capacidad": parque_activo.capacidad_total,
+                })
+
+        calendario_mes.append(fila)
+    
+    return render(
+        request,
+        "reservaciones/admin_calendario.html",
+        {
+            "nombre_parques": parques,
+            "parque_activo": parque_activo,
+            "mes_actual": hoy.strftime("%B %Y"),
+            "calendario": calendario_mes,
+        }
+    )
 
 
 @user_passes_test(solo_admin, login_url="login")
