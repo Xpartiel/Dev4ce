@@ -55,28 +55,36 @@
 
             <aside class="booking-summary">
                 <h3>Resumen</h3>
-                <p>Santuario El Rosario</p>
+                <p>{{ parque }}</p>
 
                 <div class="summary-line">
                     <span>Estancia</span>
-                    <strong>14 Jun - 16 Jun</strong>
+                    <strong>{{ checkin }} - {{checkout }}</strong>
                 </div>
 
                 <div class="summary-line">
                     <span>Tipo</span>
-                    <strong>Cabaña</strong>
+                    <strong>
+                    {% if tipo == 'cabana' %}
+                        Cabaña
+                    {% elif tipo == 'camping' %}
+                        Camping
+                    {% else %}
+                        {{ tipo }}
+                    {% endif %}
+                </strong>
                 </div>
 
                 <div class="summary-line">
                     <span>Huéspedes</span>
-                    <strong>2</strong>
+                    <strong>{{ huespedes }}</strong>
                 </div>
 
                 <hr>
 
                 <div class="summary-line total">
                     <span>Total</span>
-                    <strong>$1,700</strong>
+                    <strong>${{ total|floatformat:0 }}</strong>
                 </div>
             </aside>
 

@@ -1287,6 +1287,31 @@ body {
     }
 }
 
+/* 1. Iluminar el contenedor cuando el radio button interno esta seleccionado */
+.booking-option:has(input[type="radio"]:checked) {
+    border: 2px solid #FFC107; /* Amarillo */
+    background-color: rgba(255, 193, 7, 0.05); 
+    transition: all 0.3s ease;
+}
+
+/* 2. Ocultar el punto nativo del radio button para que el diseño se vea mas limpio */
+.booking-option input[type="radio"] {
+    display: none; 
+}
+
+/* 3. Estilo para los mensajes de error en línea */
+.inline-error {
+    color: #ef4444; /* Rojo */
+    font-size: 0.85em;
+    font-weight: normal;
+    margin-left: 8px;
+}
+
+
+
+
+
+
 /* ===== CLIENT MAP ===== */
 
 .client-map-section {
