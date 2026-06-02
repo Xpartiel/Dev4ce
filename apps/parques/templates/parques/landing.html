@@ -119,14 +119,17 @@ Festival Internacional de las Luciérnagas
 
             <div class="park-image {% cycle 'park-green' 'park-amber' 'park-blue' %}">
 
-                {% comment %} Disponibilidad hardcodeada por ahora (depende de Dan) {% endcomment %}
-                {% if forloop.counter == 1 %}
-                    <span class="park-status available">Disponible</span>
-                {% elif forloop.counter == 2 %}
-                    <span class="park-status few">Pocos lugares</span>
-                {% else %}
+                {% with estado=parque.disponibilidad_global %}
+                {% if estado == "agotado" %}
                     <span class="park-status sold">Agotado</span>
+                {% elif estado == "pocos" %}
+                    <span class="park-status few">Pocos lugares</span>
+                {% elif estado == "mantenimiento" %}
+                    <span class="park-status maintenance">Mantenimiento</span>
+                {% else %}
+                    <span class="park-status available">Disponible</span>
                 {% endif %}
+                {% endwith %}
 
                 <span class="moon"></span>
 

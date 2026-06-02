@@ -206,45 +206,22 @@ def reservar_paso_3(request, parque_id):
             estado = "confirmada",
             comentarios = request.POST.get("comentarios", ""),
         )
-        '''
         # 4. Reducimos la disponibilidad de cada dia
-
+        fechas = [checkin + timedelta(days=i) for i in range(dias)]
         for fecha in fechas:
             disponibilidad, _ = DisponibilidadParque.objects.get_or_create(
-                parque = parque,
-                fecha = fecha, 
-                defaults={"capacidad_disponible": parque.capacidad_max_cabana 
-                          if tipo == "cabana" else parque.capacidad_max_camping},
+                parque=parque,
+                fecha=fecha,
+                defaults={"capacidad_disponible": parque.capacidad_max_camping},
             )
             disponibilidad.capacidad_disponible = max(0, disponibilidad.capacidad_disponible - huespedes)
             if disponibilidad.capacidad_disponible == 0:
                 disponibilidad.estado = "agotado"
             elif disponibilidad.capacidad_disponible <= 5:
                 disponibilidad.estado = "pocos"
-            else: 
+            else:
                 disponibilidad.estado = "libre"
             disponibilidad.save()
-
-
-
-            # 5. Enviamos correo de confirmacion
-
-        asunto = f"Reservación confirmada - {folio}"
-        cuerpo = (
-            f"Hola {request.user.username}, \n\n"
-            f"Su reservación para el parque {parque.nombre} ha sido confirmada.\n"
-            f"Detalles de la reservación:\n"
-            f"- Check-in: {checkin}\n"
-            f"- Check-out: {checkout}\n"
-            f"- Tipo: {tipo}\n"
-            f"- Huéspedes: {huespedes}\n"
-            f"- Total: ${total:.2f}\n\n"
-            f"Gracias por elegirnos!"
-        )
-
-        send_mail(asunto, cuerpo, None, [request.user.email], fail_silently=True)
-
-        '''
 
         # 3. Limpiamos datos de reserva en sesion y redirigimos a confirmacion
         del request.session ["reserva"]
@@ -338,12 +315,12 @@ def cancelar_reservacion(request, reservacion_id):
                 disponibilidad.capacidad_disponible = min(
                     cap_max, disponibilidad.capacidad_disponible + reservacion.huespedes
                 )
-                if disponibilidad.capacidad_disponible == cap_max:
-                    disponibilidad.estado = "libre"
+                if disponibilidad.capacidad_disponible == 0:
+                    disponibilidad.estado = "agotado"
                 elif disponibilidad.capacidad_disponible <= 5:
                     disponibilidad.estado = "pocos"
                 else:
-                    disponibilidad.estado = "agotado"
+                    disponibilidad.estado = "libre"
                 disponibilidad.save()
 
         #3. Enviar correo de cancelacion
