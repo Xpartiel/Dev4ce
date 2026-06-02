@@ -8,7 +8,7 @@
 
     <div class="client-container">
 
-        <p class="section-label">// Hola, {{ user.nombre_completo }}</p>
+        <p class="section-label">// Hola, {{ user.persona.nombre_completo|default:user.nick_name|default:user.username }}</p>
 
         <div class="client-header">
             <div>
@@ -18,7 +18,7 @@
                     <h1><span>El festival ya comenzó</span></h1>
                 {% endif %}
                 <p>
-                    El festival arranca el 14 de junio. Estas son tus reservaciones próximas.
+                    El festival inicia el 26 de junio. Estas son tus reservaciones próximas.
                 </p>
             </div>
 
