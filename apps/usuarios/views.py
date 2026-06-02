@@ -52,9 +52,9 @@ def registro_view(request):
             "error": "Debe indicar un nombre."
         })
 
-    if not (apellido_p or apellido_m):
+    if not (apellido_p):
         return render(request, "usuarios/registro.html", {
-            "error": "Debe indicarse al menos un apellido."
+            "error": "Debe indicarse al menos el apellido paterno."
         })
         
     if not correo:
