@@ -34,16 +34,17 @@
             <div class="calendar-header">
 
                 <div>
-                    <h2> {{ parque_activo.nombre }} </h2> <h3> {{ mes_actual }} </h3>
-                    <p>
-                        Capacidad:
-                        <ul>
-                            {% if parque_activo.capacidad_max_cabana > 0 %}
-                                <li>Cabañas: {{ parque_activo.capacidad_max_cabana }}</li>
-                            {% endif %}
-                            <li>Camping: {{ parque_activo.capacidad_max_camping }}</li>
-                        </ul>
+                    <h2> <strong>{{ parque_activo.nombre }}</strong>   <small>{{ fecha_actual|date:"F Y" }}</small></h2>
+                    <p><strong>Capacidad:</strong>
+                        <br>
+                        {% if 0 < parque_activo.capacidad_max_cabana %}
+                            <strong>Cabañas:</strong> {{ parque_activo.capacidad_max_cabana }}
+                            <br>
+                        {% endif %}
+                            <strong>Camping:</strong> {{ parque_activo.capacidad_max_camping }}
+                            <br>
                     </p>
+                    
                 </div>
 
                 <div class="calendar-legend">
