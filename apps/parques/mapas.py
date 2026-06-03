@@ -1,21 +1,10 @@
 """
 Construcción del mapa de parques con Folium.
-
-Se usa tanto en la landing (parques.views.landing) como en el mapa del
-cliente (reservaciones.views.mapa_cliente): ambos comparten esta base.
-
-Nota: el CSS y el JS viven aquí (y no en styles.css) porque Folium genera
-el mapa dentro de un <iframe> aparte que NO carga los estilos del sitio;
-hay que inyectarlos dentro del propio mapa.
 """
 
 import folium
 from django.urls import reverse
 
-
-# A partir de este nivel de zoom se muestran las etiquetas con el nombre del
-# parque (debajo de él, los pines se ven sin nombre para no encimarse).
-# Súbelo si quieres que aparezcan más cerca; bájalo para que salgan antes.
 UMBRAL_ZOOM_ETIQUETAS = 12
 
 
@@ -27,7 +16,7 @@ _COLORES = {
     "mantenimiento": {"core": "#5B8DB8", "glow": "rgba(91,141,184,.80)", "pulse": "rgba(91,141,184,.4)"},
 }
 
-
+# Folium solo permite personalizar los pins con iconos predefinidos o con DivIcon (HTML+CSS).
 ESTILO_MAPA = """
 <style>
   .firefly-pin { position:relative; width:22px; height:22px; }
