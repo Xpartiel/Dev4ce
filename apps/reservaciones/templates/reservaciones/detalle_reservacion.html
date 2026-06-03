@@ -1,0 +1,116 @@
+{% extends "core/base.html" %}
+
+{% block title %}Detalle de reservación{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+    <div class="client-container reservation-detail-container">
+
+        <a href="{% url 'mis_reservaciones' %}" class="back-link">
+            ← Volver
+        </a>
+
+        <p class="section-label">// {{ reservacion.folio }}</p>
+
+        <div class="reservation-detail-header">
+            <div>
+                <h1>{{ reservacion.parque.nombre }}</h1>
+                <p>{{ reservacion.get_tipo_hospedaje_display }}</p>
+            </div>
+
+            {% if reservacion.estado == "confirmada" %}
+                <span class="status confirmed">{{ reservacion.get_estado_display }}</span>
+            {% elif reservacion.estado == "pendiente" %}
+                <span class="status pending">{{ reservacion.get_estado_display }}</span>
+            {% elif reservacion.estado == "completada" %}
+                <span class="status completed">{{ reservacion.get_estado_display }}</span>
+            {% else %}
+                <span class="status cancelled">{{ reservacion.get_estado_display }}</span>
+            {% endif %}
+        </div>
+
+        <div class="reservation-detail-layout">
+
+            <div class="reservation-detail-main">
+
+                <article class="detail-card">
+                    <div class="detail-grid">
+
+                        <div>
+                            <small>Check-in</small>
+                            <strong>{{ reservacion.checkin|date:"d M Y" }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Check-out</small>
+                            <strong>{{ reservacion.checkout|date:"d M Y" }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Huéspedes</small>
+                            <strong>{{ reservacion.huespedes }} personas</strong>
+                        </div>
+
+                        <div>
+                            <small>Total</small>
+                            <strong>${{ reservacion.total|floatformat:0 }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Tipo</small>
+                            <strong>{{ reservacion.get_tipo_hospedaje_display }}</strong>
+                        </div>
+
+                        <div>
+                            <small>Estado</small>
+                            <strong>{{ reservacion.get_estado_display }}</strong>
+                        </div>
+
+                    </div>
+                </article>
+
+                <article class="detail-card">
+                    <h2>Antes de tu visita</h2>
+
+                    <ul class="visit-list">
+                        <li>Lleva ropa abrigadora; la temperatura nocturna baja considerablemente.</li>
+                        <li>Se permiten lámparas con filtro rojo únicamente.</li>
+                        <li>Preséntate 30 minutos antes en el centro de visitantes.</li>
+                        <li>No se admiten mascotas en el área de avistamiento.</li>
+                    </ul>
+                </article>
+
+            </div>
+
+            <aside class="reservation-detail-actions">
+
+                <a href="#" class="btn btn-secondary">Descargar voucher PDF</a>
+
+                <a href="{% url 'mapa_cliente' %}" class="btn btn-secondary">Ver en el mapa</a>
+
+                {% if reservacion.estado in "pendiente,confirmada" %}
+                <form method="POST" action="{% url 'cancelar_reservacion' reservacion.id %}"
+                        onsubmit="return confirm('¿Confirmas la cancelación de esta reservación?')">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" style="width:100%">
+                        Cancelar reservación
+                    </button>
+                </form>
+                {% endif %}
+
+                <hr>
+
+                <p>
+                    Creada el {{ reservacion.creado_en|date:"d M Y" }}<br>
+                    Folio: {{ reservacion.folio }}
+                </p>
+
+            </aside>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

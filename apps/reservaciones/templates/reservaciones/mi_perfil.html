@@ -1,0 +1,164 @@
+{% extends "core/base.html" %}
+
+{% block title %}Mi perfil{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+
+    <div class="client-container profile-container">
+
+        <p class="section-label">// Mi perfil</p>
+
+        <div class="profile-header">
+
+            <div class="profile-user">
+                <div class="profile-avatar">
+                    {% if user.foto_perfil %}
+                        <img src="{{ user.foto_perfil.url }}" alt="Foto de perfil">
+                    {% else %}
+                        {{ user.persona.nombre|default:user.username|slice:":1"|upper }}
+                    {% endif %}
+                </div>
+
+                <div>
+                    <h1>{{ user.persona.nombre_completo|default:user.username }}</h1>
+                    <p>{{ user.email|default:user.username }}</p>
+                </div>
+            </div>
+
+            <span class="profile-badge">
+                {% if user.tipoAdministrador %}
+                    Administrador
+                {% else %}
+                    Cliente
+                {% endif %}
+            </span>
+
+        </div>
+
+        <div class="profile-layout" style="align-items: stretch;">
+
+            <div class="profile-main" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+                <div class="profile-stats" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 0;">
+                    <article class="profile-stat-card">
+                        <small>Reservaciones</small>
+                        <strong>{{ total_reservaciones }}</strong>
+                    </article>
+
+                    <article class="profile-stat-card">
+                        <small>Tus noches reservadas</small>
+                        <strong>{{ nochesEsteFestival|default:0 }}</strong>
+                    </article>
+
+                    <article class="profile-stat-card">
+                        <small>Parques en los que reservaste</small>
+                        <strong>{{ parques_visitados|default:0 }}</strong>
+                    </article>
+                </div>
+
+                <article class="profile-card" style="flex-grow: 1;">
+
+                    <div class="profile-card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                        <h2>Información personal</h2>
+                        <button class="btn btn-secondary" style="color: #0f172a; background-color: #ffffff; border: none; font-weight: 600; cursor: pointer;">
+                            Editar
+                        </button>
+                    </div>
+
+                    <div class="profile-grid">
+                        <div>
+                            <small>Nombre completo</small>
+                            <strong>{{ user.persona.nombre_completo|default:"—" }}</strong>
+                        </div>
+                        <div>
+                            <small>Correo electrónico</small>
+                            <strong>{{ user.email|default:user.username }}</strong>
+                        </div>
+                        <div>
+                            <small>Usuario</small>
+                            <strong>{{ user.username }}</strong>
+                        </div>
+                        <div>
+                            <small>Tipo de cuenta</small>
+                            <strong>
+                                {% if user.tipoAdministrador %}
+                                    Administrador
+                                {% else %}
+                                    Cliente
+                                {% endif %}
+                            </strong>
+                        </div>
+                    </div>
+
+                </article>
+
+            </div>
+
+            <aside class="profile-sidebar" style="display: flex; flex-direction: column; gap: 1.5rem;">
+
+                <article class="profile-stat-card" style="margin: 0;">
+                    <small>Total invertido en tu experiencia</small>
+                    <strong>${{ total_invertido|floatformat:0 }}</strong>
+                </article>
+
+                <article class="profile-card" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;">
+                    
+                    <div>
+                        <h2>Cuenta</h2>
+
+                        <div class="profile-sidebar-info">
+                            <div>
+                                <small>Último acceso</small>
+                                <strong>{{ user.last_login|date:"d M Y, H:i"|default:"-" }}</strong>
+                            </div>
+                            <div>
+                                <small>Estado</small>
+                                <strong>Activa</strong>
+                            </div>
+                        </div>
+
+                        <hr style="margin: 1.5rem 0;">
+                    </div>
+
+                    <div class="profile-actions">
+                        <a href="{% url 'mis_reservaciones' %}" class="btn btn-secondary">
+                            Ver reservaciones
+                        </a>
+                        <a href="{% url 'logout' %}" class="btn btn-danger">
+                            Cerrar sesión
+                        </a>
+                    </div>
+                </article>
+
+            </aside>
+
+        </div>
+
+        <article class="profile-card" style="margin-top: 1.5rem;">
+            <h2>Experiencias que disfrutarás:</h2>
+            <div class="profile-tags">
+                <span>Senderos nocturnos</span>
+                <span>Observación de luciérnagas</span>
+                <span>Fogatas bajo las estrellas</span>
+                <span>Recorridos guiados</span>
+                <span>Caminatas ecológicas</span>
+                <span>Avistamiento nocturno</span>
+                <span>Fotografía de naturaleza</span>
+                <span>Observación astronómica</span>
+                <span>Experiencias gastronómicas</span>
+                <span>Temazcal</span>
+                <span>Talleres ambientales</span>
+                <span>Mercado artesanal</span>
+                <span>Degustación de productos locales</span>
+                <span>Convivencia familiar</span>
+                <span>Conexión con la naturaleza</span>
+            </div>
+        </article>
+
+    </div>
+
+</section>
+
+{% endblock %}

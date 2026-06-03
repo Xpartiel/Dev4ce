@@ -1,0 +1,60 @@
+{% extends "core/base.html" %}
+
+{% block title %}Reservación confirmada{% endblock %}
+
+{% block content %}
+
+<section class="confirmation-section">
+
+    <div class="confirmation-card">
+
+        <div class="confirmation-icon">✓</div>
+
+        <h1>Reservación confirmada</h1>
+
+        <p>
+            Te enviamos el detalle a tu correo electrónico.
+        </p>
+
+
+
+        <div class="folio-box">
+
+            <small>Folio</small>
+            <strong>{{ reservacion.folio }}</strong>
+
+            <div class="confirm-grid">
+                <div>
+                    <small>Santuario</small>
+                    <strong>{{ reservacion.parque.nombre }}</strong>
+                </div>
+
+                <div>
+                    <small>Estancia</small>
+                    <strong>{{ reservacion.checkin|date:"d M" }} - {{ reservacion.checkout|date:"d M" }}</strong>
+                </div>
+
+                <div>
+                    <small>Hospedaje</small>
+                    <strong>{{ reservacion.get_tipo_hospedaje_display }}</strong>
+                </div>
+
+                <div>
+                    <small>Huéspedes</small>
+                    <strong>{{ reservacion.huespedes }} personas</strong>
+                </div>
+            
+            </div>
+
+        </div>
+
+        <div class="confirmation-actions">
+            <a href="{% url 'mis_reservaciones' %}" class="btn btn-secondary">Ver mis reservaciones</a>
+            <a href="{% url 'dashboard_cliente' %}" class="btn btn-primary">Ir al inicio</a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

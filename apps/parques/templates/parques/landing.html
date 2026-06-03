@@ -1,0 +1,160 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Festival Internacional de las Luciérnagas
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  .park-image { position: relative; overflow: hidden; }
+
+  .park-fireflies span {
+    position: absolute;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #FFC857;
+    box-shadow: 0 0 6px 2px rgba(255, 200, 87, .9);
+    opacity: 0;
+    animation: card-ff 4s ease-in-out infinite;
+  }
+  .park-fireflies span:nth-child(1) { left: 14%; top: 62%; animation-delay: 0s;   }
+  .park-fireflies span:nth-child(2) { left: 32%; top: 28%; animation-delay: .9s;  }
+  .park-fireflies span:nth-child(3) { left: 55%; top: 70%; animation-delay: 1.7s; }
+  .park-fireflies span:nth-child(4) { left: 72%; top: 40%; animation-delay: 2.4s; }
+  .park-fireflies span:nth-child(5) { left: 86%; top: 60%; animation-delay: 3.1s; }
+
+  /* La tarjeta es un enlace: que no se vea como link */
+  .park-card { text-decoration: none; color: inherit; display: block; }
+  .park-card h3,
+  .park-card p,
+  .park-card .park-footer { color: inherit; }
+
+  @keyframes card-ff {
+    0%, 100% { opacity: 0; transform: translateY(0) scale(.6); }
+    50%      { opacity: 1; transform: translateY(-8px) scale(1); }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero-section">
+
+    <div class="fireflies">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span>
+    </div>
+
+    <div class="hero-content">
+
+        <p class="hero-badge">
+            Festival · 26 Jun - 2 Ago 2026
+        </p>
+
+        <h1>
+            Reserva tu noche con <br>
+            <span>millones de luciérnagas</span>
+        </h1>
+
+        <p class="hero-description">
+            {{ total_parques }} santuarios oficiales en México. Cabañas y camping
+            reservables noche por noche, del 26 de junio al 2 de agosto.
+        </p>
+
+        <div class="hero-actions">
+            <a href="{% url 'registro' %}" class="btn btn-primary">
+                Crear cuenta y reservar
+            </a>
+
+            <a href="#mapa" class="btn btn-secondary">
+                Explorar el mapa
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <strong>{{ total_parques }}</strong>
+                <span>santuarios oficiales</span>
+            </div>
+
+            <div>
+                <strong>{{ noches_festival }}</strong>
+                <span>noches del festival</span>
+            </div>
+
+            <div>
+                <strong>{{ total_espacios }}</strong>
+                <span>espacios disponibles</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<section class="map-preview-section" id="mapa">
+
+    <p class="section-label">// Ruta bioluminiscente</p>
+
+    <h2>Ocho santuarios, un mapa</h2>
+
+    <div class="map-preview">
+        {{ mapa_html|safe }}
+    </div>
+
+</section>
+
+<section class="parks-section">
+
+    <p class="section-label">// Parques destacados</p>
+
+    <h2>Empieza por estos tres</h2>
+
+    <div class="park-grid">
+
+        {% for parque in destacados %}
+        <a href="{% url 'detalle_parque' parque.pk %}" class="park-card">
+
+            <div class="park-image {% cycle 'park-green' 'park-amber' 'park-blue' %}">
+
+                {% with estado=parque.disponibilidad_global %}
+                {% if estado == "agotado" %}
+                    <span class="park-status sold">Agotado</span>
+                {% elif estado == "pocos" %}
+                    <span class="park-status few">Pocos lugares</span>
+                {% elif estado == "mantenimiento" %}
+                    <span class="park-status maintenance">Mantenimiento</span>
+                {% else %}
+                    <span class="park-status available">Disponible</span>
+                {% endif %}
+                {% endwith %}
+
+                <span class="moon"></span>
+
+                <div class="park-fireflies">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <div class="park-info">
+                <h3>{{ parque.nombre }}</h3>
+                <p>{{ parque.descripcion|truncatewords:14 }}</p>
+
+                <div class="park-footer">
+                    <strong>${{ parque.precio_camping }}</strong>
+                    <span>noche</span>
+                </div>
+            </div>
+
+        </a>
+        {% empty %}
+        <p>Pronto anunciaremos los santuarios participantes.</p>
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

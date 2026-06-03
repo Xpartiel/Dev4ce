@@ -1,0 +1,126 @@
+{% extends "core/base.html" %}
+
+{% block title %}Calendario por parque{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    {% include "reservaciones/_admin_sidebar.html" %}
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+
+            <div>
+                <p class="section-label">// Disponibilidad</p>
+                <h1>Disponibilidad por Parque</h1>
+            </div>
+
+        </div>
+
+        <article class="admin-panel">
+
+            <div class="calendar-tabs">
+                {% for parque in nombre_parques %}
+                    <a
+                    href="?parque={{ parque.id }}"
+                    class=" no-underline  calendar-tab  {% if parque.id == parque_activo.id %}active{% endif %}">
+                        {{ parque.nombre }}
+                    </a>
+                {% endfor %}
+            </div>
+
+            <div class="calendar-header">
+
+                <div>
+                    <h2> <strong>{{ parque_activo.nombre }}</strong>   <small>{{ fecha_actual|date:"F Y" }}</small></h2>
+                    <p><strong>Capacidad:</strong>
+                        <br>
+                        {% if 0 < parque_activo.capacidad_max_cabana %}
+                            <strong>Cabañas:</strong> {{ parque_activo.capacidad_max_cabana }}
+                            <br>
+                        {% endif %}
+                            <strong>Camping:</strong> {{ parque_activo.capacidad_max_camping }}
+                            <br>
+                    </p>
+                    
+                </div>
+
+                <div class="calendar-legend">
+
+                    <span>
+                        <i class="dot free"></i>
+                        libre
+                    </span>
+
+                    <span>
+                        <i class="dot few"></i>
+                        pocos
+                    </span>
+
+                    <span>
+                        <i class="dot full"></i>
+                        agotado
+                    </span>
+
+                    <span>
+                        <i class="dot maintenance"></i>
+                        mantenimiento
+                    </span>
+
+                </div>
+            </div>
+
+            <div class="calendar-weekdays">
+                <span>Lunes</span>
+                <span>Martes</span>
+                <span>Miércoles</span>
+                <span>Jueves</span>
+                <span>Viernes</span>
+                <span>Sábado</span>
+                <span>Domingo</span>
+            </div>
+
+            <div class="admin-calendar-grid">
+                {% for semana in calendario %}
+                    {% for dia in semana %}
+                        {% if dia %}
+                            <div class="calendar-day {{ dia.estado }}">
+                                <div class="calendar-day-top">
+                                    <strong>{{ dia.numero }}</strong>
+                                    <span class="dot {{ dia.estado }}"></span>
+                                </div>
+                                <small>
+                                    {{ dia.disponibles }}/{{ dia.capacidad }}
+                                </small>
+                            </div>
+                        {% else %}
+                            <div class="calendar-day empty"></div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+
+        </div>
+            <!--
+            <div class="admin-calendar-grid">
+                {% for dia in dias_calendario %}
+                    <div class="calendar-day">
+                        <div class="calendar-day-top">
+                            <strong>{{ dia.numero }}</strong>
+                            <span class="dot {{ dia.estado }}"></span>
+                        </div>
+                        <small>{{ dia.texto }}</small>
+                    </div>
+                {% endfor %}
+            </div>
+            -->
+
+        </article>
+
+    </main>
+
+</section>
+
+{% endblock %}

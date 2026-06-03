@@ -1,0 +1,74 @@
+{% extends "core/base.html" %}
+
+{% block title %}Formulario de Reservación{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    {% include "reservaciones/_admin_sidebar.html" %}
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+
+            <div>
+                <p class="section-label">// Reservaciones</p>
+                <h1>Formulario de reservación</h1>
+            </div>
+
+        </div>
+
+        <article class="admin-panel">
+
+            <form method="post" class="admin-form">
+
+                {% csrf_token %}
+
+                {% for field in form %}
+
+                <div class="form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                    <small class="form-help">
+                        {{ field.help_text }}
+                    </small>
+                    {% endif %}
+
+                    {% for error in field.errors %}
+                    <p class="form-error">
+                        {{ error }}
+                    </p>
+                    {% endfor %}
+
+                </div>
+
+                {% endfor %}
+
+                <div class="admin-actions">
+
+                    <a href="{% url 'admin_reservaciones' %}" class="btn btn-secondary">
+                        Volver
+                    </a>
+
+                    <button type="submit" class="btn btn-primary">
+                        Guardar reservación
+                    </button>
+
+                </div>
+
+            </form>
+
+        </article>
+
+    </main>
+
+</section>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "core/base.html" %}
+
+{% block title %}Registrar administrador{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <p class="section-label">// Administración</p>
+
+        <h1>Registrar administrador</h1>
+
+        <p class="auth-subtitle">
+            Crear nuevas cuentas administrativas para el festival.
+        </p>
+
+        {% if error %}
+            <div class="form-error">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Nombre completo</label>
+                <input type="text" name="nombre" required>
+            </div>
+
+            <div class="form-group">
+                <label>Correo</label>
+                <input type="email" name="correo" required>
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+                <input type="password" name="password" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary auth-button">
+                Crear administrador
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

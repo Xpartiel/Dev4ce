@@ -1,0 +1,72 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Iniciar sesión
+{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+
+    <div class="auth-card">
+
+        <p class="auth-label">
+            Bienvenido de nuevo
+        </p>
+
+        <h1>Iniciar sesión</h1>
+
+        <p class="auth-description">
+            Accede para consultar reservaciones y explorar parques.
+        </p>
+        {% if error %}
+            <p class="form-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Correo electrónico</label>
+
+                <input
+                    type="email"
+                    name="correo"
+                    placeholder="correo@ejemplo.com"
+                >
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña</label>
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="********"
+                >
+            </div>
+
+            <button class="btn btn-primary auth-button">
+                Iniciar sesión
+            </button>
+
+        </form>
+
+        <div class="auth-links">
+
+            <a href="{% url 'core:en_construccion' %}">
+                ¿Olvidaste tu contraseña?
+            </a>
+
+            <a href="{% url 'registro' %}">
+                Crear cuenta
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

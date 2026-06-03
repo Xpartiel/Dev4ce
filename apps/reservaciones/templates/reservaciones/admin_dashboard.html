@@ -1,0 +1,189 @@
+{% extends "core/base.html" %}
+
+{% block title %}Dashboard administrador{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    {% include "reservaciones/_admin_sidebar.html" %}
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+            <div>
+                <p class="section-label">// Panel · {% now "d M Y" %}</p>
+                <h1>{{ saludo }}, {{ nombre_admin }}</h1>
+                <p>{{ mensaje_festival }}</p>
+            </div>
+
+            <div class="admin-actions">
+                <a href="{% url 'registro_admin' %}" class="btn btn-secondary">
+                    + Nuevo admin
+                </a>
+            </div>
+        </div>
+
+        <div class="admin-kpi-grid">
+
+            <article class="admin-kpi-card">
+                <p>Reservaciones totales</p>
+
+                <strong>{{ total_reservaciones }}</strong>
+
+                <span class="positive">
+                    Reservaciones registradas
+                </span>
+            </article>
+
+            <article class="admin-kpi-card">
+                <p>Ingresos totales</p>
+
+                <strong>${{ ingresos }}</strong>
+
+                <span class="positive">
+                    Ingresos acumulados
+                </span>
+            </article>
+
+            <article class="admin-kpi-card">
+                <p>Parques registrados</p>
+
+                <strong>{{ total_parques }}</strong>
+
+                <span class="positive">
+                    Parques activos
+                </span>
+            </article>
+
+            <article class="admin-kpi-card">
+                <p>Cancelaciones</p>
+
+                <strong>{{ cancelaciones }}</strong>
+
+                <span class="negative">
+                    Reservaciones canceladas
+                </span>
+            </article>
+
+        </div>
+
+        <div class="admin-dashboard-grid">
+
+            <article class="admin-panel large">
+
+                <h2>Reservaciones por parque</h2>
+
+                {% if reservaciones_por_parque %}
+                <div class="admin-chart">
+
+                    <div class="admin-chart-track">
+                        {% for item in reservaciones_por_parque %}
+                        <div class="chart-col">
+                            <span class="chart-value">{{ item.num_reservaciones }}</span>
+                            <div class="chart-fill"
+                                 style="height: {% widthratio item.num_reservaciones max_reservaciones 100 %}%">
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="admin-chart-labels">
+                        {% for item in reservaciones_por_parque %}
+                        <span title="{{ item.nombre }}">{{ item.nombre }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                {% else %}
+                <p class="chart-empty">Aún no hay reservaciones registradas.</p>
+                {% endif %}
+
+            </article>
+
+            <article class="admin-panel">
+
+                <h2>Ocupación global</h2>
+
+                <div class="occupancy-circle" style="--pct: {{ porcentaje_ocupacion }}">
+                    <strong>{{ porcentaje_ocupacion }}%</strong>
+                    <span>ocupación</span>
+                </div>
+
+                <div class="legend">
+                    <p>
+                        <span class="gold-dot"></span>
+                        Espacios reservados: {{ espacios_reservados }}
+                    </p>
+
+                    <p>
+                        <span class="blue-dot"></span>
+                        Capacidad total: {{ capacidad_total }}
+                    </p>
+                </div>
+
+            </article>
+
+        </div>
+
+        <article class="admin-panel">
+
+            <div class="admin-panel-header">
+
+                <h2>Actividad reciente</h2>
+
+                <a href="{% url 'admin_reservaciones' %}">
+                    Ver todo
+                </a>
+
+            </div>
+
+            <table class="admin-table">
+
+                <tbody>
+
+                    {% for reservacion in reservaciones_recientes %}
+
+                    <tr>
+
+                        <td>{{ reservacion.folio }}</td>
+
+                        <td>{{ reservacion.parque.nombre }}</td>
+
+                        <td>
+                            {{ reservacion.checkin }}
+                            →
+                            {{ reservacion.checkout }}
+                        </td>
+
+                        <td>${{ reservacion.total }}</td>
+
+                        <td>
+                            <span class="status {{ reservacion.estado }}">
+                                {{ reservacion.get_estado_display }}
+                            </span>
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+                        <td colspan="5">
+                            No hay actividad reciente.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </article>
+
+    </main>
+
+</section>
+
+{% endblock %}

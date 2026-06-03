@@ -1,0 +1,135 @@
+{% extends "core/base.html" %}
+
+{% block title %}Gestión de parques{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    {% include "reservaciones/_admin_sidebar.html" %}
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+
+            <div>
+                <p class="section-label">// Gestión de parques</p>
+                <h1>Parques oficiales</h1>
+            </div>
+
+            <a href="{% url 'crear_parque' %}" class="btn btn-primary">
+                + Nuevo parque
+            </a>
+
+        </div>
+
+        <article class="admin-panel">
+
+            <table class="admin-table parks-admin-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Capacidad Cabañas</th>
+                        <th>Capacidad Camping</th>
+                        <th>Precio cabaña</th>
+                        <th>Precio camping</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for parque in parques %}
+
+                    <tr>
+
+                        <td>
+                            <strong>{{ parque.nombre }}</strong>
+                            <small>{{ parque.slug }}</small>
+                        </td>
+
+                        <td>{{ parque.estado }}</td>
+
+                        <td>
+                            {{ parque.capacidad_max_cabana }}
+                        </td>
+
+                        <td>
+                            {{ parque.capacidad_max_camping }}
+                        </td>
+
+                        <td>
+                            ${{ parque.precio_cabana }}
+                        </td>
+
+                        <td>
+                            ${{ parque.precio_camping }}
+                        </td>
+
+                        <td>
+
+                            {% if parque.activo %}
+
+                                <span class="status confirmed">
+                                    Activo
+                                </span>
+
+                            {% else %}
+
+                                <span class="status cancelled">
+                                    Inactivo
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td class="admin-actions-cell">
+
+                            <a
+                                href="{% url 'editar_parque' parque.id %}"
+                                class="btn btn-secondary"
+                            >
+                                Editar
+                            </a>
+
+                            <a
+                                href="{% url 'eliminar_parque' parque.id %}"
+                                class="btn danger"
+                                onclick="return confirm('¿Estás seguro de que quieres eliminar este parque?');"
+                            >
+                                Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="8">
+                            No hay parques registrados.
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </article>
+
+    </main>
+
+</section>
+
+{% endblock %}

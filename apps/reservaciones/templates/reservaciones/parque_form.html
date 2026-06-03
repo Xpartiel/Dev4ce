@@ -1,0 +1,85 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Parque
+{% endblock %}
+
+{% block content %}
+
+<section class="admin-form-page">
+
+    <div class="admin-header">
+
+        <div>
+
+            <p class="section-label">
+                // Administración
+            </p>
+
+            {% if form.instance.pk %}
+                <h1>Editar Parque</h1>
+            {% else %}
+                <h1>Crear Parque</h1>
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <article class="admin-panel">
+
+        <form method="post" class="admin-form">
+
+            {% csrf_token %}
+
+            {% for field in form %}
+
+                <div class="admin-form-group">
+
+                    <label for="{{ field.id_for_label }}">
+                        {{ field.label }}
+                    </label>
+
+                    {{ field }}
+
+                    {% if field.help_text %}
+                        <small>
+                            {{ field.help_text }}
+                        </small>
+                    {% endif %}
+
+                    {% if field.errors %}
+                        <small style="color: var(--color-danger);">
+                            {{ field.errors }}
+                        </small>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+            <div class="admin-form-actions">
+
+                <button
+                    type="submit"
+                    class="btn btn-primary"
+                >
+                    Guardar
+                </button>
+
+                <a
+                    href="{% url 'admin_parques' %}"
+                    class="btn btn-secondary"
+                >
+                    Cancelar
+                </a>
+
+            </div>
+
+        </form>
+
+    </article>
+
+</section>
+
+{% endblock %}

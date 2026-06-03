@@ -1,0 +1,134 @@
+{% extends "core/base.html" %}
+
+{% block title %}Reportes y KPIs{% endblock %}
+
+{% block content %}
+
+<section class="admin-layout">
+
+    <aside class="admin-sidebar">
+        <div class="admin-logo">
+            {% include "core/_logo.html" %}
+        </div>
+
+        <p class="admin-label">// Administración</p>
+
+        <nav class="admin-menu">
+            <a href="{% url 'admin_dashboard' %}">Panel</a>
+            <a href="{% url 'admin_parques' %}">Parques</a>
+            <a href="{% url 'admin_reservaciones' %}">Reservaciones</a>
+            <a href="{% url 'admin_calendario' %}">Calendario</a>
+            <a href="{% url 'admin_reportes' %}" class="active">Reportes</a>
+        </nav>
+
+        <div class="admin-user-box">
+            <strong>{{ user.persona.nombre_completo|default:user.username }}</strong>
+            <small>Admin</small>
+        </div>
+    </aside>
+
+    <main class="admin-content">
+
+        <div class="admin-header">
+            <div>
+                <p class="section-label">// Reportes</p>
+                <h1>Estadísticas y tendencias</h1>
+            </div>
+
+            <button class="btn btn-primary">Exportar reporte PDF</button>
+        </div>
+
+        <div class="admin-kpi-grid">
+            <article class="admin-kpi-card">
+                <p>Ingresos festival 2026</p>
+                <strong>$1.84M</strong>
+                <span>Proyectado al cierre</span>
+            </article>
+
+            <article class="admin-kpi-card">
+                <p>Tasa de conversión</p>
+                <strong>24.3%</strong>
+                <span>Visita → reservación</span>
+            </article>
+
+            <article class="admin-kpi-card">
+                <p>Estancia promedio</p>
+                <strong>2.4 noches</strong>
+                <span>En todos los parques</span>
+            </article>
+
+            <article class="admin-kpi-card">
+                <p>Ocupación global</p>
+                <strong>67%</strong>
+                <span>Promedio mensual</span>
+            </article>
+        </div>
+
+        <article class="admin-panel report-chart-panel">
+            <h2>Reservaciones mensuales · proyección 2026</h2>
+
+            <div class="line-chart">
+                <span style="left: 5%; bottom: 20%;"></span>
+                <span style="left: 15%; bottom: 32%;"></span>
+                <span style="left: 25%; bottom: 48%;"></span>
+                <span style="left: 35%; bottom: 42%;"></span>
+                <span style="left: 45%; bottom: 62%;"></span>
+                <span style="left: 55%; bottom: 78%;"></span>
+                <span style="left: 65%; bottom: 74%;"></span>
+                <span style="left: 75%; bottom: 55%;"></span>
+                <span style="left: 85%; bottom: 34%;"></span>
+                <span style="left: 95%; bottom: 22%;"></span>
+            </div>
+        </article>
+
+        <div class="admin-dashboard-grid">
+
+            <article class="admin-panel">
+                <h2>Top 5 parques por ingresos</h2>
+
+                <div class="ranking-list">
+                    <div>
+                        <p>Santuario El Rosario <strong>$280,000</strong></p>
+                        <span style="width: 100%"></span>
+                    </div>
+
+                    <div>
+                        <p>Sierra Chincua <strong>$238,000</strong></p>
+                        <span style="width: 85%"></span>
+                    </div>
+
+                    <div>
+                        <p>Piedra Herrada <strong>$196,000</strong></p>
+                        <span style="width: 70%"></span>
+                    </div>
+
+                    <div>
+                        <p>Cerro Pelón <strong>$154,000</strong></p>
+                        <span style="width: 55%"></span>
+                    </div>
+
+                    <div>
+                        <p>Santuario Nanacamilpa <strong>$112,000</strong></p>
+                        <span style="width: 40%"></span>
+                    </div>
+                </div>
+            </article>
+
+            <article class="admin-panel">
+                <h2>Distribución por tipo</h2>
+
+                <div class="donut-chart"></div>
+
+                <div class="legend">
+                    <p><span class="gold-dot"></span> Cabañas · 62%</p>
+                    <p><span class="blue-dot"></span> Camping · 38%</p>
+                </div>
+            </article>
+
+        </div>
+
+    </main>
+
+</section>
+
+{% endblock %}

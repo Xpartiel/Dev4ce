@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+Acerca de Festival Internacional de las Luciérnagas 2026
+{% endblock %}
+
+{% block content %}
+
+<section class="parks-section">
+
+    <div class="acerca-content">
+
+        <p class="section-label">// Acerca de</p>
+        <h2>El Festival Internacional de las Luciérnagas 2026</h2>
+
+        <p>
+            Cada verano, en los bosques de México, millones de luciérnagas
+            iluminan la noche en uno de los espectáculos naturales más
+            asombrosos del país. El <strong>Festival Internacional de las
+            Luciérnagas 2026</strong> reúne a los santuarios oficiales donde
+            este fenómeno puede observarse de forma segura y responsable.
+        </p>
+
+        <p>
+            Durante las ediciones anteriores, los visitantes tuvieron
+            dificultades para localizar los parques autorizados, conocer la
+            información de cada sitio y reservar hospedaje. Para la edición
+            2026 creamos este sistema web que <strong>centraliza la
+            información de los parques oficiales</strong> y permite
+            <strong>administrar las reservaciones</strong> desde un solo lugar.
+        </p>
+
+        <h3>¿Qué ofrece la plataforma?</h3>
+        <ul>
+            <li>Un <strong>mapa interactivo</strong> con la ubicación de cada parque oficial.</li>
+            <li>Información de cada sitio: dirección, servicios y horarios.</li>
+            <li>Reservación de <strong>cabañas</strong> y <strong>zonas de camping</strong>, noche por noche.</li>
+            <li>Confirmación de tu reserva por correo electrónico.</li>
+            <li>Gestión de tus reservaciones desde tu cuenta.</li>
+        </ul>
+
+        <h3>Fechas del festival</h3>
+        <p>
+            La temporada 2026 se realiza del <strong>26 de junio al 2 de
+            agosto</strong>. Las reservaciones solo están disponibles dentro
+            de ese periodo. Por mantenimiento de los parques,
+            <strong>no se reservan los martes</strong>.
+        </p>
+
+        <h3>Un proyecto académico</h3>
+        <p>
+            Esta plataforma fue desarrollada por el equipo <strong>Dev4ce</strong>
+            de la <strong>Facultad de Ciencias, UNAM</strong>, como proyecto de
+            la materia de Ingeniería de Software.
+        </p>
+
+        <div class="acerca-actions">
+            <a href="{% url 'registro' %}" class="btn btn-primary">Crear cuenta y reservar</a>
+            <a href="{% url 'landing' %}#mapa" class="btn btn-secondary">Explorar el mapa</a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

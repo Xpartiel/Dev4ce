@@ -1,0 +1,154 @@
+{% extends "core/base.html" %}
+
+{% block title %}Reservar · Paso 1{% endblock %}
+
+{% block content %}
+
+<section class="booking-section">
+    <div class="booking-container">
+
+        <a href="{% url 'detalle_parque' parque_id %}" class="back-link">← Volver al parque</a>
+
+        <p class="section-label">// Reservar · {{ parque.nombre }}</p>
+        <h1>Tres pasos para reservar tu noche</h1>
+
+        <div class="booking-steps">
+            <span class="active">1. Fechas y huéspedes</span>
+            <span>2.Datos del visitante</span>
+            <span>3. Confirmación</span>
+        </div>
+
+        <div class="booking-layout">
+            <form class="booking-card" method="POST" action="{% url 'reservar_paso_1' parque_id %}" novalidate>
+                {% csrf_token %}
+
+                <h2>Fechas y huéspedes</h2>
+                <p>Selecciona las noches que estarás en el santuario.</p>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Check-in</label>
+                        <input type="date" name="checkin" id="checkin-input" value="{{ reserva.checkin|default:'2026-06-26' }}" required onclick="this.showPicker()">
+                        <span id="checkin-error" class="inline-error" style="display: block; margin-top: 5px;  margin-bottom: 10px; color: red;">
+                            {% if errores.checkin %}{{ errores.checkin }}{% endif %}
+                        </span>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 0.8cm;">
+                        <label>Check-out</label>
+                        <input type="date" name="checkout" id="checkout-input" value="{{ reserva.checkout|default:'2026-08-02' }}" required onclick="this.showPicker()">
+                        <span id="checkout-error" class="inline-error" style="display: block; margin-top: 5px; margin-bottom: 10px; color: red;">
+                            {% if errores.checkout %}{{ errores.checkout }}{% endif %}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0.8cm;">
+                    <label>Tipo de hospedaje</label>
+
+                    <div class="option-grid">
+                        <label class="booking-option">
+                            <input type="radio" name="tipo" value="cabana" {% if reserva.tipo == 'cabana' %}checked{% endif %}>
+                            <strong>Cabaña</strong>
+                            <span>${{ parque.precio_cabana|floatformat:0 }}/noche</span>
+                        </label>
+
+                        <label class="booking-option">
+                            <input type="radio" name="tipo" value="camping" {% if reserva.tipo == 'camping' %}checked{% endif %}>
+                            <strong>Camping</strong>
+                            <span>${{ parque.precio_camping|floatformat:0 }}/noche</span>
+                        </label>
+                    </div>
+                    <span id="tipo-error" class="inline-error" style="display: block; margin-top: 5px; margin-bottom: 10px; color: red;">
+                        {% if errores.tipo %}{{ errores.tipo }}{% endif %}
+                    </span>
+                </div>
+
+                <div class="form-group">
+                    <label>Huéspedes</label>
+                    <input type="number" name="huespedes" id="huespedes-input" value="{{ reserva.huespedes|default:2 }}" min="1" max="8" required>
+                    <span id="huespedes-error" class="inline-error" style="display: block; margin-top: 5px; margin-bottom: 10px;   color: red;">
+                        {% if errores.huespedes %}{{ errores.huespedes }}{% endif %}
+                    </span>
+                </div>
+
+                <div class="booking-actions">
+                    <a href="{% url 'detalle_parque' parque_id %}" class="btn btn-secondary">Cancelar</a>
+                    <button class="btn btn-primary" type="submit">Continuar</button>
+                </div>
+
+            </form>
+
+            <aside class="booking-summary">
+                <h3>{{ parque.nombre }}</h3>
+                <p>{{ parque.estado }}</p>
+
+                <div class="summary-line">
+                    <span>Cabaña / noche</span>
+                    <strong>${{ parque.precio_cabana|floatformat:0 }}</strong>
+                </div>
+
+                <div class="summary-line">
+                    <span>Camping / noche</span>
+                    <strong>${{ parque.precio_camping|floatformat:0 }}</strong>
+                </div>
+
+                {% if error %}
+                <p style="color:red; margin-top:1rem;">{{ error }}</p>
+                {% endif %}
+            </aside>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    document.querySelector("form.booking-card").addEventListener("submit", function(e) {
+        let formularioValido = true;
+
+        // 1. Limpiar errores previos visualmente
+        document.getElementById("checkin-error").textContent = "";
+        document.getElementById("checkout-error").textContent = "";
+        document.getElementById("tipo-error").textContent = "";
+        document.getElementById("huespedes-error").textContent = "";
+
+        // 2. Validar Check-in
+        const checkin = document.getElementById("checkin-input").value;
+        if (!checkin) {
+            document.getElementById("checkin-error").textContent = "Debe seleccionar una fecha de entrada.";
+            formularioValido = false;
+        }
+
+        // 3. Validar Check-out
+        const checkout = document.getElementById("checkout-input").value;
+        if (!checkout) {
+            document.getElementById("checkout-error").textContent = "Debe seleccionar una fecha de salida.";
+            formularioValido = false;
+        } else if (checkin && checkout <= checkin) {
+            // Validamos que la salida sea DESPUÉS de la entrada
+            document.getElementById("checkout-error").textContent = "La fecha de salida debe ser posterior a la de entrada.";
+            formularioValido = false;
+        }
+
+        // 4. Validar Tipo de hospedaje
+        const tipoSeleccionado = document.querySelector('input[name="tipo"]:checked');
+        if (!tipoSeleccionado) {
+            document.getElementById("tipo-error").textContent = "Debe seleccionar un tipo de hospedaje.";
+            formularioValido = false;
+        }
+
+        // 5. Validar Huéspedes
+        const huespedes = document.getElementById("huespedes-input").value;
+        if (!huespedes || huespedes < 1 || huespedes > 8) {
+            document.getElementById("huespedes-error").textContent = "Por favor, ingrese un número válido de huéspedes (1 a 8).";
+            formularioValido = false;
+        }
+
+        // 6. Si algo falló, prevenimos el envío del formulario al servidor
+        if (!formularioValido) {
+            e.preventDefault();
+        }
+    });
+</script>
+
+{% endblock %}

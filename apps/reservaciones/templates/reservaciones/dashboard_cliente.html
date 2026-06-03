@@ -1,0 +1,148 @@
+{% extends "core/base.html" %}
+
+{% block title %}Dashboard cliente{% endblock %}
+
+{% block content %}
+
+<section class="client-section">
+
+    <div class="client-container">
+
+        <p class="section-label">// Hola, {{ user.persona.nombre_completo|default:user.nick_name|default:user.username }}</p>
+
+        <div class="client-header">
+            <div>
+                {% if dias_para_festival > 0 %}
+                    <h1>Faltan <span>{{ dias_para_festival }} días</span> para tu primera noche</h1>
+                {% else %}
+                    <h1><span>El festival ya comenzó</span></h1>
+                {% endif %}
+                <p>
+                    El festival inicia el 26 de junio. Estas son tus reservaciones próximas.
+                </p>
+            </div>
+
+            <a href="{% url 'mapa_cliente' %}" class="btn btn-primary">
+                + Nueva reservación
+            </a>
+        </div>
+
+        <div class="stats-grid">
+
+            <article class="stat-card">
+                <p>Reservaciones activas</p>
+                <strong>{{ total_activas |default:0 }}</strong>
+            </article>
+
+            <article class="stat-card">
+                <p>Noches este festival</p>
+                <strong>{{ nochesEsteFestival |default:0 }}</strong>
+            </article>
+
+            <article class="stat-card">
+                <p>Parques en los que reservaste</p>
+                <strong>{{ parques_visitados }}</strong>
+            </article>
+            
+            <article class="profile-stat-card">
+                <small>Cuenta creada</small>
+                <strong>{{ user.date_joined|date:"Y" }}</strong>
+            </article>
+
+        </div>
+
+        <h2 class="client-subtitle">Próximas estancias</h2>
+
+        <div class="reservation-list">
+
+            {% for reservacion in proximas %}
+
+            <article class="reservation-card">
+                <div class="reservation-date">
+                    <small>Check-in</small>
+                    <strong>{{ reservacion.checkin|date:"d" }}</strong>
+                    <span>{{ reservacion.checkin|date:"M" }}</span>
+                </div>
+
+                <div class="reservation-info">
+                    <small>{{ reservacion.folio }}</small>
+                    <h3>{{ reservacion.parque.nombre }}</h3>
+                    <p>
+                        {{ reservacion.get_tipo_hospedaje_display }} ·
+                        {{ reservacion.checkin|date:"d M" }} → {{ reservacion.checkout|date:"d M" }}
+                        · {{ reservacion.huespedes }} personas
+                    </p>
+                </div>
+
+                <div class="reservation-status">
+                    <span>{{ reservacion.get_estado_display }}</span>
+                    <strong>${{ reservacion.total|floatformat:0 }}</strong>
+                </div>
+            </article>
+
+            {% empty %}
+
+            <article class="reservation-card">
+                <div class="reservation-info">
+                    <h3>No tienes estancias próximas</h3>
+                    <p>Reserva tu primera noche del festival.</p>
+                </div>
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+
+        <div class="client-section-header">
+            <h2 class="client-subtitle">Tal vez te interese</h2>
+            <a href="{% url 'mapa_cliente' %}">Ver todos</a>
+        </div>
+
+        <div class="park-grid">
+
+            {% for parque in sugeridos %}
+            <a href="{% url 'detalle_parque' parque.pk %}" class="park-card">
+
+                <div class="park-image {% cycle 'park-green' 'park-amber' 'park-blue' %}">
+
+                    {% with estado=parque.disponibilidad_global %}
+                    {% if estado == "agotado" %}
+                        <span class="park-status sold">Agotado</span>
+                    {% elif estado == "pocos" %}
+                        <span class="park-status few">Pocos lugares</span>
+                    {% elif estado == "mantenimiento" %}
+                        <span class="park-status maintenance">Mantenimiento</span>
+                    {% else %}
+                        <span class="park-status available">Disponible</span>
+                    {% endif %}
+                    {% endwith %}
+
+                    <span class="moon"></span>
+
+                    <div class="park-fireflies">
+                        <span></span><span></span><span></span><span></span><span></span>
+                    </div>
+                </div>
+
+                <div class="park-info">
+                    <h3>{{ parque.nombre }}</h3>
+                    <p>{{ parque.estado }}</p>
+                    <div class="park-footer">
+                        <strong>${{ parque.precio_camping }}</strong>
+                        <span>/noche</span>
+                    </div>
+                </div>
+
+            </a>
+            {% empty %}
+            <p>Aún no hay parques para sugerir.</p>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

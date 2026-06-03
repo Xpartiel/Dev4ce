@@ -1,0 +1,47 @@
+[
+  {
+    "model": "usuarios.TipoUsuario",
+    "pk": 1,
+    "fields": {
+      "nombre": "comun",
+      "descripcion": "Usuario regular con acceso básico al sistema.",
+      "prioridad": 0
+    }
+  },
+  {
+    "model": "usuarios.TipoUsuario",
+    "pk": 2,
+    "fields": {
+      "nombre": "colaborador",
+      "descripcion": "Puede crear y editar contenido, pero sin permisos de administración.",
+      "prioridad": 5
+    }
+  },
+  {
+    "model": "usuarios.TipoUsuario",
+    "pk": 3,
+    "fields": {
+      "nombre": "moderador",
+      "descripcion": "Puede gestionar usuarios y contenido sensible.",
+      "prioridad": 10
+    }
+  },
+  {
+    "model": "usuarios.TipoUsuario",
+    "pk": 4,
+    "fields": {
+      "nombre": "admin",
+      "descripcion": "Acceso total al sistema.",
+      "prioridad": 20
+    }
+  },
+  {
+    "model": "usuarios.TipoUsuario",
+    "pk": 5,
+    "fields": {
+      "nombre": "baneado",
+      "descripcion": "Usuario con acceso restringido o suspendido.",
+      "prioridad": -10
+    }
+  }
+]

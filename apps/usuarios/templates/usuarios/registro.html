@@ -1,0 +1,68 @@
+{% extends "core/base.html" %}
+
+{% block title %}Crear cuenta{% endblock %}
+
+{% block content %}
+
+<section class="auth-section">
+    <div class="auth-card">
+
+        <p class="auth-label">Únete al festival</p>
+
+        <h1>Crear cuenta</h1>
+
+        <p class="auth-description">
+            Regístrate para reservar cabañas, camping y consultar tus visitas.
+        </p>
+        {% if error %}
+            <p class="form-error">{{ error }}</p>
+        {% endif %}
+
+        <form method="POST" class="auth-form">
+
+            {% csrf_token %}
+
+            <div class="form-group">
+                <label>Nombre(s)*</label>
+                <input type="text" name="nombres" placeholder="Tu Nombre">
+            </div>
+
+            <div class="form-group">
+                <label>Apellido Paterno*</label>
+                <input type="text" name="apellidoP" placeholder="Tu Apellido">
+            </div>
+
+            <div class="form-group">
+                <label>Apellido Materno</label>
+                <input type="text" name="apellidoM" placeholder="Tu Apellido">
+            </div>
+
+            <div class="form-group">
+                <label>Correo electrónico*</label>
+                <input type="email" name="correo" placeholder="correo@ejemplo.com">
+            </div>
+
+            <div class="form-group">
+                <label>Contraseña*</label>
+                <input type="password" name="password" placeholder="********">
+            </div>
+
+            <div class="form-group">
+                <label>Confirmar contraseña*</label>
+                <input type="password" placeholder="********">
+            </div>
+
+            <button class="btn btn-primary auth-button">
+                Crear cuenta
+            </button>
+
+        </form>
+
+        <div class="auth-links">
+            <a href="/usuarios/login/">Ya tengo cuenta</a>
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}

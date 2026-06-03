@@ -1,0 +1,88 @@
+{% extends "core/base.html" %}
+
+{% block title %}Mapa interactivo{% endblock %}
+
+{% block content %}
+
+<style>
+  .client-map-section {
+    display: grid;
+    grid-template-columns: 340px 1fr;
+    gap: 1.5rem;
+    align-items: start;          /* clave para que el sticky funcione */
+  }
+  .interactive-map {
+    position: sticky;
+    top: 90px;                   /* alto del navbar; ajústalo si hace falta */
+    height: calc(100vh - 120px);
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 200, 87, .25);      /* marco dorado tenue */
+    box-shadow: 0 0 24px rgba(255, 200, 87, .12);   /* resplandor suave */
+  }
+  /* Folium envuelve el mapa en divs con proporción fija (60%); los forzamos
+     a llenar el alto del contenedor para que no quede recortado. */
+  .interactive-map > div,
+  .interactive-map > div > div {
+    height: 100% !important;
+    padding-bottom: 0 !important;
+  }
+  .interactive-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  /* En móvil se apilan: lista arriba, mapa abajo con alto fijo */
+  @media (max-width: 800px) {
+    .client-map-section { grid-template-columns: 1fr; }
+    .interactive-map { position: static; height: 420px; }
+  }
+</style>
+
+<section class="client-map-section">
+
+  <aside class="map-sidebar">
+
+    <p class="section-label">// Santuarios oficiales</p>
+    <h1>Parques del festival</h1>
+
+    <div class="map-filter-buttons">
+      <button class="active">Todos</button>
+    </div>
+
+    <div class="map-park-list">
+
+      {% for parque in parques %}
+      <a href="{% url 'detalle_parque' parque.pk %}" class="map-park-item">
+        <div>
+          <h3>{{ parque.nombre }}</h3>
+          <p>{{ parque.estado }}</p>
+          <small>
+            Camping ${{ parque.precio_camping }}/noche
+            {% if parque.tiene_cabanas %}
+              · Cabaña ${{ parque.precio_cabana }}/noche
+            {% endif %}
+          </small>
+        </div>
+        {% if parque.tiene_cabanas %}
+          <span class="available-text">Cabaña + Camping</span>
+        {% else %}
+          <span>Solo Camping</span>
+        {% endif %}
+      </a>
+      {% empty %}
+        <p>No hay parques disponibles.</p>
+      {% endfor %}
+
+    </div>
+
+  </aside>
+
+  <div class="interactive-map">
+    {{ mapa_html|safe }}
+  </div>
+
+</section>
+
+{% endblock %}
