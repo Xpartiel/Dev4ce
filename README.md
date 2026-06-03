@@ -1,3 +1,30 @@
+# Lucerna
+
+En **Dev4ce** como equipo de desarrollo tecnológico, nos comprometemos al trabajo de calidad y apegado a las necesidades expresas de nuestros clientes, facilitandoles herramientas que les sean de utilidad en sus tareas y asegurando un desarrollo, mantenimiento y corrección de alta velocidad.
+
+
+### Documento Final:
+https://drive.google.com/file/d/1BsAPy_inq29J6KVu9JdxxND7Y0GXgTqR/view?usp=sharing
+
+### Bitacora de Trabajo:
+https://drive.google.com/file/d/1HNEcRVOt9u3qu4t-nZs_j1NqdVYUjvdE/view?usp=sharing
+
+## Desarrollo
+
+Para cumplir con un ciclo de desarrollo ágil, optamos por utilizar tecnologías que reflejen esta filosofía por diseño.  
+
+Esto beneficia también la cultura de trabajo del equipo, en pro de mantener un ambiente altamente colaborativo, con un bajo peso tecnológico para los integrantes del equipo de desarrollo
+
+- Git + GitHub para control de versiones
+- Python como lenguaje de programación principal
+- Django como Framework
+
+## Documentacion
+
+- Google Docs como sistema central de documentación
+- PlantUML como herramienta de diagramación
+
+
 # Dev4ce - Sistema de Reservación y Mapeo para el Festival Internacional de las Luciérnagas 2026
 
 ## Requisitos
