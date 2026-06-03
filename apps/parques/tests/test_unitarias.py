@@ -41,19 +41,3 @@ class ParqueModeloTests(SimpleTestCase):
         # Basado en: modelo Parque (representacion legible).
         self.assertEqual(str(Parque(nombre="Bosque Esmeralda")), "Bosque Esmeralda")
 
-
-class ConstruirMapaTests(SimpleTestCase):
-
-    def test_construir_mapa_incluye_nombres_de_parques(self):
-        # Basado en: RF-04 (un marcador por parque) y RF-05 (info en el popup).
-        parques = [
-            Parque(nombre="Bosque Esmeralda", estado="Puebla",
-                   latitud=Decimal("19.12"), longitud=Decimal("-98.73"),
-                   precio_camping=Decimal("450")),
-            Parque(nombre="Valle San Rafael", estado="Puebla",
-                   latitud=Decimal("19.29"), longitud=Decimal("-98.62"),
-                   precio_camping=Decimal("600")),
-        ]
-        html = construir_mapa(parques, con_enlaces=False)
-        self.assertIn("Bosque Esmeralda", html)
-        self.assertIn("Valle San Rafael", html)

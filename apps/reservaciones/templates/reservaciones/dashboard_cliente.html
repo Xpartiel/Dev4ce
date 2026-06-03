@@ -31,22 +31,22 @@
 
             <article class="stat-card">
                 <p>Reservaciones activas</p>
-                <strong>{{ total_activas }}</strong>
+                <strong>{{ total_activas |default:0 }}</strong>
             </article>
 
             <article class="stat-card">
                 <p>Noches este festival</p>
-                <strong>4</strong>
+                <strong>{{ nochesEsteFestival |default:0 }}</strong>
             </article>
 
             <article class="stat-card">
-                <p>Parques visitados</p>
-                <strong>3</strong>
+                <p>Parques en los que reservaste</p>
+                <strong>{{ parques_visitados }}</strong>
             </article>
-
-            <article class="stat-card">
-                <p>Total invertido</p>
-                <strong>$3,000</strong>
+            
+            <article class="profile-stat-card">
+                <small>Cuenta creada</small>
+                <strong>{{ user.date_joined|date:"Y" }}</strong>
             </article>
 
         </div>

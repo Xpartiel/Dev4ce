@@ -13,7 +13,7 @@
         <h1>Reservación confirmada</h1>
 
         <p>
-            Te enviamos el detalle a <strong>{{ user.email }}</strong>.
+            Te enviamos el detalle a tu correo electrónico.
         </p>
 
 
@@ -49,7 +49,7 @@
         </div>
 
         <div class="confirmation-actions">
-            <a href="#" class="btn btn-secondary">Ver mis reservaciones</a>
+            <a href="{% url 'mis_reservaciones' %}" class="btn btn-secondary">Ver mis reservaciones</a>
             <a href="{% url 'dashboard_cliente' %}" class="btn btn-primary">Ir al inicio</a>
         </div>
 

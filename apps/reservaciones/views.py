@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.core.mail import send_mail
+from django.core.mail import BadHeaderError, send_mail
+from django.utils.html import strip_tags
 from django.db import transaction
 from django.db.models import Count, Sum
 from datetime import date, timedelta
-import uuid
-import folium
 from django.urls import reverse
 from apps.parques.forms import ParqueForm
 from datetime import date, datetime, timedelta
@@ -14,7 +13,14 @@ from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
 from apps.parques.mapas import construir_mapa
 import calendar
+import smtplib
+import uuid
+import logging
 
+
+
+# Logger para registrar errores sin detener la aplicacion
+logger = logging.getLogger(__name__)
 
 # Criterio único de "reservación activa" (RF-08.1).
 # Lo reutilizaremos en el dashboard para mantener consistencia.
@@ -22,8 +28,10 @@ ESTADOS_ACTIVOS = ("pendiente", "confirmada")
 FESTIVAL_INICIO = date(2026, 6, 26)
 FESTIVAL_FIN    = date(2026, 8, 2)   # ajustar a la finalizacion del festival
 
+# -------------------------------------------------------------------------------------------------------
+# Funciones auxiliares
 
-def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
+def validar_reservacion(parque, checkin, checkout, tipo, huespedes, usuario = None):
     """
     Devuelve una diccionario de errores (strings). Lista vacía = todo valido.
       1. checkin debe ser dentro de la temporada.
@@ -31,6 +39,7 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
       3. Si tipo_hospedaje es 'cabana', el parque debe tener cabañas.
       4. huespedes no puede superar la capacidad máxima del tipo.
       5. checkout debe ser posterior a checkin.
+      6. Verifica si el usuario ya tiene una reservacion activa para esas fechas (confirmada).
     """
     errores = {}
 
@@ -74,7 +83,52 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
     if checkout <= checkin:
         errores['checkout'] = "La fecha de check-out debe ser posterior a la fecha de check-in."
     
+    #6. Verifica si el usuario ya tiene una reservacion activa para esas fechas (confirmada)
+    if usuario is not None:
+        if Reservacion.objects.filter(
+            usuario=usuario,
+            estado__in=ESTADOS_ACTIVOS,
+            checkin__lte=checkout,
+            checkout__gte=checkin,
+        ).exists():
+            errores['checkin'] = "Ya tienes una reservación activa que se solapa con estas fechas."
+            errores['checkout'] = "Ya tienes una reservación activa que se solapa con estas fechas."
+
     return errores
+
+
+def noches_reservadas(request):
+    return sum(
+        (reservacion.checkout - reservacion.checkin).days
+        for reservacion in Reservacion.objects.filter(
+            usuario=request.user,
+            estado__in=ESTADOS_ACTIVOS
+        )
+    )
+
+
+def parques_visitados(request):
+    return (
+        Reservacion.objects
+        .filter(usuario=request.user, estado__in=ESTADOS_ACTIVOS)
+        .values("parque")
+        .distinct()
+        .count()
+    )
+
+
+def total_invertido(request):
+    return sum(
+        reservacion.total
+        for reservacion in Reservacion.objects.filter(
+            usuario=request.user,
+            estado__in=ESTADOS_ACTIVOS
+        )
+    )
+
+
+# -------------------------------------------------------------------------------------------------------
+# Vistas de cliente (para usuarios sin tipoAdministrador)
 
 
 @login_required
@@ -90,10 +144,13 @@ def dashboard_cliente(request):
 
     return render(request, "reservaciones/dashboard_cliente.html", {
         "proximas": activas[:2],
+        "nochesEsteFestival": noches_reservadas(request),
         "total_activas": activas.count(),
         "dias_para_festival": dias_para_festival,
         "sugeridos": Parque.objects.filter(activo=True)[:3],
+        "parques_visitados": parques_visitados(request),
     })
+
 
 @login_required
 def mapa_cliente(request):
@@ -103,12 +160,17 @@ def mapa_cliente(request):
         "parques": parques,
     })
 
+
 @login_required
 def detalle_parque(request, parque_id):
     parque = get_object_or_404(Parque, pk=parque_id, activo=True)
     return render(request, "reservaciones/detalle_parque.html", {
         "parque": parque,
     })
+
+
+# Pasos importantes para la reservacion exitosa
+
 
 @login_required
 def reservar_paso_1(request, parque_id):
@@ -145,8 +207,7 @@ def reservar_paso_1(request, parque_id):
         
 
         # Si hay algun error de validacion, mostramos el formulario de nuevo con los errores y los datos ingresados previamente
-        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes_str)
-
+        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes_str, usuario=request.user) 
         if errores_validacion:
             return render(request, "reservaciones/reservar_paso_1.html", {
                 "parque": parque,
@@ -192,12 +253,41 @@ def reservar_paso_2(request, parque_id):
     huespedes = reserva["huespedes"]
     precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
     dias = (checkout - checkin).days
-    total = precio_noche * dias * huespedes
+    total = precio_noche * dias 
+
+    tiene_perfil_completo = hasattr(request.user, 'persona') 
+    telefono_bd = request.user.persona.telefono if tiene_perfil_completo else ""
 
     if request.method == "POST":
-        # Guardamos comentarios adicionales y redirigimos al paso 3
-        reserva["comentarios"] = request.POST.get("comentarios", "") 
-        request.session.modified = True  # Indicamos que la sesión ha sido modificada y forzamos guardado de sesion
+        # Guardamos los comentarios adicionales, telefono y redirigimos al paso 3
+        
+        comentarios_entrada = request.POST.get("comentarios", "") 
+        telefono_entrada = request.POST.get("telefono", "").replace(" ", "").replace("-", "")
+        
+        if not telefono_entrada.isdigit() or len(telefono_entrada) != 10:
+            return render(request, "reservaciones/reservar_paso_2.html", {
+                "parque": parque,
+                "parque_id": parque_id,
+                "checkin": checkin,
+                "checkout": checkout,
+                "tipo": tipo,
+                "huespedes": huespedes,
+                "total": total,
+                "error_telefono": "Por favor ingresa un número de celular válido a 10 dígitos.",
+                "telefono_previo": request.POST.get("telefono", ""), # Para no borrarle lo que escribió
+                "comentarios_previos": comentarios_entrada 
+            })
+        
+        reserva["comentarios"] = comentarios_entrada
+        reserva["telefono"] = telefono_entrada
+        request.session.modified = True  # Indicamos que la sesion ha sido modificada y forzamos guardado de sesion
+
+        
+        if tiene_perfil_completo and telefono_bd != telefono_entrada:
+            request.user.persona.telefono = telefono_entrada
+            request.user.persona.save()
+
+
         return redirect("reservar_paso_3", parque_id=parque_id)
     
     return render(request, "reservaciones/reservar_paso_2.html", {
@@ -208,17 +298,14 @@ def reservar_paso_2(request, parque_id):
         "tipo": tipo,
         "huespedes": huespedes,
         "total": total,
+        "telefono_previo": telefono_bd,
     })
-
-
-
 
 
 @login_required
 def reservar_paso_3(request, parque_id):
     reserva = request.session.get("reserva", {})
     
-    # Si no hay datos de reserva en la sesion, redirigimos al paso 1
     if not reserva or reserva.get("parque_id") != parque_id:
         return redirect("reservar_paso_1", parque_id=parque_id)
     
@@ -227,14 +314,15 @@ def reservar_paso_3(request, parque_id):
     checkout = date.fromisoformat(reserva["checkout"])
     tipo = reserva["tipo"]
     huespedes = reserva["huespedes"]
+    telefono = reserva.get("telefono", "No proporcionado") # En caso de que algo haya salido mal con el teléfono, no queremos que rompa la confirmación
     precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
     dias = (checkout - checkin).days
     total = precio_noche * dias
 
     if request.method == "POST":
-        # 1. Validamos 
-        errores = validar_reservacion(parque, checkin, checkout, tipo, huespedes)
-        if errores:
+        # 1. Validacion inicial
+        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes, usuario=request.user)
+        if errores_validacion:
             return render(request, "reservaciones/reservar_paso_3.html", {
                 "parque": parque,
                 "parque_id": parque_id,
@@ -243,45 +331,126 @@ def reservar_paso_3(request, parque_id):
                 "tipo": tipo,
                 "huespedes": huespedes,
                 "total": total,
-                "error": " ".join(errores),
+                "error": " ".join(errores_validacion.values()), 
             })
         
-        # 2. Creamos reservacion en BD
-        folio = f"LUZ-{date.today().year}-{uuid.uuid4().hex[:5].upper()}"
-        reservacion = Reservacion.objects.create(
-            usuario = request.user,
-            parque = parque,
-            folio = folio,
-            checkin = checkin,
-            checkout = checkout,
-            huespedes = huespedes,
-            tipo_hospedaje = tipo,
-            total = total,
-            estado = "confirmada",
-            comentarios = request.POST.get("comentarios", ""),
-        )
-        # 4. Reducimos la disponibilidad de cada dia
         fechas = [checkin + timedelta(days=i) for i in range(dias)]
-        for fecha in fechas:
-            disponibilidad, _ = DisponibilidadParque.objects.get_or_create(
-                parque=parque,
-                fecha=fecha,
-                defaults={"capacidad_disponible": parque.capacidad_max_camping},
-            )
-            disponibilidad.capacidad_disponible = max(0, disponibilidad.capacidad_disponible - huespedes)
-            if disponibilidad.capacidad_disponible == 0:
-                disponibilidad.estado = "agotado"
-            elif disponibilidad.capacidad_disponible <= 5:
-                disponibilidad.estado = "pocos"
-            else:
-                disponibilidad.estado = "libre"
-            disponibilidad.save()
+        capacidad_base = parque.capacidad_max_cabana if tipo == "cabana" else parque.capacidad_max_camping
 
-        # 3. Limpiamos datos de reserva en sesion y redirigimos a confirmacion
-        del request.session ["reserva"]
+        # 2. Seccion critica para que no se sobrevendan los espacios
+        try:
+            with transaction.atomic():
+                #2.1. Garantizar que existan los registros antes de bloquear
+                # No podemos bloquear espacios que aún no existen en la base de datos
+                for fecha in fechas:
+                    DisponibilidadParque.objects.get_or_create(
+                        parque=parque,
+                        fecha=fecha,
+                        defaults={"capacidad_disponible": capacidad_base, "estado": "libre"}
+                    )
+
+                #2.2. Adquirir los locks
+                # El order_by('fecha') es importante porque nos ayuda a evitar los deadlocks en la base de datos
+                disponibilidades = DisponibilidadParque.objects.select_for_update().filter(
+                    parque=parque,
+                    fecha__in=fechas
+                ).order_by('fecha')
+
+                #3.3. Verificacion lineal dentro de la zona de exclusión mutua
+                for disp in disponibilidades:
+                    if disp.capacidad_disponible < huespedes:
+                        # Lanzar excepción hace rollback automático de todo el bloque atomic
+                        raise ValueError(f"Los lugares para el {disp.fecha.strftime('%d/%m/%Y')} acaban de agotarse.")
+                
+                #4.4. Mutacion de estado (Descontamos los lugares de forma segura)
+                for disp in disponibilidades:
+                    disp.capacidad_disponible -= huespedes
+                    
+                    if disp.capacidad_disponible == 0:
+                        disp.estado = "agotado"
+                    elif disp.capacidad_disponible <= 5:
+                        disp.estado = "pocos"
+                    else:
+                        disp.estado = "libre"
+                        
+                    disp.save()
+
+                #5.5. Creamos la reservacion
+                # Solo insertamos si la mutacion de disponibilidad fue exitosa
+                folio = f"LUZ-{date.today().year}-{uuid.uuid4().hex[:5].upper()}"
+                reservacion = Reservacion.objects.create(
+                    usuario=request.user,
+                    parque=parque,
+                    folio=folio,
+                    checkin=checkin,
+                    checkout=checkout,
+                    huespedes=huespedes,
+                    tipo_hospedaje=tipo,
+                    total=total,
+                    estado="confirmada",
+                    comentarios=reserva.get("comentarios", ""),
+                )
+
+        except ValueError as e:
+            # Si alguien mas gano la condicion de carrera, mostramos el error aqui
+            return render(request, "reservaciones/reservar_paso_3.html", {
+                "parque": parque,
+                "parque_id": parque_id,
+                "checkin": checkin,
+                "checkout": checkout,
+                "tipo": tipo,
+                "huespedes": huespedes,
+                "total": total,
+                "error": str(e),
+            })
+
+
+    # 3. Enviamos correo de confirmacion (fuera del bloque atomic)
+        comentarios_seguros = strip_tags(reserva.get("comentarios", ""))
+        asunto = f"Confirmación de Reservación - Folio {reservacion.folio}".replace('\n', '').replace('\r', '')
+        cuerpo = f"""Hola {request.user.username},
+
+        ¡Tu reservación en el Festival de las Luciérnagas está confirmada!
+
+        --- DETALLES DE TU ESTANCIA ---
+        Parque: {parque.nombre}
+        Folio: {reservacion.folio}
+        Check-in: {checkin.strftime('%d/%m/%Y')}
+        Check-out: {checkout.strftime('%d/%m/%Y')}
+        Hospedaje: {'Cabaña' if tipo == 'cabana' else 'Camping'}
+        Huéspedes: {huespedes}
+        Teléfono de contacto: {telefono}
+
+        Total de tu reservación: ${total:.2f}
+
+        Tus comentarios adicionales:
+        {comentarios_seguros if comentarios_seguros else 'Ninguno'}
+
+        ¡Te esperamos pronto!
+        """
+
+        print("Usuario:", request.user)
+        print("Email:", request.user.username)
+        print("Asunto:", asunto)
+        try:
+            send_mail(
+                subject=asunto,
+                message=cuerpo,
+                from_email=None,
+                recipient_list=[request.user.username],
+                fail_silently=False,
+            )
+        except BadHeaderError:
+            logger.warning(f"Intento de Header Injection detectado en la reservación {reservacion.folio}")
+        except smtplib.SMTPException as e:
+            logger.error(f"Error SMTP al enviar correo del folio {reservacion.folio}: {e}")
+        except Exception as e:
+            logger.error(f"Error inesperado al enviar correo del folio {reservacion.folio}: {e}")
+        # 4. Limpieza de sesion y redireccion 
+        del request.session["reserva"]
         return redirect("reservacion_confirmada_folio", reservacion_id=reservacion.id)
 
-    # GET para mostrar resumen de reserva y confirmacion final
+    # GET para mostrar resumen de reserva y confirmación final
     return render(request, "reservaciones/reservar_paso_3.html", {
         "parque": parque,
         "parque_id": parque_id,
@@ -290,8 +459,13 @@ def reservar_paso_3(request, parque_id):
         "tipo": tipo,
         "huespedes": huespedes,
         "total": total,
-    })
-            
+        "telefono": telefono,
+    })   
+
+          
+
+
+# Informacion de confirmacion y gestion de reservaciones activas
 
 
 @login_required
@@ -336,6 +510,8 @@ def detalle_reservacion(request, reservacion_id):
         "reservacion": reservacion,
     })
 
+
+# Cancelaciones de reservaciones activas (confirmada). No se pueden cancelar reservaciones ya canceladas o finalizadas.
 
 @login_required
 def cancelar_reservacion(request, reservacion_id):
@@ -391,7 +567,17 @@ def cancelar_reservacion(request, reservacion_id):
             f"- Total: ${reservacion.total:.2f}\n\n"
             f"Si esta cancelación fue un error o desea reprogramar, por favor contáctenos lo antes posible."
         )
-        send_mail(asunto, cuerpo, None, [request.user.email], fail_silently=True)
+        try:
+            send_mail(
+                subject=asunto,
+                message=cuerpo,
+                from_email=None,
+                recipient_list=[request.user.username],
+                fail_silently=False,
+            )
+        except Exception as e:
+            logger.error(f"Error al enviar correo de cancelación del folio {reservacion.folio}: {e}")
+
         return redirect("mis_reservaciones")
     
     # GET para redirigir (por seguridad)
@@ -402,7 +588,12 @@ def mi_perfil(request):
     total_reservaciones = Reservacion.objects.filter(usuario=request.user).count()
     return render(request, "reservaciones/mi_perfil.html", {
         "total_reservaciones": total_reservaciones,
+        "nochesEsteFestival": noches_reservadas(request),
+        "parques_visitados": parques_visitados(request),
+        "total_invertido": total_invertido(request),
     })
+
+
 
 # -------------------------------------------------------------------------------------------------------
 # Vistas de administracion (solo para usuarios con tipoAdministrador=True)

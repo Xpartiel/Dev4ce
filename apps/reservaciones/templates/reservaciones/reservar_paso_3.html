@@ -13,9 +13,9 @@
         <h1>Revisa y confirma tu reservación</h1>
 
         <div class="booking-steps">
-            <span>1 Fechas y huéspedes</span>
-            <span>2 Datos del visitante</span>
-            <span class="active">3 Confirmación</span>
+            <span>1. Fechas y huéspedes</span>
+            <span>2. Datos del visitante</span>
+            <span class="active">3. Confirmación</span>
         </div>
 
         <div class="booking-layout">
@@ -27,32 +27,32 @@
                 <div class="confirm-grid">
                     <div>
                         <small>Santuario</small>
-                        <strong>Santuario El Rosario</strong>
+                        <strong>{{ parque.nombre }}</strong>
                     </div>
 
                     <div>
                         <small>Estancia</small>
-                        <strong>14 Jun - 16 Jun</strong>
+                        <strong>{{ checkin }} - {{ checkout }}</strong>
                     </div>
 
                     <div>
                         <small>Hospedaje</small>
-                        <strong>Cabaña</strong>
+                        <strong>{{ tipo|capfirst }}</strong>
                     </div>
 
                     <div>
                         <small>Huéspedes</small>
-                        <strong>2 personas</strong>
+                        <strong>{{ huespedes }} personas</strong>
                     </div>
 
                     <div>
                         <small>Visitante</small>
-                        <strong>{{ user.nombre_completo }}</strong>
+                        <strong>{{user.persona.nombre_completo|default:user.username }}</strong>
                     </div>
 
                     <div>
                         <small>Correo</small>
-                        <strong>{{ user.email }}</strong>
+                        <strong>{{ user.email|default:user.username  }}</strong>
                     </div>
                 </div>
 
