@@ -31,18 +31,18 @@
                         <input type="text" value="{{ user.nombre_completo }}">
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" style="margin-bottom: 0.8cm;">
                         <label>Correo electrónico</label>
                         <input type="email" value="{{ user.email }}">
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.8cm;">
                     <label>Teléfono de contacto</label>
                     <input type="text" placeholder="+52 55 1234 5678">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.8cm;">
                     <label>Comentarios adicionales</label>
                     <textarea name="comentarios" placeholder="Ej. Llegaremos después de las 7 pm"></textarea>
 
@@ -55,7 +55,11 @@
 
             <aside class="booking-summary">
                 <h3>Resumen</h3>
-                <p>{{ parque }}</p>
+                
+                <div class="summary-line">
+                    <span>Parque</span>
+                    <strong>{{ parque }}</strong>
+                </div>
 
                 <div class="summary-line">
                     <span>Estancia</span>

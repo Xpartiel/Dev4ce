@@ -50,18 +50,18 @@
             </article>
 
             <article class="profile-stat-card">
-                <small>Noches reservadas</small>
-                <strong>{{ noches_reservadas|default:0 }}</strong>
+                <small>Tus noches reservadas</small>
+                <strong>{{ nochesEsteFestival|default:0 }}</strong>
             </article>
 
             <article class="profile-stat-card">
-                <small>Parques visitados</small>
+                <small>Parques en los que reservaste</small>
                 <strong>{{ parques_visitados|default:0 }}</strong>
             </article>
 
-            <article class="profile-stat-card">
-                <small>Cuenta creada</small>
-                <strong>{{ user.date_joined|date:"Y" }}</strong>
+            <article class="stat-card">
+                <p>Total invertido en tu experiencia</p>
+                <strong>${{ total_invertido|floatformat:0 }}</strong>
             </article>
 
         </div>
