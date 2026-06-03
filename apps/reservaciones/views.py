@@ -31,7 +31,7 @@ FESTIVAL_FIN    = date(2026, 8, 2)   # ajustar a la finalizacion del festival
 # -------------------------------------------------------------------------------------------------------
 # Funciones auxiliares
 
-def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
+def validar_reservacion(parque, checkin, checkout, tipo, huespedes, usuario = None):
     """
     Devuelve una diccionario de errores (strings). Lista vacía = todo valido.
       1. checkin debe ser dentro de la temporada.
@@ -84,13 +84,15 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
         errores['checkout'] = "La fecha de check-out debe ser posterior a la fecha de check-in."
     
     #6. Verifica si el usuario ya tiene una reservacion activa para esas fechas (confirmada)
-    if Reservacion.objects.filter(
-        estado__in=ESTADOS_ACTIVOS,
-        checkin__lte=checkout,
-        checkout__gte=checkin,
-    ).exists():
-        errores['checkin'] = "Ya tienes una reservación activa que se solapa con estas fechas."
-        errores['checkout'] = "Ya tienes una reservación activa que se solapa con estas fechas."
+    if usuario is not None:
+        if Reservacion.objects.filter(
+            usuario=usuario,
+            estado__in=ESTADOS_ACTIVOS,
+            checkin__lte=checkout,
+            checkout__gte=checkin,
+        ).exists():
+            errores['checkin'] = "Ya tienes una reservación activa que se solapa con estas fechas."
+            errores['checkout'] = "Ya tienes una reservación activa que se solapa con estas fechas."
 
     return errores
 
@@ -205,8 +207,7 @@ def reservar_paso_1(request, parque_id):
         
 
         # Si hay algun error de validacion, mostramos el formulario de nuevo con los errores y los datos ingresados previamente
-        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes_str)
-
+        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes_str, usuario=request.user) 
         if errores_validacion:
             return render(request, "reservaciones/reservar_paso_1.html", {
                 "parque": parque,
@@ -319,8 +320,8 @@ def reservar_paso_3(request, parque_id):
 
     if request.method == "POST":
         # 1. Validacion inicial
-        errores = validar_reservacion(parque, checkin, checkout, tipo, huespedes)
-        if errores:
+        errores_validacion = validar_reservacion(parque, checkin, checkout, tipo, huespedes, usuario=request.user)
+        if errores_validacion:
             return render(request, "reservaciones/reservar_paso_3.html", {
                 "parque": parque,
                 "parque_id": parque_id,
@@ -401,56 +402,45 @@ def reservar_paso_3(request, parque_id):
                 "total": total,
                 "error": str(e),
             })
-    
-    # 3. Enviamos correo de confirmacion (obviamente fuera del bloque atomic para no retrasar el lock)   
 
-        #3.1 Seguridad: Limpiamos HTML/Scripts de los comentarios ingresados por el usuario
+
+    # 3. Enviamos correo de confirmacion (fuera del bloque atomic)
         comentarios_seguros = strip_tags(reserva.get("comentarios", ""))
-        #3.2 Seguridad: Eliminamos cualquier salto de línea del asunto para evitar Header Injection
         asunto = f"Confirmación de Reservación - Folio {reservacion.folio}".replace('\n', '').replace('\r', '')
-        #3.3 Construimos el cuerpo del correo con la informacion de la reservacion
         cuerpo = f"""Hola {request.user.username},
 
-¡Tu reservación en el Festival de las Luciérnagas está confirmada!
+        ¡Tu reservación en el Festival de las Luciérnagas está confirmada!
 
---- DETALLES DE TU ESTANCIA ---
-Parque: {parque.nombre}
-Folio: {reservacion.folio}
-Check-in: {checkin.strftime('%d/%m/%Y')}
-Check-out: {checkout.strftime('%d/%m/%Y')}
-Hospedaje: {'Cabaña' if tipo == 'cabana' else 'Camping'}
-Huéspedes: {huespedes}
-Teléfono de contacto: {telefono}
+        --- DETALLES DE TU ESTANCIA ---
+        Parque: {parque.nombre}
+        Folio: {reservacion.folio}
+        Check-in: {checkin.strftime('%d/%m/%Y')}
+        Check-out: {checkout.strftime('%d/%m/%Y')}
+        Hospedaje: {'Cabaña' if tipo == 'cabana' else 'Camping'}
+        Huéspedes: {huespedes}
+        Teléfono de contacto: {telefono}
 
-Total de tu reservación: ${total:.2f}
+        Total de tu reservación: ${total:.2f}
 
-Tus comentarios adicionales:
-{comentarios_seguros if comentarios_seguros else 'Ninguno'}
+        Tus comentarios adicionales:
+        {comentarios_seguros if comentarios_seguros else 'Ninguno'}
 
-¡Te esperamos pronto!
-"""
-        # Intentamos enviar el correo manejando posibles excepciones
-        send_mail(
+        ¡Te esperamos pronto!
+        """
+        try:
+            send_mail(
                 subject=asunto,
                 message=cuerpo,
-                from_email=None, # Usa el DEFAULT_FROM_EMAIL definido en settings.py
+                from_email=None,
                 recipient_list=[request.user.email],
                 fail_silently=False,
             )
-        '''
-        try:
-            
         except BadHeaderError:
-            # Detectó intento de inyección en cabeceras
             logger.warning(f"Intento de Header Injection detectado en la reservación {reservacion.folio}")
         except smtplib.SMTPException as e:
-            # Falló el envío, pero la reserva ya está guardada. 
-            # Registramos el error internamente sin interrumpir la experiencia del usuario.
             logger.error(f"Error SMTP al enviar correo del folio {reservacion.folio}: {e}")
         except Exception as e:
-            # Captura cualquier otro error de red inesperado
             logger.error(f"Error inesperado al enviar correo del folio {reservacion.folio}: {e}")
-        '''
         # 4. Limpieza de sesion y redireccion 
         del request.session["reserva"]
         return redirect("reservacion_confirmada_folio", reservacion_id=reservacion.id)
@@ -572,7 +562,11 @@ def cancelar_reservacion(request, reservacion_id):
             f"- Total: ${reservacion.total:.2f}\n\n"
             f"Si esta cancelación fue un error o desea reprogramar, por favor contáctenos lo antes posible."
         )
-        send_mail(asunto, cuerpo, None, [request.user.email], fail_silently=True)
+        try:
+            send_mail(asunto, cuerpo, None, [request.user.email], fail_silently=False)
+        except Exception as e:
+            logger.error(f"Error al enviar correo de cancelación del folio {reservacion.folio}: {e}")
+
         return redirect("mis_reservaciones")
     
     # GET para redirigir (por seguridad)
