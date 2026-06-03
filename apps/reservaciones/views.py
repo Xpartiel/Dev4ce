@@ -330,7 +330,7 @@ def reservar_paso_3(request, parque_id):
                 "tipo": tipo,
                 "huespedes": huespedes,
                 "total": total,
-                "error": " ".join(errores.values()), 
+                "error": " ".join(errores_validacion.values()), 
             })
         
         fechas = [checkin + timedelta(days=i) for i in range(dias)]
@@ -427,12 +427,16 @@ def reservar_paso_3(request, parque_id):
 
         ¡Te esperamos pronto!
         """
+
+        print("Usuario:", request.user)
+        print("Email:", request.user.username)
+        print("Asunto:", asunto)
         try:
             send_mail(
                 subject=asunto,
                 message=cuerpo,
                 from_email=None,
-                recipient_list=[request.user.email],
+                recipient_list=[request.user.username],
                 fail_silently=False,
             )
         except BadHeaderError:
@@ -563,7 +567,13 @@ def cancelar_reservacion(request, reservacion_id):
             f"Si esta cancelación fue un error o desea reprogramar, por favor contáctenos lo antes posible."
         )
         try:
-            send_mail(asunto, cuerpo, None, [request.user.email], fail_silently=False)
+            send_mail(
+                subject=asunto,
+                message=cuerpo,
+                from_email=None,
+                recipient_list=[request.user.username],
+                fail_silently=False,
+            )
         except Exception as e:
             logger.error(f"Error al enviar correo de cancelación del folio {reservacion.folio}: {e}")
 
