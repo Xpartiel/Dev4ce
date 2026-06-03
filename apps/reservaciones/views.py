@@ -22,6 +22,8 @@ ESTADOS_ACTIVOS = ("pendiente", "confirmada")
 FESTIVAL_INICIO = date(2026, 6, 26)
 FESTIVAL_FIN    = date(2026, 8, 2)   # ajustar a la finalizacion del festival
 
+# -------------------------------------------------------------------------------------------------------
+# Funciones auxiliares
 
 def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
     """
@@ -31,6 +33,7 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
       3. Si tipo_hospedaje es 'cabana', el parque debe tener cabañas.
       4. huespedes no puede superar la capacidad máxima del tipo.
       5. checkout debe ser posterior a checkin.
+      6. Verifica si el usuario ya tiene una reservacion activa para esas fechas (confirmada).
     """
     errores = {}
 
@@ -86,6 +89,40 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes):
     return errores
 
 
+def noches_reservadas(request):
+    return sum(
+        (reservacion.checkout - reservacion.checkin).days
+        for reservacion in Reservacion.objects.filter(
+            usuario=request.user,
+            estado__in=ESTADOS_ACTIVOS
+        )
+    )
+
+
+def parques_visitados(request):
+    return (
+        Reservacion.objects
+        .filter(usuario=request.user, estado__in=ESTADOS_ACTIVOS)
+        .values("parque")
+        .distinct()
+        .count()
+    )
+
+
+def total_invertido(request):
+    return sum(
+        reservacion.total
+        for reservacion in Reservacion.objects.filter(
+            usuario=request.user,
+            estado__in=ESTADOS_ACTIVOS
+        )
+    )
+
+
+# -------------------------------------------------------------------------------------------------------
+# Vistas de cliente (para usuarios sin tipoAdministrador)
+
+
 @login_required
 def dashboard_cliente(request):
     activas = (
@@ -106,6 +143,7 @@ def dashboard_cliente(request):
         "parques_visitados": parques_visitados(request),
     })
 
+
 @login_required
 def mapa_cliente(request):
     parques = Parque.objects.filter(activo=True)
@@ -114,12 +152,17 @@ def mapa_cliente(request):
         "parques": parques,
     })
 
+
 @login_required
 def detalle_parque(request, parque_id):
     parque = get_object_or_404(Parque, pk=parque_id, activo=True)
     return render(request, "reservaciones/detalle_parque.html", {
         "parque": parque,
     })
+
+
+# Pasos importantes para la reservacion exitosa
+
 
 @login_required
 def reservar_paso_1(request, parque_id):
@@ -187,7 +230,6 @@ def reservar_paso_1(request, parque_id):
     })
 
 
-
 @login_required
 def reservar_paso_2(request, parque_id):
     reserva = request.session.get("reserva", {})
@@ -220,9 +262,6 @@ def reservar_paso_2(request, parque_id):
         "huespedes": huespedes,
         "total": total,
     })
-
-
-
 
 
 @login_required
@@ -342,6 +381,9 @@ def reservar_paso_3(request, parque_id):
     })         
 
 
+# Informacion de confirmacion y gestion de reservaciones activas
+
+
 @login_required
 def reservacion_confirmada(request, reservacion_id):
     reservacion = get_object_or_404(
@@ -384,6 +426,8 @@ def detalle_reservacion(request, reservacion_id):
         "reservacion": reservacion,
     })
 
+
+# Cancelaciones de reservaciones activas (confirmada). No se pueden cancelar reservaciones ya canceladas o finalizadas.
 
 @login_required
 def cancelar_reservacion(request, reservacion_id):
@@ -455,33 +499,6 @@ def mi_perfil(request):
         "total_invertido": total_invertido(request),
     })
 
-
-def noches_reservadas(request):
-    return sum(
-        (reservacion.checkout - reservacion.checkin).days
-        for reservacion in Reservacion.objects.filter(
-            usuario=request.user,
-            estado__in=ESTADOS_ACTIVOS
-        )
-    )
-
-def parques_visitados(request):
-    return (
-        Reservacion.objects
-        .filter(usuario=request.user, estado__in=ESTADOS_ACTIVOS)
-        .values("parque")
-        .distinct()
-        .count()
-    )
-
-def total_invertido(request):
-    return sum(
-        reservacion.total
-        for reservacion in Reservacion.objects.filter(
-            usuario=request.user,
-            estado__in=ESTADOS_ACTIVOS
-        )
-    )
 
 
 # -------------------------------------------------------------------------------------------------------
