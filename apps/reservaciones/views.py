@@ -247,10 +247,39 @@ def reservar_paso_2(request, parque_id):
     dias = (checkout - checkin).days
     total = precio_noche * dias 
 
+    tiene_perfil_completo = hasattr(request.user, 'persona') 
+    telefono_bd = request.user.persona.telefono if tiene_perfil_completo else ""
+
     if request.method == "POST":
-        # Guardamos comentarios adicionales y redirigimos al paso 3
-        reserva["comentarios"] = request.POST.get("comentarios", "") 
+        # Guardamos los comentarios adicionales, telefono y redirigimos al paso 3
+        
+        comentarios_entrada = request.POST.get("comentarios", "") 
+        telefono_entrada = request.POST.get("telefono", "").replace(" ", "").replace("-", "")
+        
+        if not telefono_entrada.isdigit() or len(telefono_entrada) != 10:
+            return render(request, "reservaciones/reservar_paso_2.html", {
+                "parque": parque,
+                "parque_id": parque_id,
+                "checkin": checkin,
+                "checkout": checkout,
+                "tipo": tipo,
+                "huespedes": huespedes,
+                "total": total,
+                "error_telefono": "Por favor ingresa un número de celular válido a 10 dígitos.",
+                "telefono_previo": request.POST.get("telefono", ""), # Para no borrarle lo que escribió
+                "comentarios_previos": comentarios_entrada 
+            })
+        
+        reserva["comentarios"] = comentarios_entrada
+        reserva["telefono"] = telefono_entrada
         request.session.modified = True  # Indicamos que la sesion ha sido modificada y forzamos guardado de sesion
+
+        
+        if tiene_perfil_completo and telefono_bd != telefono_entrada:
+            request.user.persona.telefono = telefono_entrada
+            request.user.persona.save()
+
+
         return redirect("reservar_paso_3", parque_id=parque_id)
     
     return render(request, "reservaciones/reservar_paso_2.html", {
@@ -261,6 +290,7 @@ def reservar_paso_2(request, parque_id):
         "tipo": tipo,
         "huespedes": huespedes,
         "total": total,
+        "telefono_previo": telefono_bd,
     })
 
 

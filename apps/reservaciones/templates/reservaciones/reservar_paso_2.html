@@ -13,38 +13,42 @@
         <h1>Completa los datos de tu visita</h1>
 
         <div class="booking-steps">
-            <span>1 Fechas y huéspedes</span>
-            <span class="active">2 Datos del visitante</span>
-            <span>3 Confirmación</span>
+            <span>1. Fechas y huéspedes</span>
+            <span class="active">2. Datos extra del visitante</span>
+            <span>3. Confirmación</span>
         </div>
 
         <div class="booking-layout">
 
             <form class="booking-card" method="POST" action="{% url 'reservar_paso_2' parque_id %}">
             {% csrf_token %}
-                <h2>Datos del responsable</h2>
-                <p>Estos datos se usarán para validar tu llegada al santuario.</p>
+                <h2>Comentarios para que tu experiencia sea perfecta</h2>
+                <p>Estos datos se usarán para que tu llegada al santuario sea una experiencia inolvidable.</p>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nombre completo</label>
-                        <input type="text" value="{{ user.nombre_completo }}">
-                    </div>
 
-                    <div class="form-group" style="margin-bottom: 0.8cm;">
-                        <label>Correo electrónico</label>
-                        <input type="email" value="{{ user.email }}">
-                    </div>
-                </div>
 
-                <div class="form-group" style="margin-bottom: 0.8cm;">
-                    <label>Teléfono de contacto</label>
-                    <input type="text" placeholder="+52 55 1234 5678">
-                </div>
-
-                <div class="form-group" style="margin-bottom: 0.8cm;">
+                <div class="form-group" style="margin-bottom: 0.5cm;">
                     <label>Comentarios adicionales</label>
-                    <textarea name="comentarios" placeholder="Ej. Llegaremos después de las 7 pm"></textarea>
+                    <textarea name="comentarios" placeholder="Ej. Llegaremos después de las 7 p.m.">{{ comentarios_previos }}</textarea>
+                </div>
+                <div class="form-group" style="margin-bottom: 0.5cm;">
+                    <label>Teléfono de contacto</label>
+                    <input type="tel" 
+                        name="telefono" 
+                        value="{{ telefono_previo }}" 
+                        placeholder="Ej: 5512345678" 
+                        pattern="[0-9]{10}" 
+                        maxlength="10" 
+                        title="Ingresa un número a 10 dígitos, sin espacios ni guiones" 
+                        required>
+                    
+                    {% if error_telefono %}
+                        <span class="inline-error" style="color: #ef4444; font-size: 0.85em; display: block; margin-top: 5px;">
+                            {{ error_telefono }}
+                        </span>
+                    {% endif %}
+                </div>
+
 
                 <div class="booking-actions">
                     <a href="{% url 'reservar_paso_1' parque_id %}" class="btn btn-secondary">Regresar</a>
