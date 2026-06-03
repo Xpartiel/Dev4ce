@@ -14,6 +14,7 @@ from apps.parques.models import Parque
 from apps.parques.mapas import construir_mapa
 import calendar
 import smtplib
+import threading
 import uuid
 import logging
 
@@ -31,11 +32,34 @@ FESTIVAL_FIN    = date(2026, 8, 2)   # ajustar a la finalizacion del festival
 # -------------------------------------------------------------------------------------------------------
 # Funciones auxiliares
 
+def _enviar_correo_async(asunto, cuerpo, destinatario, folio):
+    """
+    Envía un correo en SEGUNDO PLANO (en un hilo aparte) para no bloquear la
+    respuesta al usuario: la confirmación se muestra de inmediato y el envío por
+    SMTP (que es lento) ocurre en paralelo. Como la petición ya respondió,
+    cualquier fallo solo se registra en el log.
+    """
+    try:
+        send_mail(
+            subject=asunto,
+            message=cuerpo,
+            from_email=None,
+            recipient_list=[destinatario],
+            fail_silently=False,
+        )
+    except BadHeaderError:
+        logger.warning(f"Intento de Header Injection detectado en la reservación {folio}")
+    except smtplib.SMTPException as e:
+        logger.error(f"Error SMTP al enviar correo del folio {folio}: {e}")
+    except Exception as e:
+        logger.error(f"Error inesperado al enviar correo del folio {folio}: {e}")
+
+
 def validar_reservacion(parque, checkin, checkout, tipo, huespedes, usuario = None):
     """
     Devuelve una diccionario de errores (strings). Lista vacía = todo valido.
       1. checkin debe ser dentro de la temporada.
-      2. checkin no puede caer en martes.
+      2. Ningún día de la estancia puede caer en martes (mantenimiento).
       3. Si tipo_hospedaje es 'cabana', el parque debe tener cabañas.
       4. huespedes no puede superar la capacidad máxima del tipo.
       5. checkout debe ser posterior a checkin.
@@ -56,9 +80,19 @@ def validar_reservacion(parque, checkin, checkout, tipo, huespedes, usuario = No
             f"{FESTIVAL_INICIO.strftime('%d/%m/%Y')} y "
             f"{FESTIVAL_FIN.strftime('%d/%m/%Y')}."
         )
-    # 2. Check-in no puede caer en martes (cambiar a 1)
-    elif checkin.weekday() == 0:
-        errores['checkin'] = "Las reservaciones no pueden realizarse los dias martes. Nos encontramos en mantenimiento"
+    # 2. Ningún día de la estancia puede caer en martes: los martes el parque
+    #    cierra por mantenimiento, así que se rechaza cualquier rango que
+    #    incluya un martes. weekday(): 0=lunes, 1=martes.
+    if 'checkin' not in errores and 'checkout' not in errores and checkin <= checkout:
+        dia = checkin
+        while dia <= checkout:
+            if dia.weekday() == 1:
+                errores['checkin'] = (
+                    "Tu estancia incluye un martes y los martes el parque cierra "
+                    "por mantenimiento. Elige fechas que no abarquen ningún martes."
+                )
+                break
+            dia += timedelta(days=1)
     
     # 3. Verificar el tipo hospedaje de los parques
     if tipo == "cabana" and not parque.tiene_cabanas:
@@ -429,23 +463,13 @@ def reservar_paso_3(request, parque_id):
         ¡Te esperamos pronto!
         """
 
-        print("Usuario:", request.user)
-        print("Email:", request.user.username)
-        print("Asunto:", asunto)
-        try:
-            send_mail(
-                subject=asunto,
-                message=cuerpo,
-                from_email=None,
-                recipient_list=[request.user.username],
-                fail_silently=False,
-            )
-        except BadHeaderError:
-            logger.warning(f"Intento de Header Injection detectado en la reservación {reservacion.folio}")
-        except smtplib.SMTPException as e:
-            logger.error(f"Error SMTP al enviar correo del folio {reservacion.folio}: {e}")
-        except Exception as e:
-            logger.error(f"Error inesperado al enviar correo del folio {reservacion.folio}: {e}")
+        # Enviamos el correo en SEGUNDO PLANO (hilo aparte): así el usuario ve la
+        # confirmación al instante y el envío por SMTP no retrasa la respuesta.
+        threading.Thread(
+            target=_enviar_correo_async,
+            args=(asunto, cuerpo, request.user.username, reservacion.folio),
+            daemon=True,
+        ).start()
         # 4. Limpieza de sesion y redireccion 
         del request.session["reserva"]
         return redirect("reservacion_confirmada_folio", reservacion_id=reservacion.id)
