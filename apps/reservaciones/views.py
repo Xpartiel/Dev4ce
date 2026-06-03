@@ -237,6 +237,7 @@ def reservar_paso_1(request, parque_id):
     })
 
 
+
 @login_required
 def reservar_paso_2(request, parque_id):
     reserva = request.session.get("reserva", {})
@@ -795,15 +796,137 @@ def eliminar_reservacion(request, reservacion_id):
     return redirect("admin_reservaciones")
 
 
+'''
+Constantes uilizadas para indicar el estatus de disponibilidad
+de determinados dias; usado en la vista admin_calendario
+'''
+ESTADOS_CSS = {
+    "libre": "free",
+    "pocos": "few",
+    "agotado": "full",
+    "mantenimiento": "maintenance",
+}
+
+def obtener_parque_activo(parques, parque_id):
+    '''
+    Metodo auxiliar con que se se indica al panel de calendario
+    cual es el parque selecto.
+    Por defecto intenta devolver al primer parque activo
+    '''
+    
+    try:
+        return parques.get(pk=parque_id)
+
+    except (Parque.DoesNotExist, ValueError, TypeError):
+        return parques.first()
+
+def obtener_disponibilidades_mes(parque, anio, mes):
+    '''
+    Metodo auxiliar con que se obtienen todos los objetos de
+    disponibilidad correspondientes al parque en un mes y año
+    dados, para que sean usados en el panel de disponibilidad
+    '''
+    return (
+        DisponibilidadParque.objects
+        .filter(
+            parque=parque,
+            fecha__year=anio,
+            fecha__month=mes
+        )
+    )
+
+def indexar_disponibilidades(disponibilidades):
+    '''
+    Metodo auxiliar con que se asocia la fecha y el valor
+    de disponibilidad para su uso en la vista de calendario-disponibilidad
+    '''
+    return {
+        disponibilidad.fecha.day: disponibilidad
+        for disponibilidad in disponibilidades
+    }
+
+
+def construir_dia(numero_dia, disponibilidad, capacidad_total):
+
+    if disponibilidad:
+
+        return {
+            "numero": numero_dia,
+            "estado": ESTADOS_CSS.get(
+                disponibilidad.estado,
+                "free"
+            ),
+            "disponibles": disponibilidad.capacidad_disponible,
+            "capacidad": capacidad_total,
+        }
+
+    return {
+        "numero": numero_dia,
+        "estado": "free",
+        "disponibles": capacidad_total,
+        "capacidad": capacidad_total,
+    }
+
+
+def construir_calendario_mes(
+    anio,
+    mes,
+    disponibilidad_por_dia,
+    capacidad_total ):
+    '''
+    Metodo auxiliar con que se construye la informacion de todo el mes
+    a partir de la informacion de fechas (anio,mes), de disponibilidad
+    obtenida, y la capacidad total del parque en cuestion
+    '''
+
+    calendario_mes = []
+
+    for semana in calendar.monthcalendar(anio, mes):
+
+        fila = []
+
+        for numero_dia in semana:
+
+            if numero_dia == 0:
+                fila.append(None)
+                continue
+
+            disponibilidad = disponibilidad_por_dia.get(
+                numero_dia
+            )
+
+            fila.append(
+                construir_dia(
+                    numero_dia,
+                    disponibilidad,
+                    capacidad_total
+                )
+            )
+
+        calendario_mes.append(fila)
+
+    return calendario_mes
+
+
+
+
+
 @user_passes_test(solo_admin, login_url="login")
 def admin_calendario(request):
+    '''
+    Vista con que se indican varias cosas al template:
+    1. Obtener un listado de todos los parques activos
+    2. 
+    '''
 
+    # Obtener parques activos
     parques = (
         Parque.objects
         .filter(activo=True)
         .order_by("nombre")
     )
 
+    # Si no hay parques activos, indicarlo de inmediato con un listado vacio
     if not parques.exists():
         return render(
             request,
@@ -814,85 +937,46 @@ def admin_calendario(request):
             }
         )
 
-    parque_id = request.GET.get("parque")
-
-    try:
-        parque_activo = parques.get(pk=parque_id)
-    except (Parque.DoesNotExist, ValueError, TypeError):
-        parque_activo = parques.first()
-
-    hoy = date.today()
-
-    anio = hoy.year
-    mes = hoy.month
-
-    disponibilidades = (
-        DisponibilidadParque.objects
-        .filter(
-            parque=parque_activo,
-            fecha__year=anio,
-            fecha__month=mes
-        )
+    # Obtener el parque que sera selecto para ver sus detalles.
+    # Por defecto sera el primero encontrado entre los activos
+    parque_activo = obtener_parque_activo(
+        parques,
+        request.GET.get("parque")
     )
 
-    disponibilidad_por_dia = {
-        disponibilidad.fecha.day: disponibilidad
-        for disponibilidad in disponibilidades
-    }
+    # Variable auxiliar que ayuda a mostrar datos relevantes
+    # segun la fecha de consulta
+    hoy = date.today()
 
-    semanas = calendar.monthcalendar(anio, mes)
+    # Obtener informacion de disponibilidad a partir de la fecha de consulta
+    disponibilidades = obtener_disponibilidades_mes(
+        parque_activo,
+        hoy.year,
+        hoy.month
+    )
 
-    calendario_mes = []
+    # Asociar informacion de dia con informacion de disponibilidad
+    disponibilidad_por_dia = indexar_disponibilidades(
+        disponibilidades
+    )
 
-    for semana in semanas:
+    # Construir la informacion a mostrar en el calendario
+    # - Numero de dia
+    # - 
+    calendario_mes = construir_calendario_mes(
+        hoy.year,
+        hoy.month,
+        disponibilidad_por_dia,
+        parque_activo.capacidad_total
+    )
 
-        fila = []
-
-        for numero_dia in semana:
-
-            if numero_dia == 0:
-                fila.append(None)
-                continue
-
-            disponibilidad = disponibilidad_por_dia.get(numero_dia)
-
-            if disponibilidad:
-
-                estado_css = {
-                    "libre": "free",
-                    "pocos": "few",
-                    "agotado": "full",
-                    "mantenimiento": "maintenance",
-                }.get(
-                    disponibilidad.estado,
-                    "free"
-                )
-
-                fila.append({
-                    "numero": numero_dia,
-                    "estado": estado_css,
-                    "disponibles": disponibilidad.capacidad_disponible,
-                    "capacidad": parque_activo.capacidad_total,
-                })
-
-            else:
-
-                fila.append({
-                    "numero": numero_dia,
-                    "estado": "free",
-                    "disponibles": parque_activo.capacidad_total,
-                    "capacidad": parque_activo.capacidad_total,
-                })
-
-        calendario_mes.append(fila)
-    
     return render(
         request,
         "reservaciones/admin_calendario.html",
         {
             "nombre_parques": parques,
             "parque_activo": parque_activo,
-            "mes_actual": hoy.strftime("%B %Y"),
+            "fecha_actual": hoy,
             "calendario": calendario_mes,
         }
     )

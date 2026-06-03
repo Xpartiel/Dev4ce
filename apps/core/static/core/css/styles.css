@@ -2749,9 +2749,6 @@ textarea {
 .calendar-weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-}
-
-.calendar-weekdays div {
     text-align: center;
     font-weight: 600;
     padding: 0.75rem 0;
