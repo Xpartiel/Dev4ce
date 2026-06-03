@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
-from django.core.mail import send_mail
+from django.core.mail import BadHeaderError, send_mail
+from django.utils.html import strip_tags
 from django.db import transaction
 from django.db.models import Count, Sum
 from datetime import date, timedelta
-import uuid
-import folium
 from django.urls import reverse
 from apps.parques.forms import ParqueForm
 from datetime import date, datetime, timedelta
@@ -14,7 +13,14 @@ from .models import DisponibilidadParque, Reservacion
 from apps.parques.models import Parque
 from apps.parques.mapas import construir_mapa
 import calendar
+import smtplib
+import uuid
+import logging
 
+
+
+# Logger para registrar errores sin detener la aplicacion
+logger = logging.getLogger(__name__)
 
 # Criterio único de "reservación activa" (RF-08.1).
 # Lo reutilizaremos en el dashboard para mantener consistencia.
@@ -306,6 +312,7 @@ def reservar_paso_3(request, parque_id):
     checkout = date.fromisoformat(reserva["checkout"])
     tipo = reserva["tipo"]
     huespedes = reserva["huespedes"]
+    telefono = reserva.get("telefono", "No proporcionado") # En caso de que algo haya salido mal con el teléfono, no queremos que rompa la confirmación
     precio_noche = parque.precio_cabana if tipo == "cabana" else parque.precio_camping
     dias = (checkout - checkin).days
     total = precio_noche * dias
@@ -383,7 +390,7 @@ def reservar_paso_3(request, parque_id):
                 )
 
         except ValueError as e:
-            # Si alguien mas gano la condicion de carrera, mostramos el error aqui.
+            # Si alguien mas gano la condicion de carrera, mostramos el error aqui
             return render(request, "reservaciones/reservar_paso_3.html", {
                 "parque": parque,
                 "parque_id": parque_id,
@@ -394,8 +401,57 @@ def reservar_paso_3(request, parque_id):
                 "total": total,
                 "error": str(e),
             })
+    
+    # 3. Enviamos correo de confirmacion (obviamente fuera del bloque atomic para no retrasar el lock)   
 
-        # 3. Limpieza de sesion y redireccion 
+        #3.1 Seguridad: Limpiamos HTML/Scripts de los comentarios ingresados por el usuario
+        comentarios_seguros = strip_tags(reserva.get("comentarios", ""))
+        #3.2 Seguridad: Eliminamos cualquier salto de línea del asunto para evitar Header Injection
+        asunto = f"Confirmación de Reservación - Folio {reservacion.folio}".replace('\n', '').replace('\r', '')
+        #3.3 Construimos el cuerpo del correo con la informacion de la reservacion
+        cuerpo = f"""Hola {request.user.username},
+
+¡Tu reservación en el Festival de las Luciérnagas está confirmada!
+
+--- DETALLES DE TU ESTANCIA ---
+Parque: {parque.nombre}
+Folio: {reservacion.folio}
+Check-in: {checkin.strftime('%d/%m/%Y')}
+Check-out: {checkout.strftime('%d/%m/%Y')}
+Hospedaje: {'Cabaña' if tipo == 'cabana' else 'Camping'}
+Huéspedes: {huespedes}
+Teléfono de contacto: {telefono}
+
+Total de tu reservación: ${total:.2f}
+
+Tus comentarios adicionales:
+{comentarios_seguros if comentarios_seguros else 'Ninguno'}
+
+¡Te esperamos pronto!
+"""
+        # Intentamos enviar el correo manejando posibles excepciones
+        send_mail(
+                subject=asunto,
+                message=cuerpo,
+                from_email=None, # Usa el DEFAULT_FROM_EMAIL definido en settings.py
+                recipient_list=[request.user.email],
+                fail_silently=False,
+            )
+        '''
+        try:
+            
+        except BadHeaderError:
+            # Detectó intento de inyección en cabeceras
+            logger.warning(f"Intento de Header Injection detectado en la reservación {reservacion.folio}")
+        except smtplib.SMTPException as e:
+            # Falló el envío, pero la reserva ya está guardada. 
+            # Registramos el error internamente sin interrumpir la experiencia del usuario.
+            logger.error(f"Error SMTP al enviar correo del folio {reservacion.folio}: {e}")
+        except Exception as e:
+            # Captura cualquier otro error de red inesperado
+            logger.error(f"Error inesperado al enviar correo del folio {reservacion.folio}: {e}")
+        '''
+        # 4. Limpieza de sesion y redireccion 
         del request.session["reserva"]
         return redirect("reservacion_confirmada_folio", reservacion_id=reservacion.id)
 
@@ -408,7 +464,10 @@ def reservar_paso_3(request, parque_id):
         "tipo": tipo,
         "huespedes": huespedes,
         "total": total,
-    })         
+        "telefono": telefono,
+    })   
+
+          
 
 
 # Informacion de confirmacion y gestion de reservaciones activas
