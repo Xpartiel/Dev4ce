@@ -72,6 +72,29 @@ conda activate luciernagas
 
 ---
 
+## Configuración del correo electrónico (.env)
+
+El sistema envía un correo de confirmación al reservar. Por seguridad, las credenciales **no se incluyen en el repositorio**; se configuran en un archivo `.env` local.
+
+1. Copie la plantilla:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edite `.env` y pegue las credenciales (usuario de Gmail y **contraseña de aplicación** de 16 caracteres, no la contraseña normal de la cuenta):
+
+   ```text
+   EMAIL_USER=correo@gmail.com
+   EMAIL_PASSWORD=xxxxxxxxxxxxxxxx
+   ```
+
+   > Las credenciales reales se proporcionan en el **comentario privado de la entrega en Google Classroom**, no en este repositorio.
+
+> La aplicación funciona completa **sin** `.env`; lo único que no ocurrirá es el envío real del correo de confirmación (la reservación se crea y se muestra la confirmación de todas formas).
+
+---
+
 ## Configuración automática del proyecto
 
 Una vez activado el entorno, ejecutar:
@@ -219,5 +242,5 @@ También es posible ejecutar las pruebas de una sola app o de un solo nivel:
 python manage.py test apps.reservaciones
 
 # Un solo nivel (unidad / integración / sistema)
-python manage.py test apps.parques.tests.test_unidad
+python manage.py test apps.parques.tests.test_unitarias
 ```
