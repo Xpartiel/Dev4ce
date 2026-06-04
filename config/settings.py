@@ -151,3 +151,5 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 
 DEFAULT_FROM_EMAIL = f'Festival Luciérnagas <{EMAIL_HOST_USER}>'
+
+EMAIL_TIMEOUT = 10
